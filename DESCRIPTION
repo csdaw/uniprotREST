@@ -1,0 +1,15 @@
+Package: proteotools
+Title: General functions for proteomics
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Charlotte", 
+           family = "Dawson", 
+           email = "csdaw@outlook.com", 
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7151-5971"))
+Description: Provides simple functions to facilitate proteomics analyses. Should 
+    be used alongside other mass spectrometry focused packages including QFeatures.
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
