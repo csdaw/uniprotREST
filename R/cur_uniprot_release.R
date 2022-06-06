@@ -5,13 +5,8 @@
 #' @export
 #'
 #' @examples
-#' # Useful for naming files e.g.
-#' \dontrun{
-#'   Biostrings::writeXStringSet(
-#'     x = Biostrings::AAStringSet("AAA"),
-#'     filepath = paste0(cur_uniprot_release, "_a_protein.fasta")
-#'   )
-#' }
+#' # Useful for constructing file names e.g.
+#' paste0(cur_uniprot_release(), "_a_protein.fasta")
 #'
 cur_uniprot_release <- function() {
   # Construct GET request for human actin

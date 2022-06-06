@@ -14,12 +14,7 @@ format \code{"20XX_0X"}.
 Get current UniProt release number
 }
 \examples{
-# Useful for naming files e.g.
-\dontrun{
-  Biostrings::writeXStringSet(
-    x = Biostrings::AAStringSet("AAA"),
-    filepath = paste0(cur_uniprot_release, "_a_protein.fasta")
-  )
-}
+# Useful for constructing file names e.g.
+paste0(cur_uniprot_release(), "_a_protein.fasta")
 
 }
