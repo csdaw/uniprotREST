@@ -7,14 +7,17 @@
 cur_uniprot_release()
 }
 \value{
-Returns a string with the current UniProt release number in the
+Returns a \code{string} with the current UniProt release number in the
 format \code{"20XX_0X"}.
 }
 \description{
-Get current UniProt release number
+This function queries the UniProt REST API and gets the current
+release number.
 }
 \examples{
 # Useful for constructing file names e.g.
+\dontrun{
 paste0(cur_uniprot_release(), "_a_protein.fasta")
+}
 
 }
