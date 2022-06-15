@@ -2,4 +2,5 @@
 
 export(cur_uniprot_proteomes)
 export(cur_uniprot_release)
+export(search_uniprot)
 importFrom(magrittr,"%>%")
