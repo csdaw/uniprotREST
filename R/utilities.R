@@ -16,8 +16,9 @@
 #' error if `several.ok = FALSE`. When `several.ok = TRUE` and more than one
 #' element of `arg` has a match, all matches are returned.
 #'
-#' @source This code was copied from the source of the [MARSS]() package which
-#' is licensed under CC0 1.0 Universal.
+#' @source This code was copied from the source of the
+#' [MARSS](https://CRAN.R-project.org/package=MARSS) package which is licensed
+#' under CC0 1.0 Universal.
 #'
 match.arg.exact <- function (arg, choices, several.ok = FALSE, exact = TRUE) {
   if (missing(choices)) {

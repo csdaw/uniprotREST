@@ -63,7 +63,8 @@ Bad Request error i.e. your \code{query} was not written correctly.}
 \value{
 If the request was successful (i.e. the request was successfully
 performed and a response with HTTP status code <400 was received), an HTTP
-response is returned; otherwise an error is thrown.
+response is returned; otherwise an error is thrown. Use the \code{path} argument
+to save the body of the response to a file.
 
 If \code{dry_run = TRUE}, then prints the HTTP request and returns,
 invisibly, a list containing information about the request without actually

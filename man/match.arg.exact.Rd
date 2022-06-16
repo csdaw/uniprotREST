@@ -4,8 +4,9 @@
 \alias{match.arg.exact}
 \title{Argument verification using exact matching}
 \source{
-This code was copied from the source of the \url{MARSS} package which
-is licensed under CC0 1.0 Universal.
+This code was copied from the source of the
+\href{https://CRAN.R-project.org/package=MARSS}{MARSS} package which is licensed
+under CC0 1.0 Universal.
 }
 \usage{
 match.arg.exact(arg, choices, several.ok = FALSE, exact = TRUE)

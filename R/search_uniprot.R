@@ -41,7 +41,8 @@
 #'
 #' @return If the request was successful (i.e. the request was successfully
 #' performed and a response with HTTP status code <400 was received), an HTTP
-#' response is returned; otherwise an error is thrown.
+#' response is returned; otherwise an error is thrown. Use the `path` argument
+#' to save the body of the response to a file.
 #'
 #' If `dry_run = TRUE`, then prints the HTTP request and returns,
 #' invisibly, a list containing information about the request without actually
@@ -101,6 +102,11 @@ search_uniprot <- function(query,
   database <- match.arg.exact(database)
   format <- match.arg.exact(format)
 
+  # Check path is a single string if present
+  if (!is.null(path)) {
+    if (!is.character(path) & length(path) == 1) stop("`path` must be a single string")
+  }
+
   # Check fields and convert to single string if necessary
   if (!is.null(fields)) {
     if (!is.character(fields)) stop("`fields` must be a string or character vector")
@@ -108,11 +114,11 @@ search_uniprot <- function(query,
   }
 
   # Check other arguments
-  if(!is.null(isoform)) if(!is.logical(isoform)) stop("`isoform` must be TRUE or FALSE.")
-  if(!is.logical(compressed)) stop("`compressed` must be TRUE or FALSE.")
-  if(!is.null(size)) if (!is.integer(size)) stop("`size` must be an integer.")
-  if(!is.null(cursor)) if (!is.character(cursor) & length(cursor) == 1) stop("`cursor` must be single string.")
-  if(!is.logical(dry_run)) stop("`dry_run` must be TRUE or FALSE.")
+  if (!is.null(isoform)) if (!is.logical(isoform)) stop("`isoform` must be TRUE or FALSE.")
+  if (!is.logical(compressed)) stop("`compressed` must be TRUE or FALSE.")
+  if (!is.null(size)) if (!is.integer(size)) stop("`size` must be an integer.")
+  if (!is.null(cursor)) if (!is.character(cursor) & length(cursor) == 1) stop("`cursor` must be single string.")
+  if (!is.logical(dry_run)) stop("`dry_run` must be TRUE or FALSE.")
 
   ## Access REST API
   rest_url <- paste0("https://rest.uniprot.org/", database, "/search")
