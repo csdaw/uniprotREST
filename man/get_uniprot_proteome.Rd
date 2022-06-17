@@ -45,7 +45,9 @@ sending anything to the UniProt server.
 \description{
 To do: write proper description. See
 \href{https://pwilmart.github.io/blog/2020/09/19/shotgun-quantification-part2}{here}
-for description of the FTP canonical reference proteomes.
+for description of the FTP canonical reference proteomes. Use
+\code{\link{cur_uniprot_proteomes}} to see the table of available proteomes
+to download.
 }
 \examples{
 

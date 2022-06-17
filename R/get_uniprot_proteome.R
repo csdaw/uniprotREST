@@ -2,7 +2,9 @@
 #'
 #' @description To do: write proper description. See
 #' [here](https://pwilmart.github.io/blog/2020/09/19/shotgun-quantification-part2)
-#' for description of the FTP canonical reference proteomes.
+#' for description of the FTP canonical reference proteomes. Use
+#' \code{\link{cur_uniprot_proteomes}} to see the table of available proteomes
+#' to download.
 #'
 #' @param id `string`, UniProt proteome ID e.g. `UP000005640` for _Homo sapiens_.
 #' @param format `string`, desired file format to download. Choose from:
@@ -68,7 +70,7 @@ get_uniprot_proteome <- function(id,
     fields = c("organism_id", "lineage")
   ) %>%
     httr2::resp_body_string() %>%
-    read.delim(text = .)
+    utils::read.delim(text = .)
 
   superregnum <- sub("(\\w+).*", "\\1", proteome_info$Taxonomic.lineage)
   taxon_id <- proteome_info$Organism.Id
