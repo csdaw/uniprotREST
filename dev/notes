@@ -1,0 +1,8 @@
+# ID mapping
+
+Using the beta web app, use the ID mapper. Then click on the 'Download' button.
+Then click on 'generate URL for API'. This gives 2 ways to obtain the results
+which you should put into the function. This sort of helps explain the two
+ways of downloading results described in this page https://beta.uniprot.org/help/id_mapping.
+
+Also see more info about the paginated results here https://beta.uniprot.org/help/pagination
