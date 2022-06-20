@@ -1,5 +1,5 @@
-Package: proteotools
-Title: General functions for proteomics
+Package: unirest
+Title: R interface for the new UniProt REST API
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Charlotte", 
@@ -7,13 +7,16 @@ Authors@R:
            email = "csdaw@outlook.com", 
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7151-5971"))
-Description: Provides simple functions to facilitate proteomics analyses. Should 
-    be used alongside other proteomics and mass spectrometry focused packages.
+Description: Simple functions to access the updated UniProt REST API. Wraps
+    httr2 functions to easily map IDs and query all available databases (UniProtKB, 
+    UniRef, UniParc, proteomes, taxonomy, keywords, literature citations, 
+    human diseases, cross-references databases, subcellular locations, UniRule, and ARBA). 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.0
 Imports: 
     httr2,
+    jsonlite,
     magrittr,
     utils
