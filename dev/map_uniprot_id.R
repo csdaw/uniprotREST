@@ -1,4 +1,121 @@
-#' @export
+library(magrittr)
+library(jsonlite)
+library(purrr)
+
+## Valid from to values
+valid_to_from <- read_json("dev/valid_from_to.json")
+
+to_from_groups <- valid_to_from %>%
+  pluck("groups") %>%
+  map_dfr(pluck, 2)
+
+to_from_rules <- valid_to_from %>%
+  pluck("rules") %>%
+  map(function(i) modify_at(i, "tos", flatten_chr)) %>%
+  map_dfr(~ .x)
+
+## Potential approach 1
+# valid froms = check against some vector
+
+# valid tos = check against some vector
+
+# check_from_to(from, to)
+# function to check the mapping of from to
+
+# Given a 'from' is the 'to' allowed?
+input_from <- "PDB"
+
+bad_to <- "A string"
+good_to <- "UniProtKB"
+
+bad_to %in% allowed_tos
+good_to %in% allowed_tos
+
+## Wrap the above into a function
+check_from_to <- function(from, to) {
+  valid_froms <- to_from_groups[to_from_groups$from, "name", drop = TRUE]
+  valid_tos <- to_from_groups[to_from_groups$to, "name", drop = TRUE]
+
+  uniprotREST:::match.arg.exact(from, valid_froms)
+  uniprotREST:::match.arg.exact(to, valid_tos)
+
+  rule_id <- to_from_groups[to_from_groups$name == from, "ruleId", drop = TRUE]
+
+  allowed_tos <- to_from_rules[to_from_rules$ruleId == rule_id, "tos", drop = TRUE]
+
+  if (!to %in% allowed_tos) stop("`to` is invalid.")
+}
+
+check_from_to("UniProtKB", "UniProtKB")
+check_from_to("UniParc", "aaaaaaaa")
+check_from_to("UniParc", "PDB")
+check_from_to("UniParc", "UniProtKB")
+
+## Potential approach 2
+# named list
+# list elements are vectors with allowed tos
+test <- dplyr::left_join(to_from_groups, to_from_rules, by = "ruleId") %>%
+  dplyr::filter(from) %>%
+  dplyr::select(name, tos) %>%
+  rev() %>%
+  unstack()
+
+# function to check a given from to pair
+# from in names of list
+# to in collapsed unique list elements
+# index list based on from name and check if to is in vector
+input_from <- "PDB"
+
+# Check from is valid
+input_from %in% names(test)
+
+bad_to <- "A string"
+good_to <- "UniProtKB"
+
+# Check to is valid overall
+bad_to %in% unique(unlist(test, use.names = FALSE))
+good_to %in% unique(unlist(test, use.names = FALSE))
+
+# Check to is valid for the given from
+bad_to %in% test[[input_from]]
+good_to %in% test[[input_from]]
+
+## Construct and send POST request
+rest_url <- "https://rest.uniprot.org/idmapping"
+
+post_req <- httr2::request(rest_url) %>%
+  httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
+  httr2::req_url_path_append("run") %>%
+  httr2::req_body_form(
+    `from` = from,
+    `to` = to,
+    `ids` = ids,
+  )
+
+if (dry_run) return(httr2::req_dry_run(post_req)) else
+  post_resp <- httr2::req_perform(post_req)
+
+# Extract and print job ID
+jobid <- httr2::resp_body_json(post_resp)$jobId
+message(paste("Job ID:", jobid))
+
+## Check job status and automatically fetch results if job is complete
+## (i.e. HTML status 303 is returned)
+## On failure retry every 1 min for 60 min in total
+get_req <- httr2::request(rest_url) %>%
+  httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
+  httr2::req_url_path_append("results", jobid) %>%
+  httr2::req_url_query(
+    `format` = format,
+    `fields` = fields,
+    `includeIsoform` = isoform,
+    `compressed` = compressed
+  ) %>%
+  httr2::req_retry(max_tries = 60, backoff = ~ 60)
+
+httr2::req_perform(get_req, path = path)
+
+
 map_uniprot_id <- function(ids, from = "UniProtKB_AC-ID", to = "UniProtKB",
                            format = c("json", "tsv", "xlsx"),
                            path = NULL,
