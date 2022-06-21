@@ -29,7 +29,6 @@
 #' If `dry_run = TRUE`, then prints the HTTP request and returns,
 #' invisibly, a list containing information about the request without actually
 #' sending anything to the UniProt server.
-#' @export
 #'
 #' @examples
 #'

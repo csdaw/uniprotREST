@@ -23,8 +23,6 @@
 #' @return Returns a `data.frame` with the current species in UniProt with
 #' available reference proteomes.
 #'
-#' @export
-#'
 #' @examples
 #' # To do: example
 #'
