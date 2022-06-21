@@ -13,7 +13,7 @@
 #' paste0(cur_uniprot_release(), "_a_protein.fasta")
 #' }
 #'
-cur_uniprot_release <- function() {
+current_release <- function() {
   # Construct and perform GET request for human actin
   httr2::request("https://rest.uniprot.org/uniprotkb/P60709") %>%
     httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
