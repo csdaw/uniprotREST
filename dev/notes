@@ -6,3 +6,15 @@ which you should put into the function. This sort of helps explain the two
 ways of downloading results described in this page https://beta.uniprot.org/help/id_mapping.
 
 Also see more info about the paginated results here https://beta.uniprot.org/help/pagination
+
+TO: UniProt.
+ - Valid formats = fasta, fasta (isoforms), tsv, xlsx, json, xml, rdf, txt, gff, list
+ - Valid fields (tsv/xlsx only)
+
+TO: UniParc.
+ - Valid formats = fasta, tsv, xslx, json, xml, rdf, list.
+ - Valid fields (tsv/xslx only)
+
+TO: UniRef
+ - Valid formats = fasta, tsv, json, xlsx, list
+ - Valid fields (tsv, xlsx only)
