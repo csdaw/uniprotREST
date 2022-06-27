@@ -83,13 +83,17 @@ good_to %in% test[[input_from]]
 ## Construct and send POST request
 rest_url <- "https://rest.uniprot.org/idmapping"
 
+test_ids <- paste(readLines("dev/map-id-test-input.txt"), collapse = ",")
+test_from <- "UniProtKB_AC-ID"
+test_to <- "UniRef90"
+
 post_req <- httr2::request(rest_url) %>%
   httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
   httr2::req_url_path_append("run") %>%
   httr2::req_body_form(
-    `from` = from,
-    `to` = to,
-    `ids` = ids,
+    `from` = test_from,
+    `to` = test_to,
+    `ids` = test_ids
   )
 
 if (dry_run) return(httr2::req_dry_run(post_req)) else
@@ -104,17 +108,19 @@ message(paste("Job ID:", jobid))
 ## On failure retry every 1 min for 60 min in total
 get_req <- httr2::request(rest_url) %>%
   httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
-  httr2::req_url_path_append("results", jobid) %>%
+  httr2::req_url_path_append("uniref", "results", jobid) %>%
   httr2::req_url_query(
-    `format` = format,
-    `fields` = fields,
-    `includeIsoform` = isoform,
-    `compressed` = compressed
-  ) %>%
-  httr2::req_retry(max_tries = 60, backoff = ~ 60)
+    `format` = "tsv",
+    `fields` = "common_taxonid,name,organism",
+    `compressed` = FALSE
+  )
 
-httr2::req_perform(get_req, path = path)
+httr2::req_dry_run(get_req)
 
+get_resp <- httr2::req_perform(get_req, path = "dev/map-id-test-output.txt")
+
+xxx <- read.delim("dev/map-id-test-output.txt")
+xxx <- jsonlite::read_json("dev/map-id-test-output.json")
 
 map_uniprot_id <- function(ids, from = "UniProtKB_AC-ID", to = "UniProtKB",
                            format = c("json", "tsv", "xlsx"),
