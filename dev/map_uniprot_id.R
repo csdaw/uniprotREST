@@ -83,19 +83,20 @@ good_to %in% test[[input_from]]
 ## Construct and send POST request
 rest_url <- "https://rest.uniprot.org/idmapping"
 
-test_ids <- paste(readLines("dev/map-id-test-input.txt"), collapse = ",")
+# test_ids <- paste(readLines("dev/map-id-test-input.txt"), collapse = ",")
+test_ids <- "Q9NZB2"
 test_from <- "UniProtKB_AC-ID"
-test_to <- "UniRef90"
+test_to <- "Ensembl"
 
 post_req <- httr2::request(rest_url) %>%
-  httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
+  httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
   httr2::req_url_path_append("run") %>%
   httr2::req_body_form(
     `from` = test_from,
     `to` = test_to,
     `ids` = test_ids
   )
-
+dry_run <- FALSE
 if (dry_run) return(httr2::req_dry_run(post_req)) else
   post_resp <- httr2::req_perform(post_req)
 
@@ -107,17 +108,16 @@ message(paste("Job ID:", jobid))
 ## (i.e. HTML status 303 is returned)
 ## On failure retry every 1 min for 60 min in total
 get_req <- httr2::request(rest_url) %>%
-  httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
-  httr2::req_url_path_append("uniref", "results", jobid) %>%
+  httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
+  httr2::req_url_path_append("results", jobid) %>%
   httr2::req_url_query(
     `format` = "tsv",
-    `fields` = "common_taxonid,name,organism",
     `compressed` = FALSE
   )
 
 httr2::req_dry_run(get_req)
 
-get_resp <- httr2::req_perform(get_req, path = "dev/map-id-test-output.txt")
+get_resp <- httr2::req_perform(get_req, path = "dev/zzzz.txt")
 
 xxx <- read.delim("dev/map-id-test-output.txt")
 xxx <- jsonlite::read_json("dev/map-id-test-output.json")
