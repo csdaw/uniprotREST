@@ -20,8 +20,8 @@ search_uniprot(
 }
 \arguments{
 \item{query}{\code{string}, the search query. See available
-\href{https://beta.uniprot.org/help/query-fields}{query fields} and help for
-\href{https://beta.uniprot.org/help/text-search}{constructing queries}.}
+\href{https://www.uniprot.org/help/query-fields}{query fields} and help for
+\href{https://www.uniprot.org/help/text-search}{constructing queries}.}
 
 \item{database}{\code{string}, the name of the database endpoint of interest.
 Choose from: \code{uniprotkb} (default), \code{uniref}, \code{uniparc}, \code{proteomes}, \code{taxonomy},
@@ -39,7 +39,7 @@ in memory.}
 
 \item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
 results. Applies to the \code{json}, \code{tsv}, and \code{xlsx} formats only.
-See \href{https://beta.uniprot.org/help/return_fields}{here} for available
+See \href{https://www.uniprot.org/help/return_fields}{here} for available
 UniProtKB fields}
 
 \item{isoform}{Optional \code{logical}. Whether or not to include isoforms in the
@@ -75,15 +75,15 @@ Search UniProt programmatically with \code{\link[httr2:httr2-package]{httr2}}.
 Essentially a wrapper around a HTTP \code{\link[httr2]{request}} on the UniProt
 REST API sent using \code{\link[httr2]{req_perform}}.
 See the
-\href{https://beta.uniprot.org/help/api_queries}{Retrieving entries via queries}
+\href{https://www.uniprot.org/help/api_queries}{Retrieving entries via queries}
 page for more details on the API this function accesses.
 }
 \details{
 To do: add more details on a number of things!
 }
 \examples{
-# See https://beta.uniprot.org/help/query-fields and
-# https://beta.uniprot.org/help/text-search for help constructing queries.
+# See https://www.uniprot.org/help/query-fields and
+# https://www.uniprot.org/help/text-search for help constructing queries.
 
 \dontrun{
 

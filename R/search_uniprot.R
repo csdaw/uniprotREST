@@ -4,12 +4,12 @@
 #' Essentially a wrapper around a HTTP \code{\link[httr2]{request}} on the UniProt
 #' REST API sent using \code{\link[httr2]{req_perform}}.
 #' See the
-#' [Retrieving entries via queries](https://beta.uniprot.org/help/api_queries)
+#' [Retrieving entries via queries](https://www.uniprot.org/help/api_queries)
 #' page for more details on the API this function accesses.
 #'
 #' @param query `string`, the search query. See available
-#' [query fields](https://beta.uniprot.org/help/query-fields) and help for
-#' [constructing queries](https://beta.uniprot.org/help/text-search).
+#' [query fields](https://www.uniprot.org/help/query-fields) and help for
+#' [constructing queries](https://www.uniprot.org/help/text-search).
 #' @param database `string`, the name of the database endpoint of interest.
 #' Choose from: `uniprotkb` (default), `uniref`, `uniparc`, `proteomes`, `taxonomy`,
 #' `keywords`, `citations`, `diseases`, `database`, `locations`, `unirule`, `arba`.
@@ -23,7 +23,7 @@
 #' in memory.
 #' @param fields Optional `character vector`. Columns to retrieve in the search
 #' results. Applies to the `json`, `tsv`, and `xlsx` formats only.
-#' See [here](https://beta.uniprot.org/help/return_fields) for available
+#' See [here](https://www.uniprot.org/help/return_fields) for available
 #' UniProtKB fields
 #' @param isoform Optional `logical`. Whether or not to include isoforms in the
 #' search results. Only applicable if `database = "uniprotkb"`.
@@ -54,8 +54,8 @@
 #' To do: add more details on a number of things!
 #'
 #' @examples
-#' # See https://beta.uniprot.org/help/query-fields and
-#' # https://beta.uniprot.org/help/text-search for help constructing queries.
+#' # See https://www.uniprot.org/help/query-fields and
+#' # https://www.uniprot.org/help/text-search for help constructing queries.
 #'
 #' \dontrun{
 #'
