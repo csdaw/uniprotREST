@@ -17,21 +17,25 @@ An R interface for the new UniProt REST API.
 
 Placeholder.
 
+``` r
+library(uniprotREST)
+library(magrittr)
+```
+
 ### Retrieving individual entries
 
 Placeholder.
 
 ### Retrieving entries via queries
 
-[API description](https://beta.uniprot.org/help/api_queries).
+[API description](https://www.uniprot.org/help/api_queries).
 
 ``` r
-library(uniprotREST)
-library(magrittr)
-
-resp <- search_uniprot(query = "Major capsid protein 723",
-                       format = "tsv", 
-                       fields = c("accession", "gene_primary", "length"))
+resp <- uniprot_search(
+  query = "Major capsid protein 723",
+  format = "tsv", 
+  fields = c("accession", "gene_primary", "length")
+)
 
 result <- httr2::resp_body_string(resp) %>% 
   read.delim(text = .)
@@ -49,4 +53,27 @@ head(result)
 
 ### Mapping database identifiers
 
-Placeholder.
+[API description](https://www.uniprot.org/help/id_mapping)
+
+``` r
+resp <- uniprot_map(
+  ids = c("ENSG00000092199", "ENSG00000136997"),
+  from = "Ensembl",
+  to = "UniProtKB-Swiss-Prot",
+  format = "tsv",
+  fields = c("accession", "gene_names", "organism_name")
+)
+```
+
+    ## Job ID: 9fd69708ccefc32b78b8a13d5e126be638cd7f90
+
+``` r
+result <- httr2::resp_body_string(resp) %>% 
+  read.delim(text = .)
+
+result
+```
+
+    ##              From  Entry   Gene.Names             Organism
+    ## 1 ENSG00000092199 P07910 HNRNPC HNRPC Homo sapiens (Human)
+    ## 2 ENSG00000136997 P01106  MYC BHLHE39 Homo sapiens (Human)
