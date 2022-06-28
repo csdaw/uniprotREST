@@ -30,6 +30,7 @@ from_to_rules <- from_to_json %>%
 from_to <- from_to_groups %>%
   select(name, from, to, uriLink) %>%
   rename("url" = uriLink) %>%
+  arrange(name) %>%
   as.data.frame()
 
 usethis::use_data(from_to, internal = FALSE, overwrite = TRUE)
