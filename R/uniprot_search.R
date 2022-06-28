@@ -81,7 +81,7 @@
 #' # To do: add more examples
 #' }
 #'
-search_uniprot <- function(query,
+uniprot_search <- function(query,
                            database = c("uniprotkb", "uniref", "uniparc", "proteomes",
                                         "taxonomy", "keywords", "citations", "diseases",
                                         "database", "locations", "unirule", "arba"),
