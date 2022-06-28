@@ -13,8 +13,7 @@ uniprot_search(
   fields = NULL,
   isoform = NULL,
   compressed = FALSE,
-  size = NULL,
-  cursor = NULL,
+  verbosity = NULL,
   dry_run = FALSE
 )
 }
@@ -48,12 +47,15 @@ search results. Only applicable if \code{database = "uniprotkb"}.}
 \item{compressed}{\code{logical}, should results be returned gzipped? Default is
 \code{FALSE}.}
 
-\item{size}{Optional \code{integer}. Specifies the maximum number of results to
-return.}
-
-\item{cursor}{Optional \code{string}. Specifies the cursor position in the entire
-result set, from which returned results will begin. Cursors are used to allow
-paging through results. Typically used together with the \code{size} argument.}
+\item{verbosity}{Optional \code{integer}, how much information to print? This is
+a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
+control verbosity:
+\itemize{
+\item 0: no output.
+\item 1: show headers.
+\item 2: show headers and bodies.
+\item 3: show headers, bodies, and curl status messages.
+}}
 
 \item{dry_run}{\code{logical}, default is \code{FALSE}. If \code{TRUE} print the HTTP
 request using \code{\link[httr2]{req_dry_run}} without actually sending

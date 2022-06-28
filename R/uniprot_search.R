@@ -1,52 +1,56 @@
 #' Search UniProt via REST API
 #'
 #' @description Search UniProt programmatically with \code{\link[httr2:httr2-package]{httr2}}.
-#' Essentially a wrapper around a HTTP \code{\link[httr2]{request}} on the UniProt
-#' REST API sent using \code{\link[httr2]{req_perform}}.
-#' See the
-#' [Retrieving entries via queries](https://www.uniprot.org/help/api_queries)
-#' page for more details on the API this function accesses.
+#'   Essentially a wrapper around a HTTP \code{\link[httr2]{request}} on the UniProt
+#'   REST API sent using \code{\link[httr2]{req_perform}}.
+#'   See the
+#'   [Retrieving entries via queries](https://www.uniprot.org/help/api_queries)
+#'   page for more details on the API this function accesses.
 #'
 #' @param query `string`, the search query. See available
-#' [query fields](https://www.uniprot.org/help/query-fields) and help for
-#' [constructing queries](https://www.uniprot.org/help/text-search).
+#'   [query fields](https://www.uniprot.org/help/query-fields) and help for
+#'   [constructing queries](https://www.uniprot.org/help/text-search).
 #' @param database `string`, the name of the database endpoint of interest.
-#' Choose from: `uniprotkb` (default), `uniref`, `uniparc`, `proteomes`, `taxonomy`,
-#' `keywords`, `citations`, `diseases`, `database`, `locations`, `unirule`, `arba`.
-#' See details below.
+#'   Choose from: `uniprotkb` (default), `uniref`, `uniparc`, `proteomes`, `taxonomy`,
+#'   `keywords`, `citations`, `diseases`, `database`, `locations`, `unirule`, `arba`.
+#'   See details below.
 #' @param format `string`, desired output format for search results. Different
-#' `database` provide different formats, though generally, `json` and `tsv`
-#' are always available. Choose from: `json` (default), `xml`, `txt`, `list`, `tsv`,
-#' `fasta`, `gff`, `obo`, `rdf`, `xlsx`.
+#'   `database` provide different formats, though generally, `json` and `tsv`
+#'   are always available. Choose from: `json` (default), `xml`, `txt`, `list`, `tsv`,
+#'   `fasta`, `gff`, `obo`, `rdf`, `xlsx`.
 #' @param path Optional `string`. Path to save the body of the HTTP response.
-#' This is useful for large search results since it avoids storing the response
-#' in memory.
+#'   This is useful for large search results since it avoids storing the response
+#'   in memory.
 #' @param fields Optional `character vector`. Columns to retrieve in the search
-#' results. Applies to the `json`, `tsv`, and `xlsx` formats only.
-#' See [here](https://www.uniprot.org/help/return_fields) for available
-#' UniProtKB fields
+#'   results. Applies to the `json`, `tsv`, and `xlsx` formats only.
+#'   See [here](https://www.uniprot.org/help/return_fields) for available
+#'   UniProtKB fields
 #' @param isoform Optional `logical`. Whether or not to include isoforms in the
-#' search results. Only applicable if `database = "uniprotkb"`.
+#'   search results. Only applicable if `database = "uniprotkb"`.
 #' @param compressed `logical`, should results be returned gzipped? Default is
-#' `FALSE`.
-#' @param size Optional `integer`. Specifies the maximum number of results to
-#' return.
-#' @param cursor Optional `string`. Specifies the cursor position in the entire
-#' result set, from which returned results will begin. Cursors are used to allow
-#' paging through results. Typically used together with the `size` argument.
+#'   `FALSE`.
+#' @param verbosity Optional `integer`, how much information to print? This is
+#'   a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
+#'   control verbosity:
+#'
+#'   * 0: no output.
+#'   * 1: show headers.
+#'   * 2: show headers and bodies.
+#'   * 3: show headers, bodies, and curl status messages.
+#'
 #' @param dry_run `logical`, default is `FALSE`. If `TRUE` print the HTTP
-#' request using \code{\link[httr2]{req_dry_run}} without actually sending
-#' anything to the UniProt server. Useful for debugging if you get an HTTP 400
-#' Bad Request error i.e. your `query` was not written correctly.
+#'   request using \code{\link[httr2]{req_dry_run}} without actually sending
+#'   anything to the UniProt server. Useful for debugging if you get an HTTP 400
+#'   Bad Request error i.e. your `query` was not written correctly.
 #'
 #' @return If the request was successful (i.e. the request was successfully
-#' performed and a response with HTTP status code <400 was received), an HTTP
-#' response is returned; otherwise an error is thrown. Use the `path` argument
-#' to save the body of the response to a file.
+#'   performed and a response with HTTP status code <400 was received), an HTTP
+#'   response is returned; otherwise an error is thrown. Use the `path` argument
+#'   to save the body of the response to a file.
 #'
-#' If `dry_run = TRUE`, then prints the HTTP request and returns,
-#' invisibly, a list containing information about the request without actually
-#' sending anything to the UniProt server.
+#'   If `dry_run = TRUE`, then prints the HTTP request and returns,
+#'   invisibly, a list containing information about the request without actually
+#'   sending anything to the UniProt server.
 #' @export
 #'
 #' @details
@@ -91,8 +95,7 @@ uniprot_search <- function(query,
                            fields = NULL,
                            isoform = NULL,
                            compressed = FALSE,
-                           size = NULL,
-                           cursor = NULL,
+                           verbosity = NULL,
                            dry_run = FALSE) {
   ## Argument checking
   # Check query is single string
@@ -116,25 +119,22 @@ uniprot_search <- function(query,
   # Check other arguments
   if (!is.null(isoform)) if (!is.logical(isoform)) stop("`isoform` must be TRUE or FALSE.")
   if (!is.logical(compressed)) stop("`compressed` must be TRUE or FALSE.")
-  if (!is.null(size)) if (!is.integer(size)) stop("`size` must be an integer.")
-  if (!is.null(cursor)) if (!is.character(cursor) & length(cursor) == 1) stop("`cursor` must be single string.")
   if (!is.logical(dry_run)) stop("`dry_run` must be TRUE or FALSE.")
 
   ## Access REST API
   rest_url <- paste0("https://rest.uniprot.org/", database, "/search")
 
   req <- httr2::request(rest_url) %>%
-    httr2::req_user_agent("proteotools https://github.com/csdaw/proteotools") %>%
+    httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
     httr2::req_url_query(
       `query` = query,
       `format` = format,
       `fields` = fields,
       `includeIsoform` = isoform,
-      `compressed` = compressed,
-      `size` = size,
-      `cursor` = cursor
-    )
+      `compressed` = compressed
+    ) %>%
+    httr2::req_retry(max_tries = 5)
 
   if (dry_run) httr2::req_dry_run(req) else
-    httr2::req_perform(req, path = path)
+    httr2::req_perform(req, path = path, verbosity = verbosity)
 }
