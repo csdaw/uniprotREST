@@ -57,6 +57,9 @@ uniprot_map <- function(ids,
                         verbosity = NULL,
                         dry_run = FALSE) {
   ## Argument checking
+  if (!is.character(ids)) stop("`ids` must be a string or character vector")
+  if (length(ids) > 1) ids <- paste(ids, collapse = ",")
+
   if (!is.null(fields)) {
     if (!is.character(fields)) stop("`fields` must be a string or character vector")
     if (length(fields) > 1) fields <- paste(fields, collapse = ",")
@@ -93,17 +96,29 @@ uniprot_map <- function(ids,
   ## Construct and send GET request
   # Check job status and automatically fetch results if job is complete
   # (i.e. HTML status 303 is returned)
-  # On failure retry every 10 sec for 5 times
+  # If job not complete (i.e. HTML status 200 is returned)
+  # send status request another 5 times
+  status_req <- httr2::request(rest_url) %>%
+    httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
+    httr2::req_url_path_append("status", jobid) %>%
+    httr2::req_retry(is_transient = ~ httr2::resp_status(.x) %in% c("200", "429", "503"),
+                     max_tries = 5) %>%
+    httr2::req_options(followlocation = FALSE)
+
+  result_url <- httr2::req_perform(status_req, verbosity = verbosity) %>%
+    httr2::resp_header("location")
+
+  # When job complete, follow result URL and download paginated results
   get_req <- httr2::request(rest_url) %>%
     httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
-    httr2::req_url_path_append(database, "results", jobid) %>%
+    httr2::req_url(result_url) %>%
     httr2::req_url_query(
       `format` = format,
       `fields` = fields,
       `isoform` = isoform,
       `compressed` = compressed
     ) %>%
-    httr2::req_retry(max_tries = 5, backoff = ~ 10)
+    httr2::req_retry(max_tries = 5)
 
   # Send GET request
   httr2::req_perform(get_req, path = path, verbosity = verbosity)
