@@ -55,7 +55,7 @@ result <- httr2::resp_body_string(resp) %>%
 head(result)
 ```
 
-### Mapping database identifiers
+### Map database identifiers
 
 [API description](https://www.uniprot.org/help/id_mapping)
 

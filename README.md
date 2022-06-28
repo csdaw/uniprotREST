@@ -81,7 +81,7 @@ head(result)
     ## 5     T1S005                   HA    560
     ## 6 A0A0G2S1S8                   HA    326
 
-### Mapping database identifiers
+### Map database identifiers
 
 [API description](https://www.uniprot.org/help/id_mapping)
 
