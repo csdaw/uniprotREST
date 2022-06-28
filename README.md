@@ -22,11 +22,41 @@ library(uniprotREST)
 library(magrittr)
 ```
 
-### Retrieving individual entries
+### Retrieve individual entries
 
-Placeholder.
+[API description](https://www.uniprot.org/help/api_retrieve_entries)
 
-### Retrieving entries via queries
+``` r
+resp <- uniprot_retrieve(
+  id = "P99999",
+  database = "uniprotkb",
+  format = "json"
+)
+
+result <- httr2::resp_body_json(resp) %>% 
+  str(max.level = 1)
+```
+
+    ## List of 17
+    ##  $ entryType               : chr "UniProtKB reviewed (Swiss-Prot)"
+    ##  $ primaryAccession        : chr "P99999"
+    ##  $ secondaryAccessions     :List of 6
+    ##  $ uniProtkbId             : chr "CYC_HUMAN"
+    ##  $ entryAudit              :List of 5
+    ##  $ annotationScore         : num 263
+    ##  $ organism                :List of 4
+    ##  $ proteinExistence        : chr "1: Evidence at protein level"
+    ##  $ proteinDescription      :List of 1
+    ##  $ genes                   :List of 1
+    ##  $ comments                :List of 10
+    ##  $ features                :List of 36
+    ##  $ keywords                :List of 14
+    ##  $ references              :List of 19
+    ##  $ uniProtKBCrossReferences:List of 175
+    ##  $ sequence                :List of 5
+    ##  $ extraAttributes         :List of 3
+
+### Retrieve entries via queries
 
 [API description](https://www.uniprot.org/help/api_queries).
 

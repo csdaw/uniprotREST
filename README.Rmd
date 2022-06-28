@@ -22,11 +22,23 @@ library(magrittr)
 ```
 
 
-### Retrieving individual entries
+### Retrieve individual entries
 
-Placeholder.
+[API description](https://www.uniprot.org/help/api_retrieve_entries)
 
-### Retrieving entries via queries
+```{r}
+resp <- uniprot_retrieve(
+  id = "P99999",
+  database = "uniprotkb",
+  format = "json"
+)
+
+result <- httr2::resp_body_json(resp) %>% 
+  str(max.level = 1)
+```
+
+
+### Retrieve entries via queries
 
 [API description](https://www.uniprot.org/help/api_queries).
 
