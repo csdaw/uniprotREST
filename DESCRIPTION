@@ -20,3 +20,6 @@ Imports:
     jsonlite,
     magrittr,
     utils
+Depends: 
+    R (>= 2.10)
+LazyData: true

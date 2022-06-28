@@ -1,4 +1,5 @@
-^proteotools\.Rproj$
+^uniprotREST\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
+^README.Rmd$
 ^dev
+^data-raw
