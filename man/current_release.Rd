@@ -4,11 +4,17 @@
 \alias{current_release}
 \title{Get current UniProt release number}
 \usage{
-current_release()
+current_release(dry_run = FALSE)
+}
+\arguments{
+\item{dry_run}{\code{logical}, default is \code{FALSE}. If \code{TRUE} print the HTTP
+request using \code{\link[httr2]{req_dry_run}} without actually sending
+anything to the UniProt server. Useful for debugging if you get an HTTP 400
+Bad Request error i.e. your \code{query} was not written correctly.}
 }
 \value{
 Returns a \code{string} with the current UniProt release number in the
-format \code{"20XX_0X"}.
+format \code{"DDDD_DD"} e.g. \verb{2022_02}.
 }
 \description{
 This function queries the UniProt REST API and gets the current
@@ -17,7 +23,7 @@ release number.
 \examples{
 # Useful for constructing file names e.g.
 \dontrun{
-paste0(cur_uniprot_release(), "_a_protein.fasta")
+paste0(currentt_release(), "_a_protein.fasta")
 }
 
 }
