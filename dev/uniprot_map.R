@@ -48,28 +48,28 @@ test_req2 <- httr2::request(rest_url) %>%
   httr2::req_method("HEAD")
 
 test_resp2 <- httr2::req_perform(test_req2, verbosity = 1)
-
-aaa <- test_resp2$headers$link
-
-re_next_link <- gsub('<(.+)>; rel="next"', "\\1", aaa)
-
-get_next_link <- function(resp) {
-  link_header <- httr2::resp_header(resp, "Link")
-
-  if (!is.null(link_header)) {
-    gsub('<(.+)>; rel="next"', "\\1", link_header)
-  } else {
-    link_header
-  }
-}
+#
+# aaa <- test_resp2$headers$link
+#
+# re_next_link <- gsub('<(.+)>; rel="next"', "\\1", aaa)
+#
+# get_next_link <- function(resp) {
+#   link_header <- httr2::resp_header(resp, "Link")
+#
+#   if (!is.null(link_header)) {
+#     gsub('<(.+)>; rel="next"', "\\1", link_header)
+#   } else {
+#     link_header
+#   }
+# }
 
 page_size <- 500
-n_pages <- round(as.integer(test_resp2$headers$`x-total-results`) / page_size)
+n_pages <- ceiling(as.integer(test_resp2$headers$`x-total-results`) / page_size)
 
-out <- vector(mode = "list", length = n_pages)
-
-result_url <- test_resp2 %>%
-  httr2::resp_header("location")
+# out <- vector(mode = "list", length = n_pages)
+#
+# result_url <- test_resp2 %>%
+#   httr2::resp_header("location")
 
 test_req3 <- httr2::request(rest_url) %>%
   httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
@@ -83,40 +83,9 @@ test_req3 <- httr2::request(rest_url) %>%
   httr2::req_retry(max_tries = 5) %>%
   httr2::req_throttle(rate = 2 / 1) # limit: 2 requests every 1 second
 
-# test_req3
-# test_resp3 <- httr2::req_perform(test_req3, verbosity = 1)
-
-# test_body3 <- test_resp3 %>% httr2::resp_body_string() %>% read.delim(text = .)
-
-# get_next_link(test_resp3$headers$link)
-
-
-
-get_results <- function(req, page_size, n_pages, verbosity) {
-  out <- vector("list", n_pages)
-  i <- 1L
-  page_url <- req$url
-
-  repeat({
-    out[[i]] <- req_perform(httr2::req_url(req, page_url), verbosity = verbosity)
-    if (i == n_pages) break
-
-    next_page_url <- get_next_link(out[[i]])
-    if (is.null(next_page_url)) break
-
-    page_url <- next_page_url
-    i <- i + 1L
-  })
-
-  out
-}
-
-debugonce(get_results)
-bbb <- get_results(test_req3, 25, 8, 1)
+source(here("dev", "get_paged_results.R"))
+debugonce(get_paged_results)
+bbb <- get_paged_results(test_req3, page_size, n_pages, 1)
 ccc <- bbb[[1]] %>%
   httr2::resp_body_string() %>%
   read.delim(text = .)
-ccc <- lapply(bbb, function(i) {
-  httr2::resp_body_string(i) %>%
-    read.delim(text = .)
-})
