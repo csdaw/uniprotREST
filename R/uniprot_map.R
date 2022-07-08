@@ -62,11 +62,6 @@ uniprot_map <- function(ids,
   if (!is.null(fields)) {
     if (!is.character(fields)) stop("`fields` must be a string or character vector")
     if (length(fields) > 1) fields <- paste(fields, collapse = ",")
-
-    # If `fields` is specified then need to check `to` to construct GET url properly
-    database <- get_to_db(to)
-  } else {
-    database <- ""
   }
 
   ## Construct and send POST request
@@ -111,76 +106,5 @@ uniprot_map <- function(ids,
 
   status_resp <- httr2::req_perform(status_req, verbosity = verbosity)
 
-  # When job complete, follow result URL and download paginated results
-  get_req <- httr2::request(rest_url) %>%
-    httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
-    httr2::req_url(status_resp$url) %>%
-    httr2::req_url_query(
-      `format` = format,
-      `fields` = fields,
-      `includeIsoform` = isoform,
-      `compressed` = compressed
-    ) %>%
-    httr2::req_retry(max_tries = 5) %>%
-    httr2::req_throttle(rate = 2 / 1) # limit is 2 requests every 1 second
-
-  n_pages <- ceiling(as.integer(status_resp$headers$`x-total-results`) / size)
-
-  # Send multiple GET requests for each page of results
-  message("Retrieving results...")
-  get_paged_results(get_req, page_size = size, n_pages = n_pages, verbosity = verbosity)
+  status_resp
 }
-
-get_to_db <- function(to) {
-  lookup_df <- data.frame(
-    to = c("UniProtKB", "UniProtKB-Swiss-Prot",
-           "UniRef100", "UniRef90", "UniRef50",
-           "UniParc"),
-    db = c(rep("uniprotkb", 2),
-           rep("uniref", 3),
-           "uniparc")
-  )
-
-  if (!to %in% lookup_df$to) {
-    return("")
-  } else {
-    lookup_df[lookup_df$to == to, "db"]
-  }
-}
-
-get_paged_results <- function(req, page_size, n_pages, verbosity) {
-  i <- 1L
-  # n_pages <- httr2::req_perform(httr2::req_method(req, "HEAD"), verbosity = verbosity)$headers$`x-total-results`
-
-  out <- vector("list", n_pages)
-
-  # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
-  repeat({
-    message(paste("Page", i, "of", n_pages))
-    out[[i]] <- httr2::req_perform(httr2::req_error(req, is_error = function(resp) FALSE), verbosity = verbosity)
-    if (out[[i]]$status_code == "200")
-      message("Success")
-    else
-      message(paste("Something went wrong. Status code:", out[[i]]$status_code))
-    if (i == n_pages) break
-
-    next_page_url <- get_next_page(out[[i]])
-    if (is.null(next_page_url)) break
-
-    req$url <- next_page_url
-    i <- i + 1L
-  })
-
-  out
-}
-
-get_next_page <- function(resp) {
-  link_header <- httr2::resp_header(resp, "Link")
-
-  if (!is.null(link_header)) {
-    gsub('<(.+)>; rel="next"', "\\1", link_header)
-  } else {
-    link_header
-  }
-}
-
