@@ -9,10 +9,10 @@ uniprot_map(
   from = "UniProtKB_AC-ID",
   to = "UniProtKB",
   format = "tsv",
-  path = NULL,
   fields = NULL,
   isoform = NULL,
   compressed = FALSE,
+  size = 500L,
   verbosity = NULL,
   dry_run = FALSE
 )
@@ -30,10 +30,6 @@ See \code{\link{from_to}} for a list of all possible database names.}
 \item{format}{\code{string}, output format for mapping results.
 To do: add available formats.}
 
-\item{path}{Optional \code{string}. Path to save the body of the HTTP response.
-This is useful for large search results since it avoids storing the response
-in memory.}
-
 \item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
 results. Applies to the \code{tsv}, and \code{xlsx} formats only.}
 
@@ -42,6 +38,9 @@ search results. Only applicable if \code{to} is \code{UniProtKB} or \code{UniPro
 
 \item{compressed}{\code{logical}, should results be returned gzipped? Default is
 \code{FALSE}.}
+
+\item{size}{\code{integer}, number of entries to output per 'page' of results.
+Probably don't change this from the default to avoid hammering UniProt's servers.}
 
 \item{verbosity}{Optional \code{integer}, how much information to print? This is
 a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
@@ -60,8 +59,8 @@ Bad Request error i.e. your \code{ids} or \code{fields} were not written correct
 }
 \value{
 If the request was successful (i.e. the request was successfully
-performed and a response with HTTP status code <400 was received), an HTTP
-response is returned; otherwise an error is thrown. Use the \code{path} argument
+performed and a response with HTTP status code <400 was received), a list of HTTP
+responses is returned; otherwise an error is thrown. Use the \code{path} argument
 to save the body of the response to a file.
 
 If \code{dry_run = TRUE}, then prints the HTTP request and returns,

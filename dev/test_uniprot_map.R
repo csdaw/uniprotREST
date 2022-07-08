@@ -1,16 +1,12 @@
 library(magrittr)
+library(here)
 
-test_ids <- c("ENSG00000048828")
-test_from <- "Ensembl"
-test_to <- "UniProtKB"
+input <- readLines(here("dev/map-id-test-input.txt"))[-4]
 
-result <- uniprotREST::uniprot_map(
-  ids = test_ids,
-  from = test_from,
-  to = test_to,
-  fields = c("uniparc_id", "go_c")
+debugonce(uniprotREST::uniprot_map)
+test <- uniprotREST::uniprot_map(
+  ids = input,
+  fields = c("accession", "length", "reviewed"),
+  size = 25,
+  verbosity = 1
 )
-
-result %>%
-  httr2::resp_body_string() %>%
-  read.delim(text = .)

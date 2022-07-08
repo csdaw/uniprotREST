@@ -1,9 +1,21 @@
+####
 library(here)
+
+input <- readLines(here("dev/map-id-test-input.txt"))[-2]
+
+test <- uniprotREST::uniprot_map(
+  ids = input,
+  fields = c("accession", "length", "reviewed"),
+  size = 25,
+  verbosity = 1
+)
+
+####
+
 library(magrittr)
 library(httr2)
 
-input <- readLines(here("dev/map-id-test-input.txt"))[-1] %>%
-  paste(collapse = ",")
+
 
 ## Construct and send POST request
 rest_url <- "https://rest.uniprot.org/idmapping"
