@@ -7,17 +7,14 @@ get_paged_results <- function(req, page_size, n_pages, verbosity) {
   # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
   repeat({
     message(paste("Page", i, "of", n_pages))
-    out[[i]] <- httr2::req_perform(httr2::req_error(req, is_error = function(resp) FALSE), verbosity = verbosity)
+    out[[i]] <- httr2::req_perform(req, verbosity = verbosity)
     if (out[[i]]$status_code == "200")
       message("Success")
     else
       message(paste("Something went wrong. Status code:", out[[i]]$status_code))
     if (i == n_pages) break
 
-    next_page_url <- get_next_page(out[[i]])
-    if (is.null(next_page_url)) break
-
-    req$url <- next_page_url
+    req$url <- get_next_page(out[[i]])
     i <- i + 1L
   })
 
