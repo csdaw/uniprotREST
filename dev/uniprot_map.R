@@ -1,8 +1,10 @@
 library(here)
 library(magrittr)
 source(here("dev", "utils.R"))
+source(here("dev", "get_results_stream.R"))
+source(here("dev", "resp_body.R"))
 
-input <- readLines(here("dev/map-id-test-input.txt"))[-2]
+input <- readLines(here("dev/map-id-test-input.txt"))[-10:-15]
 
 test <- uniprotREST::uniprot_map(
   ids = input,
@@ -33,42 +35,27 @@ test <- uniprotREST::uniprot_map(
 #### STREAM INTO MEMORY ####
 stream_url <- gsub("results", "results/stream", test$url)
 
-get_req <- httr2::request(stream_url) %>%
-  httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
-  httr2::req_url_query(
-    `format` = "tsv",
-    `fields` = "accession,length,reviewed,go_c",
-    `compressed` = FALSE
-  )
-
-resp_body_tsv <- function(resp, encoding = NULL) {
-  check_response(resp)
-
-  if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
-
-  if (length(resp$body) == 0) {
-    stop("Can not retrieve empty body")
-  }
-
-  resp$body %>%
-    readBin(character()) %>%
-    iconv(from = encoding, to = "UTF-8") %>%
-    read.delim(text = .)
-}
-
-debugonce(resp_body_tsv)
-
-test_stream_mem <- httr2::req_perform(get_req, verbosity = 1)
-
-# Format specific stuff goes here
-test_stream_mem_out <- test_stream_mem %>%
-  resp_body_tsv()
+get_results_stream(
+  url = stream_url,
+  format = "tsv",
+  path = here("dev", "test_to_disk", "test_sream_disk2.txt"),
+  fields = "accession,reviewed,length",
+  isoform = NULL,
+  compressed = NULL,
+  size = 50,
+  verbosity = 1
+)
 
 #### STREAM TO DISK ####
 
-test_stream_disk <- httr2::req_perform(
-  get_req,
-  path = here("dev", "test_to_disk", "test_stream_disk.txt"),
+test_res <- get_results_stream(
+  url = stream_url,
+  format = "tsv",
+  path = NULL,
+  fields = "accession,reviewed,length",
+  isoform = NULL,
+  compressed = NULL,
+  size = 50,
   verbosity = 1
 )
 
