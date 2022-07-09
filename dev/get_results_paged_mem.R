@@ -1,24 +1,33 @@
-get_paged_results <- function(req, page_size, n_pages, verbosity) {
+get_results_paged_mem <- function(req, format, page_size, n_pages, verbosity) {
   i <- 1L
-  # n_pages <- httr2::req_perform(httr2::req_method(req, "HEAD"), verbosity = verbosity)$headers$`x-total-results`
 
   out <- vector("list", n_pages)
 
   # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
   repeat({
     message(paste("Page", i, "of", n_pages))
-    out[[i]] <- httr2::req_perform(req, verbosity = verbosity)
-    if (out[[i]]$status_code == "200")
-      message("Success")
-    else
-      message(paste("Something went wrong. Status code:", out[[i]]$status_code))
-    if (i == n_pages) break
 
+    out[[i]] <- httr2::req_perform(req, verbosity = verbosity)
+    if (out[[i]]$status_code == "200") {
+      message("Success")
+    } else {
+      message(paste("Something went wrong. Status code:", out[[i]]$status_code))
+    }
+
+    if (i == n_pages) break
     req$url <- get_next_page(out[[i]])
     i <- i + 1L
   })
 
-  out
+  switch(
+    format,
+    tsv = {
+      out %>%
+        lapply(resp_body_tsv) %>%
+        do.call(rbind, .)
+    },
+    stop("Only format = `tsv` implemented currently")
+  )
 }
 
 get_next_page <- function(resp) {
