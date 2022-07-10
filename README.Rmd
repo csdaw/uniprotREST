@@ -60,7 +60,7 @@ head(result)
 [API description](https://www.uniprot.org/help/id_mapping)
 
 ```{r}
-resp <- uniprot_map(
+df <- uniprot_map(
   ids = c("ENSG00000092199", "ENSG00000136997"),
   from = "Ensembl",
   to = "UniProtKB-Swiss-Prot",
@@ -68,9 +68,6 @@ resp <- uniprot_map(
   fields = c("accession", "gene_names", "organism_name")
 )
 
-result <- httr2::resp_body_string(resp) %>% 
-  read.delim(text = .)
-
-result
+df
 ```
 

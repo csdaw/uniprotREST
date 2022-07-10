@@ -86,7 +86,7 @@ head(result)
 [API description](https://www.uniprot.org/help/id_mapping)
 
 ``` r
-resp <- uniprot_map(
+df <- uniprot_map(
   ids = c("ENSG00000092199", "ENSG00000136997"),
   from = "Ensembl",
   to = "UniProtKB-Swiss-Prot",
@@ -98,10 +98,7 @@ resp <- uniprot_map(
     ## Job ID: 9fd69708ccefc32b78b8a13d5e126be638cd7f90
 
 ``` r
-result <- httr2::resp_body_string(resp) %>% 
-  read.delim(text = .)
-
-result
+df
 ```
 
     ##              From  Entry   Gene.Names             Organism
