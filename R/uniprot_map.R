@@ -111,11 +111,24 @@ uniprot_map <- function(ids,
   status_resp <- httr2::req_perform(status_req, verbosity = verbosity)
 
   ## Get results (via stream or pagination)
-  if (method == "stream") {
-    result_url <- gsub("results", "results/stream", status_resp$url)
+  result_url <- switch(
+    method,
+    stream = gsub("results", "results/stream", status_resp$url),
+    paged = status_resp$url
+  )
 
+  get_req <- httr2::request(result_url) %>%
+    httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
+    httr2::req_url_query(
+      `format` = format,
+      `fields` = fields,
+      `compressed` = compressed
+    ) %>%
+    httr2::req_retry(max_tries = 5)
+
+  if (method == "stream") {
     get_results_stream(
-      url = result_url,
+      req = get_req,
       format = format,
       path = path,
       fields = fields,
@@ -124,13 +137,13 @@ uniprot_map <- function(ids,
       verbosity = verbosity
     )
   } else if (method == "paged") {
-    result_url <- status_resp$url
-
     # n pages = n results / page size
     n_pages <- ceiling(as.integer(status_resp$headers$`x-total-results`) / size)
 
     get_results_paged(
-      url = result_url,
+      req = get_req %>%
+        httr2::req_url_query(`size` = size) %>%
+        httr2::req_error(is_error = function(resp) FALSE),
       n_pages = n_pages,
       format = format,
       path = path,
