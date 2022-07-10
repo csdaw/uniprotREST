@@ -27,14 +27,13 @@ library(magrittr)
 [API description](https://www.uniprot.org/help/api_retrieve_entries)
 
 ```{r}
-resp <- uniprot_retrieve(
+lst <- uniprot_retrieve(
   id = "P99999",
   database = "uniprotkb",
   format = "json"
 )
 
-result <- httr2::resp_body_json(resp) %>% 
-  str(max.level = 1)
+lst %>% str(max.level = 1)
 ```
 
 
@@ -43,16 +42,14 @@ result <- httr2::resp_body_json(resp) %>%
 [API description](https://www.uniprot.org/help/api_queries).
 
 ```{r}
-resp <- uniprot_search(
+df <- uniprot_search(
   query = "Major capsid protein 723",
   format = "tsv", 
-  fields = c("accession", "gene_primary", "length")
+  fields = c("accession", "gene_primary", "length"),
+  path = "test.txt"
 )
 
-result <- httr2::resp_body_string(resp) %>% 
-  read.delim(text = .)
-
-head(result)
+df
 ```
 
 ### Map database identifiers

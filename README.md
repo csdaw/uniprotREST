@@ -27,14 +27,13 @@ library(magrittr)
 [API description](https://www.uniprot.org/help/api_retrieve_entries)
 
 ``` r
-resp <- uniprot_retrieve(
+lst <- uniprot_retrieve(
   id = "P99999",
   database = "uniprotkb",
   format = "json"
 )
 
-result <- httr2::resp_body_json(resp) %>% 
-  str(max.level = 1)
+lst %>% str(max.level = 1)
 ```
 
     ## List of 17
@@ -61,25 +60,26 @@ result <- httr2::resp_body_json(resp) %>%
 [API description](https://www.uniprot.org/help/api_queries).
 
 ``` r
-resp <- uniprot_search(
+df <- uniprot_search(
   query = "Major capsid protein 723",
   format = "tsv", 
   fields = c("accession", "gene_primary", "length")
 )
 
-result <- httr2::resp_body_string(resp) %>% 
-  read.delim(text = .)
-
-head(result)
+df
 ```
 
-    ##        Entry Gene.Names..primary. Length
-    ## 1     P12499              gag-pol   1436
-    ## 2 A0A2D3QNK9                   HA    566
-    ## 3     G2TSP5                   HA    566
-    ## 4     Q0R7D7                   HA    566
-    ## 5     T1S005                   HA    560
-    ## 6 A0A0G2S1S8                   HA    326
+    ##         Entry Gene.Names..primary. Length
+    ## 1      P12499              gag-pol   1436
+    ## 2  A0A2D3QNK9                   HA    566
+    ## 3      G2TSP5                   HA    566
+    ## 4      Q0R7D7                   HA    566
+    ## 5      T1S005                   HA    560
+    ## 6  A0A0G2S1S8                   HA    326
+    ## 7      M1GNV6                   HA    344
+    ## 8  A0A0N9R076                         116
+    ## 9      W6HUJ6                   HA    319
+    ## 10 A0A8B6X312                         418
 
 ### Map database identifiers
 
