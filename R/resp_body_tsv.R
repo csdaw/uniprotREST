@@ -10,7 +10,7 @@ resp_body_tsv <- function(resp, encoding = NULL) {
   resp$body %>%
     readBin(character()) %>%
     iconv(from = encoding, to = "UTF-8") %>%
-    read.delim(text = .)
+    utils::read.delim(text = .)
 }
 
 resp_body_tsv_paged <- function(resp, page, con, encoding = NULL) {

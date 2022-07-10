@@ -1,11 +1,10 @@
-get_results_stream <- function(url, format, path, fields, isoform, compressed, size, verbosity) {
+get_results_stream <- function(url, format, path, fields, isoform, compressed, verbosity) {
   get_req <- httr2::request(url) %>%
     httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
     httr2::req_url_query(
       `format` = format,
       `fields` = fields,
-      `compressed` = compressed,
-      `size` = size
+      `compressed` = compressed
     ) %>%
     httr2::req_retry(max_tries = 5)
 

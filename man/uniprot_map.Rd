@@ -9,9 +9,11 @@ uniprot_map(
   from = "UniProtKB_AC-ID",
   to = "UniProtKB",
   format = "tsv",
+  path = NULL,
   fields = NULL,
   isoform = NULL,
-  compressed = FALSE,
+  compressed = NULL,
+  method = "stream",
   size = 500L,
   verbosity = NULL,
   dry_run = FALSE
@@ -30,6 +32,8 @@ See \code{\link{from_to}} for a list of all possible database names.}
 \item{format}{\code{string}, output format for mapping results.
 To do: add available formats.}
 
+\item{path}{Description.}
+
 \item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
 results. Applies to the \code{tsv}, and \code{xlsx} formats only.}
 
@@ -38,6 +42,8 @@ search results. Only applicable if \code{to} is \code{UniProtKB} or \code{UniPro
 
 \item{compressed}{\code{logical}, should results be returned gzipped? Default is
 \code{FALSE}.}
+
+\item{method}{Description.}
 
 \item{size}{\code{integer}, number of entries to output per 'page' of results.
 Probably don't change this from the default to avoid hammering UniProt's servers.}

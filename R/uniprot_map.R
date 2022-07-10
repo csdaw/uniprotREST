@@ -10,12 +10,14 @@
 #'   See \code{\link{from_to}} for a list of all possible database names.
 #' @param format `string`, output format for mapping results.
 #'   To do: add available formats.
+#' @param path Description.
 #' @param fields Optional `character vector`. Columns to retrieve in the search
 #'   results. Applies to the `tsv`, and `xlsx` formats only.
 #' @param isoform Optional `logical`. Whether or not to include isoforms in the
 #'   search results. Only applicable if `to` is `UniProtKB` or `UniProt-Swiss-Prot`.
 #' @param compressed `logical`, should results be returned gzipped? Default is
 #'   `FALSE`.
+#' @param method Description.
 #' @param size `integer`, number of entries to output per 'page' of results.
 #' Probably don't change this from the default to avoid hammering UniProt's servers.
 #' @param verbosity Optional `integer`, how much information to print? This is
@@ -49,9 +51,11 @@ uniprot_map <- function(ids,
                         from = "UniProtKB_AC-ID",
                         to = "UniProtKB",
                         format = "tsv",
+                        path = NULL,
                         fields = NULL,
                         isoform = NULL,
-                        compressed = FALSE,
+                        compressed = NULL,
+                        method = "stream",
                         size = 500L,
                         verbosity = NULL,
                         dry_run = FALSE) {
@@ -88,7 +92,7 @@ uniprot_map <- function(ids,
   jobid <- httr2::resp_body_json(post_resp)$jobId
   message(paste("Job ID:", jobid))
 
-  ## Construct and send GET request
+  ## Construct and send status GET request
   # Check job status and automatically fetch results if job is complete
   # (i.e. HTML status 303 is returned)
   # If job not complete (i.e. HTML status 200 is returned)
@@ -106,5 +110,35 @@ uniprot_map <- function(ids,
 
   status_resp <- httr2::req_perform(status_req, verbosity = verbosity)
 
-  status_resp
+  ## Get results (via stream or pagination)
+  if (method == "stream") {
+    result_url <- gsub("results", "results/stream", status_resp$url)
+
+    get_results_stream(
+      url = result_url,
+      format = format,
+      path = path,
+      fields = fields,
+      isoform = isoform,
+      compressed = compressed,
+      verbosity = verbosity
+    )
+  } else if (method == "paged") {
+    result_url <- status_resp$url
+
+    # n pages = n results / page size
+    n_pages <- ceiling(as.integer(status_resp$headers$`x-total-results`) / size)
+
+    get_results_paged(
+      url = result_url,
+      n_pages = n_pages,
+      format = format,
+      path = path,
+      fields = fields,
+      isoform = isoform,
+      compressed = compressed,
+      size = size,
+      verbosity = verbosity
+    )
+  }
 }
