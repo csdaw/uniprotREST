@@ -13,6 +13,8 @@ uniprot_search(
   fields = NULL,
   isoform = NULL,
   compressed = FALSE,
+  method = "stream",
+  size = 500L,
   verbosity = NULL,
   dry_run = FALSE
 )
@@ -46,6 +48,10 @@ search results. Only applicable if \code{database = "uniprotkb"}.}
 
 \item{compressed}{\code{logical}, should results be returned gzipped? Default is
 \code{FALSE}.}
+
+\item{method}{Description.}
+
+\item{size}{Description.}
 
 \item{verbosity}{Optional \code{integer}, how much information to print? This is
 a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to

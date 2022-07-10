@@ -29,6 +29,8 @@
 #'   search results. Only applicable if `database = "uniprotkb"`.
 #' @param compressed `logical`, should results be returned gzipped? Default is
 #'   `FALSE`.
+#' @param method Description.
+#' @param size Description.
 #' @param verbosity Optional `integer`, how much information to print? This is
 #'   a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
 #'   control verbosity:
@@ -95,6 +97,8 @@ uniprot_search <- function(query,
                            fields = NULL,
                            isoform = NULL,
                            compressed = FALSE,
+                           method = "stream",
+                           size = 500L,
                            verbosity = NULL,
                            dry_run = FALSE) {
   ## Argument checking
@@ -122,9 +126,13 @@ uniprot_search <- function(query,
   if (!is.logical(dry_run)) stop("`dry_run` must be TRUE or FALSE.")
 
   ## Access REST API
-  rest_url <- paste0("https://rest.uniprot.org/", database, "/search")
+  result_url <- switch(
+    method,
+    stream = paste0("https://rest.uniprot.org/", database, "/stream"),
+    paged = paste0("https://rest.uniprot.org/", database, "/search")
+  )
 
-  req <- httr2::request(rest_url) %>%
+  get_req <- httr2::request(result_url) %>%
     httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
     httr2::req_url_query(
       `query` = query,
@@ -135,6 +143,49 @@ uniprot_search <- function(query,
     ) %>%
     httr2::req_retry(max_tries = 5)
 
-  if (dry_run) httr2::req_dry_run(req) else
-    httr2::req_perform(req, path = path, verbosity = verbosity)
+  if (dry_run) {
+    httr2::req_dry_run(get_req)
+  } else if (method == "stream") {
+    get_results_stream(
+      req = get_req,
+      format = format,
+      path = path,
+      fields = fields,
+      isoform = isoform,
+      compressed = compressed,
+      verbosity = verbosity
+    )
+  } else if (method == "paged") {
+    n_pages <- httr2::request(result_url) %>%
+      httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
+      httr2::req_url_query(
+        `query` = query,
+        `format` = format,
+        `fields` = fields,
+        `includeIsoform` = isoform,
+        `compressed` = compressed,
+        `size` = size
+      ) %>%
+      httr2::req_retry(max_tries = 5) %>%
+      httr2::req_method("HEAD") %>%
+      httr2::req_perform(verbosity = verbosity) %>%
+      httr2::resp_header("x-total-results") %>%
+      as.integer() %>%
+      `/`(size) %>%
+      ceiling()
+
+    get_results_paged(
+      req = get_req %>%
+        httr2::req_url_query(`size` = size) %>%
+        httr2::req_error(is_error = function(resp) FALSE),
+      n_pages = n_pages,
+      format = format,
+      path = path,
+      fields = fields,
+      isoform = isoform,
+      compressed = compressed,
+      size = size,
+      verbosity = verbosity
+    )
+  }
 }

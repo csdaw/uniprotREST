@@ -31,7 +31,8 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
     }
 
     if (i == n_pages) break
-    req$url <- get_next_page(resp)
+    next_page <- get_next_page(resp)
+    if (!is.null(next_page)) req$url <- next_page else break
     i <- i + 1L
   })
 
@@ -55,7 +56,8 @@ get_results_paged_mem <- function(req, format, page_size, n_pages, verbosity) {
     }
 
     if (i == n_pages) break
-    req$url <- get_next_page(out[[i]])
+    next_page <- get_next_page(out[[i]])
+    if (!is.null(next_page)) req$url <- next_page else break
     i <- i + 1L
   })
 
