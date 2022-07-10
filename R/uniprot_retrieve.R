@@ -82,6 +82,17 @@ uniprot_retrieve <- function(id,
     ) %>%
     httr2::req_retry(max_tries = 5)
 
-  if (dry_run) httr2::req_dry_run(req) else
-    httr2::req_perform(req, path = path, verbosity = verbosity)
+  if (!is.null(path)) {
+    if (dry_run) httr2::req_dry_run(req) else
+      httr2::req_perform(req, path = path, verbosity = verbosity)
+  } else {
+    resp <- httr2::req_perform(req, verbosity = verbosity)
+
+    switch(
+      format,
+      tsv = resp_body_tsv(resp),
+      json = httr2::resp_body_json(resp), # To do: add ... ?
+      stop("Only format = `tsv` or `json` implemented currently")
+    )
+  }
 }
