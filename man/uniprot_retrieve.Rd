@@ -8,7 +8,7 @@ uniprot_retrieve(
   id,
   database = c("uniprotkb", "uniref", "uniparc", "proteomes", "taxonomy", "keywords",
     "citations", "diseases", "database", "locations", "unirule", "arba"),
-  format = "tsv",
+  format = c("tsv", "json"),
   path = NULL,
   fields = NULL,
   isoform = NULL,

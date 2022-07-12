@@ -51,24 +51,21 @@ uniprot_retrieve <- function(id,
                              database = c("uniprotkb", "uniref", "uniparc", "proteomes",
                                           "taxonomy", "keywords", "citations", "diseases",
                                           "database", "locations", "unirule", "arba"),
-                             format = "tsv",
+                             format = c("tsv", "json"),
                              path = NULL,
                              fields = NULL,
                              isoform = NULL,
                              verbosity = NULL,
                              dry_run = FALSE) {
   ## Argument checking
-  # Check query is single string
-  if (!is.character(id) & length(id) == 1) stop("`id` must be single string.")
-
-  # Check database and format arguments
-  database <- match.arg.exact(database)
-
-  # Check fields and convert to single string if necessary
-  if (!is.null(fields)) {
-    if (!is.character(fields)) stop("`fields` must be a string or character vector")
-    if (length(fields) > 1) fields <- paste(fields, collapse = ",")
-  }
+  check_string(id) # id must be single string
+  database <- match.arg.exact(database) # database must be exactly one of the options
+  format <- match.arg.exact(format) # format must be exactly one of the options
+  if (!is.null(path)) check_string(path) # path must be single string
+  if (!is.null(fields))
+    fields <- check_character(fields, convert = TRUE) # convert fields to single string if necessary
+  if (!is.null(isoform)) check_logical(isoform) # isoform must be T or F
+  if (!is.null(verbosity)) check_verbosity(verbosity) # verbosity must be in 0:3
 
   ## Access REST API
   rest_url <- "https://rest.uniprot.org"
@@ -81,6 +78,7 @@ uniprot_retrieve <- function(id,
       `includeIsoform` = isoform
     ) %>%
     httr2::req_retry(max_tries = 5)
+  # To do: consider adding throttle here
 
   if (!is.null(path)) {
     if (dry_run) httr2::req_dry_run(req) else
