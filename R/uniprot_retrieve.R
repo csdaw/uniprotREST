@@ -66,6 +66,7 @@ uniprot_retrieve <- function(id,
     fields <- check_character(fields, convert = TRUE) # convert fields to single string if necessary
   if (!is.null(isoform)) check_logical(isoform) # isoform must be T or F
   if (!is.null(verbosity)) check_verbosity(verbosity) # verbosity must be in 0:3
+  check_logical(dry_run) # dry_run must be T or F
 
   ## Access REST API
   rest_url <- "https://rest.uniprot.org"

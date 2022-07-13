@@ -91,41 +91,31 @@ uniprot_search <- function(query,
                            database = c("uniprotkb", "uniref", "uniparc", "proteomes",
                                         "taxonomy", "keywords", "citations", "diseases",
                                         "database", "locations", "unirule", "arba"),
-                           format = c("json", "xml", "txt", "list", "tsv", "fasta",
-                                      "gff", "obo", "rdf", "xlsx"),
+                           format = c("tsv", "json"),
                            path = NULL,
                            fields = NULL,
                            isoform = NULL,
-                           compressed = FALSE,
-                           method = "stream",
+                           compressed = NULL,
+                           method = c("stream", "paged"),
                            size = 500L,
                            verbosity = NULL,
                            dry_run = FALSE) {
   ## Argument checking
-  # Check query is single string
-  if (!is.character(query) & length(query) == 1) stop("`query` must be single string.")
-
-  # Check database and format arguments
-  database <- match.arg.exact(database)
-  format <- match.arg.exact(format)
-
-  # Check path is a single string if present
-  if (!is.null(path)) {
-    if (!is.character(path) & length(path) == 1) stop("`path` must be a single string")
-  }
-
-  # Check fields and convert to single string if necessary
-  if (!is.null(fields)) {
-    if (!is.character(fields)) stop("`fields` must be a string or character vector")
-    if (length(fields) > 1) fields <- paste(fields, collapse = ",")
-  }
-
-  # Check other arguments
-  if (!is.null(isoform)) if (!is.logical(isoform)) stop("`isoform` must be TRUE or FALSE.")
-  if (!is.logical(compressed)) stop("`compressed` must be TRUE or FALSE.")
-  if (!is.logical(dry_run)) stop("`dry_run` must be TRUE or FALSE.")
+  check_string(query) # query must be single string
+  database <- match.arg.exact(database) # database must be exactly one of the options
+  format <- match.arg.exact(format) # format must be exactly one of the options
+  if (!is.null(path)) check_string(path) # path must be single string
+  if (!is.null(fields))
+    fields <- check_character(fields, convert = TRUE) # convert fields to single string if necessary
+  if (!is.null(isoform)) check_logical(isoform) # isoform must be T or F
+  if (!is.null(compressed)) check_logical(compressed) # compressed must be T or F
+  method <- match.arg.exact(method) # method must be stream or paged
+  check_numeric(size) # size must be a number (ideally an integer)
+  if (!is.null(verbosity)) check_verbosity(verbosity) # verbosity must be in 0:3
+  check_logical(dry_run) # dry_run must be T or F
 
   ## Access REST API
+  # Endpoint to get results depends on method
   result_url <- switch(
     method,
     stream = paste0("https://rest.uniprot.org/", database, "/stream"),
@@ -142,6 +132,7 @@ uniprot_search <- function(query,
       `compressed` = compressed
     ) %>%
     httr2::req_retry(max_tries = 5)
+  # To do: consider adding throttle here
 
   if (dry_run) {
     httr2::req_dry_run(get_req)
@@ -173,6 +164,7 @@ uniprot_search <- function(query,
       as.integer() %>%
       `/`(size) %>%
       ceiling()
+    # To do: consider adding throttle here
 
     get_results_paged(
       req = get_req %>%
