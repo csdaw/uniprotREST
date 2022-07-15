@@ -34,3 +34,17 @@ check_verbosity <- function(x) {
 check_numeric <- function(x) {
   if (!is.numeric(x)) stop(sprintf("`%s` must be numeric.", deparse(substitute(x))))
 }
+
+check_from_to <- function(from, to) {
+  # Check from is valid
+  if (!from %in% names(from_to_list))
+    stop("`from` database is not valid.")
+
+  # Check to is valid
+  if (!to %in% unique(unlist(from_to_list, use.names = FALSE)))
+    stop("`to` database is not valid.")
+
+  # Check from to pair is valid
+  if (!to %in% from_to_list[[from]])
+    stop(sprintf("Unable to map IDs from `%s` to `%s`.", from, to))
+}

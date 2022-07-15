@@ -61,7 +61,7 @@ uniprot_map <- function(ids,
                         dry_run = FALSE) {
   ## Argument checking
   ids <- check_character(ids, convert = TRUE) # convert ids to single string if necessary
-  # check_from_to(from, to) # from/to pair must be okay
+  check_from_to(from, to) # from/to pair must be okay
   format <- match.arg.exact(format) # format must be exactly one of the options
   if (!is.null(path)) check_string(path) # path must be single string
   if (!is.null(fields))
