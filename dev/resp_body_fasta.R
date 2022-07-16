@@ -40,3 +40,39 @@ bbb <- Biostrings::AAStringSet(seqs)
 httr2::resp_body_string(tresp) %>%
   Biostrings::AAStringSet()
 Biostrings::AAStringSet(tresp$body)
+
+resp_body_fasta <- function(resp, encoding = NULL) {
+  check_response(resp)
+
+  if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
+
+  if (length(resp$body) == 0) {
+    stop("Can not retrieve empty body")
+  }
+
+  txt <- resp$body %>%
+    readBin(character()) %>%
+    iconv(from = encoding, to = "UTF-8") %>%
+    strsplit("\n") %>%
+    unlist()
+
+  header_idx <- grep(">", txt)
+
+  seqs_idx <- data.frame(ind = ind,
+                         from = ind + 1,
+                         to = c((ind - 1)[-1], length(ind)))
+
+  seqs <- vector(mode = "character", length = length(ind))
+
+  for (i in seq_along(header_idx)) {
+    seqs[i] <- paste(txt[seqs_idx$from[i]:seqs_idx$to[i]], collapse = "")
+  }
+
+  names(seqs) <- substr(txt[header_idx], 2)
+
+  if (requireNamespace("Biostrings", quietly = TRUE)) {
+    Biostrings::AAStringSet(seqs)
+  } else {
+    seqs
+  }
+}
