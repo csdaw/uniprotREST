@@ -155,7 +155,6 @@ uniprot_map <- function(ids,
       fields = fields,
       isoform = isoform,
       compressed = compressed,
-      size = size,
       verbosity = verbosity
     )
   }

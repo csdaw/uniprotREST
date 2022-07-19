@@ -1,10 +1,10 @@
-get_results_paged <- function(req, n_pages, format, path, fields, isoform, compressed, size, verbosity) {
+get_results_paged <- function(req, n_pages, format, path, fields, isoform, compressed, verbosity) {
   if (!is.null(path)) {
     # Load results into memory then save to disk, page by page
-    get_results_paged_disk(req, format = format, path = path, page_size = size, n_pages = n_pages, verbosity = verbosity)
+    get_results_paged_disk(req, format = format, path = path, n_pages = n_pages, verbosity = verbosity)
   } else {
     # Load results into memory page by page and output single object
-    get_results_paged_mem(req, format = format, page_size = size, n_pages = n_pages, verbosity = verbosity)
+    get_results_paged_mem(req, format = format, n_pages = n_pages, verbosity = verbosity)
   }
 }
 
@@ -39,7 +39,7 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
   close(file_con)
 }
 
-get_results_paged_mem <- function(req, format, page_size, n_pages, verbosity) {
+get_results_paged_mem <- function(req, format, n_pages, verbosity) {
   i <- 1L
 
   out <- vector("list", n_pages)
