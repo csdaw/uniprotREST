@@ -62,11 +62,9 @@ test <- get_results_paged(
   verbosity = 1
 )
 
-test
-
+## mem
 test2 <- test %>%
-  lapply(httr2::resp_body_string) %>%
-  jsonlite::fromJSON()
+  lapply(httr2::resp_body_string)
 
 test3 <- jsonlite::fromJSON(test2[[1]], simplifyVector = FALSE) %>%
   unlist(recursive = FALSE)
@@ -74,7 +72,14 @@ test3 <- jsonlite::fromJSON(test2[[1]], simplifyVector = FALSE) %>%
 test4 <- test %>% sapply(httr2::resp_body_json) %>%
   unlist(recursive = FALSE, use.names = FALSE)
 
+## disk
 test2[[1]] -> test5
+
+test6 <- jsonlite::fromJSON(
+  test5,
+  simplifyVector = FALSE
+) %>%
+  unlist(recursive = FALSE, use.names = FALSE)
 
 test6 <- stringr::str_sub(test5, 1, 200)
 test7 <- stringr::str_sub(test5, -200, -1)

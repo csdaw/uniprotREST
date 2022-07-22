@@ -70,8 +70,9 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
         do.call(rbind, .)
     },
     json = {
-      out %>% sapply(httr2::resp_body_json) %>%
-        unlist(recursive = FALSE, use.names = FALSE)
+      out
+      # out %>% sapply(httr2::resp_body_json) %>%
+      #   unlist(recursive = FALSE, use.names = FALSE)
     },
     stop("Only format = `tsv` and `json` implemented currently")
   )
