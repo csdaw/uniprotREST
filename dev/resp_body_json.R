@@ -66,61 +66,56 @@ test <- get_results_paged(
 test2 <- test %>%
   lapply(httr2::resp_body_string)
 
-test3 <- jsonlite::fromJSON(test2[[1]], simplifyVector = FALSE) %>%
-  unlist(recursive = FALSE)
+test3 <- test %>%
+  lapply(httr2::resp_body_json)
 
 test4 <- test %>% sapply(httr2::resp_body_json) %>%
   unlist(recursive = FALSE, use.names = FALSE)
 
 ## disk
-test2[[1]] -> test5
 
-test6 <- jsonlite::fromJSON(
-  test5,
-  simplifyVector = FALSE
-) %>%
-  unlist(recursive = FALSE, use.names = FALSE)
+## stream
 
-test6 <- stringr::str_sub(test5, 1, 200)
-test7 <- stringr::str_sub(test5, -200, -1)
-
-test8 <- sub('{"results":[', "", test5, fixed = TRUE)
-test8 <- sub('}}}]}', "}}}", test8, fixed = TRUE)
-
-test9 <- jsonlite::fromJSON(test8, simplifyVector = FALSE)
-
-#### JSON to disk ####
-resp_body_json_paged <- function(resp, page, con, encoding = NULL) {
-  uniprotREST:::check_response(resp)
-
-  if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
-
-  # message if length(resp$body) == 0?
-  writeLines("{")
-
-  resp$body %>%
-    readBin(character()) %>%
-    iconv(from = encoding, to = "UTF-8") %>%
-    writeLines(con = con, sep = "\n")
-}
-
-get_results_paged(
+debugonce(uniprotREST:::get_results_stream)
+uniprotREST:::get_results_stream(
   req = get_req %>%
-    httr2::req_url_query(`size` = size) %>%
-    httr2::req_error(is_error = function(resp) FALSE),
-  n_pages = n_pages,
+    httr2::req_url(sub("results", "results/stream", get_req$url)),
+  # n_pages = n_pages,
   format = "json",
-  path = here("dev/test_to_disk/test.json"),
+  path = here("dev/test_to_disk/test_json_stream.json"),
   fields = NULL,
   isoform = NULL,
   compressed = NULL,
   verbosity = 1
 )
 
-bbb <- readr::read_file(here("dev/test_to_disk/test.json"))
+ddd <- jsonlite::read_json(here("dev/test_to_disk/test_json_stream.json"))
 
-substr(bbb, 1, 20)
+## paged
+aaa <- test[[1]]$body %>%
+  readBin(character()) %>%
+  iconv(from = "UTF-8", to = "UTF-8")
 
-ccc <- gsub('{"results":[', '', bbb, fixed = TRUE)
+bbb <- test[[2]]$body %>%
+  readBin(character()) %>%
+  iconv(from = "UTF-8", to = "UTF-8")
 
-substr(ccc, 1, 20)
+ccc <- test[[3]]$body %>%
+  readBin(character()) %>%
+  iconv(from = "UTF-8", to = "UTF-8")
+
+file_con <- file(here("dev/test_to_disk/test_json_paged.json"), "w")
+
+# first page
+writeLines(aaa %>% substr(., 1, nchar(.) - 2), file_con)
+cat(",", file = file_con)
+
+# any internal page
+writeLines(bbb %>% substr(., 13, nchar(.) - 2), file_con)
+cat(",", file = file_con)
+
+# final page
+writeLines(ccc %>% substr(., 13, nchar(.)), file_con)
+close(file_con)
+
+ddd <- jsonlite::read_json(here("dev/test_to_disk/test_json_paged.json"))
