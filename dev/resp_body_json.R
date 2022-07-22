@@ -61,3 +61,61 @@ test <- get_results_paged(
   compressed = NULL,
   verbosity = 1
 )
+
+test
+
+test2 <- test %>%
+  lapply(httr2::resp_body_string) %>%
+  jsonlite::fromJSON()
+
+test3 <- jsonlite::fromJSON(test2[[1]], simplifyVector = FALSE) %>%
+  unlist(recursive = FALSE)
+
+test4 <- test %>% sapply(httr2::resp_body_json) %>%
+  unlist(recursive = FALSE, use.names = FALSE)
+
+test2[[1]] -> test5
+
+test6 <- stringr::str_sub(test5, 1, 200)
+test7 <- stringr::str_sub(test5, -200, -1)
+
+test8 <- sub('{"results":[', "", test5, fixed = TRUE)
+test8 <- sub('}}}]}', "}}}", test8, fixed = TRUE)
+
+test9 <- jsonlite::fromJSON(test8, simplifyVector = FALSE)
+
+#### JSON to disk ####
+resp_body_json_paged <- function(resp, page, con, encoding = NULL) {
+  uniprotREST:::check_response(resp)
+
+  if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
+
+  # message if length(resp$body) == 0?
+  writeLines("{")
+
+  resp$body %>%
+    readBin(character()) %>%
+    iconv(from = encoding, to = "UTF-8") %>%
+    writeLines(con = con, sep = "\n")
+}
+
+get_results_paged(
+  req = get_req %>%
+    httr2::req_url_query(`size` = size) %>%
+    httr2::req_error(is_error = function(resp) FALSE),
+  n_pages = n_pages,
+  format = "json",
+  path = here("dev/test_to_disk/test.json"),
+  fields = NULL,
+  isoform = NULL,
+  compressed = NULL,
+  verbosity = 1
+)
+
+bbb <- readr::read_file(here("dev/test_to_disk/test.json"))
+
+substr(bbb, 1, 20)
+
+ccc <- gsub('{"results":[', '', bbb, fixed = TRUE)
+
+substr(ccc, 1, 20)

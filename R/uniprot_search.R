@@ -176,7 +176,6 @@ uniprot_search <- function(query,
       fields = fields,
       isoform = isoform,
       compressed = compressed,
-      size = size,
       verbosity = verbosity
     )
   }

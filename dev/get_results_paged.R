@@ -24,7 +24,7 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
       switch(
         format,
         tsv = resp_body_tsv_paged(resp, page = i, con = file_con),
-        json = resp$body,
+        json = resp_body_json_paged(resp, con = file_con),
         stop("Only format = `tsv` implemented currently")
       )
     } else {
@@ -69,8 +69,11 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
         lapply(resp_body_tsv) %>%
         do.call(rbind, .)
     },
-    json = sapply(out, httr2::resp_body_json),
-    stop("Only format = `tsv` implemented currently")
+    json = {
+      out %>% sapply(httr2::resp_body_json) %>%
+        unlist(recursive = FALSE, use.names = FALSE)
+    },
+    stop("Only format = `tsv` and `json` implemented currently")
   )
 }
 
