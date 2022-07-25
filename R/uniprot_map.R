@@ -129,7 +129,8 @@ uniprot_map <- function(ids,
       `fields` = fields,
       `compressed` = compressed
     ) %>%
-    httr2::req_retry(max_tries = 5)
+    httr2::req_retry(max_tries = 5) %>%
+    httr2::req_throttle(rate = 1 / 1) # limit 1 request every 1 second
 
   if (method == "stream") {
     get_results_stream(
