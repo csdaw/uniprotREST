@@ -24,19 +24,16 @@ Choose from: \code{uniprotkb} (default), \code{uniref}, \code{uniparc}, \code{pr
 \code{keywords}, \code{citations}, \code{diseases}, \code{database}, \code{locations}, \code{unirule}, \code{arba}.
 See details below.}
 
-\item{format}{\code{string}, desired output format for search results. Different
-\code{database} provide different formats, though generally, \code{json} and \code{tsv}
-are always available. Choose from: \code{json} (default), \code{xml}, \code{txt}, \code{list}, \code{tsv},
-\code{fasta}, \code{gff}, \code{obo}, \code{rdf}, \code{xlsx}.}
+\item{format}{\code{string}, output format for search results.
+Only \code{tsv} (default) or \code{json} implemented at the moment.}
 
-\item{path}{Optional \code{string}. Path to save the body of the HTTP response.
-This is useful for large search results since it avoids storing the response
-in memory.}
+\item{path}{Optional \code{string}, file path to save API response. Useful for
+large queries to avoid storing in memory.}
 
 \item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
 results. Applies to the \code{json}, \code{tsv}, and \code{xlsx} formats only.
 See \href{https://www.uniprot.org/help/return_fields}{here} for available
-UniProtKB fields}
+UniProtKB fields.}
 
 \item{isoform}{Optional \code{logical}. Whether or not to include isoforms in the
 search results. Only applicable if \code{database = "uniprotkb"}.}
@@ -58,9 +55,9 @@ Bad Request error i.e. your \code{query} was not written correctly.}
 }
 \value{
 If the request was successful (i.e. the request was successfully
-performed and a response with HTTP status code <400 was received), an HTTP
-response is returned; otherwise an error is thrown. Use the \code{path} argument
-to save the body of the response to a file.
+performed and a response with HTTP status code <400 was received), a data.frame
+(\code{tsv}) or a list (\code{json}) is returned; otherwise an error is thrown.
+Use the \code{path} argument to save to a file instead.
 
 If \code{dry_run = TRUE}, then prints the HTTP request and returns,
 invisibly, a list containing information about the request without actually

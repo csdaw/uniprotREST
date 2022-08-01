@@ -14,23 +14,23 @@
 #'   Choose from: `uniprotkb` (default), `uniref`, `uniparc`, `proteomes`, `taxonomy`,
 #'   `keywords`, `citations`, `diseases`, `database`, `locations`, `unirule`, `arba`.
 #'   See details below.
-#' @param format `string`, desired output format for search results. Different
-#'   `database` provide different formats, though generally, `json` and `tsv`
-#'   are always available. Choose from: `json` (default), `xml`, `txt`, `list`, `tsv`,
-#'   `fasta`, `gff`, `obo`, `rdf`, `xlsx`.
-#' @param path Optional `string`. Path to save the body of the HTTP response.
-#'   This is useful for large search results since it avoids storing the response
-#'   in memory.
+#' @param format `string`, output format for search results.
+#'   Only `tsv` (default) implemented properly at the moment.
+#' @param path Optional `string`, file path to save API response. Useful for
+#'   large queries to avoid storing in memory.
 #' @param fields Optional `character vector`. Columns to retrieve in the search
 #'   results. Applies to the `json`, `tsv`, and `xlsx` formats only.
 #'   See [here](https://www.uniprot.org/help/return_fields) for available
-#'   UniProtKB fields
+#'   UniProtKB fields.
 #' @param isoform Optional `logical`. Whether or not to include isoforms in the
 #'   search results. Only applicable if `database = "uniprotkb"`.
 #' @param compressed `logical`, should results be returned gzipped? Default is
 #'   `FALSE`.
-#' @param method Description.
-#' @param size Description.
+#' @param method `string`, method for getting results. Either `stream` (default) or `paged`.
+#'   Stream method should be used with small queries, and can fail at times. Paged
+#'   method is a bit slower but more reliable and useful for large queries.
+#' @param size `integer`, number of entries to output per 'page' of results.
+#'   Probably don't change this from the default to avoid hammering UniProt's servers.
 #' @param verbosity Optional `integer`, how much information to print? This is
 #'   a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
 #'   control verbosity:
@@ -46,9 +46,9 @@
 #'   Bad Request error i.e. your `query` was not written correctly.
 #'
 #' @return If the request was successful (i.e. the request was successfully
-#'   performed and a response with HTTP status code <400 was received), an HTTP
-#'   response is returned; otherwise an error is thrown. Use the `path` argument
-#'   to save the body of the response to a file.
+#'   performed and a response with HTTP status code <400 was received), a data.frame
+#'   (`tsv`) or a list (`json`) is returned; otherwise an error is thrown.
+#'   Use the `path` argument to save to a file instead.
 #'
 #'   If `dry_run = TRUE`, then prints the HTTP request and returns,
 #'   invisibly, a list containing information about the request without actually

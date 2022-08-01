@@ -29,19 +29,16 @@ Choose from: \code{uniprotkb} (default), \code{uniref}, \code{uniparc}, \code{pr
 \code{keywords}, \code{citations}, \code{diseases}, \code{database}, \code{locations}, \code{unirule}, \code{arba}.
 See details below.}
 
-\item{format}{\code{string}, desired output format for search results. Different
-\code{database} provide different formats, though generally, \code{json} and \code{tsv}
-are always available. Choose from: \code{json} (default), \code{xml}, \code{txt}, \code{list}, \code{tsv},
-\code{fasta}, \code{gff}, \code{obo}, \code{rdf}, \code{xlsx}.}
+\item{format}{\code{string}, output format for search results.
+Only \code{tsv} (default) implemented properly at the moment.}
 
-\item{path}{Optional \code{string}. Path to save the body of the HTTP response.
-This is useful for large search results since it avoids storing the response
-in memory.}
+\item{path}{Optional \code{string}, file path to save API response. Useful for
+large queries to avoid storing in memory.}
 
 \item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
 results. Applies to the \code{json}, \code{tsv}, and \code{xlsx} formats only.
 See \href{https://www.uniprot.org/help/return_fields}{here} for available
-UniProtKB fields}
+UniProtKB fields.}
 
 \item{isoform}{Optional \code{logical}. Whether or not to include isoforms in the
 search results. Only applicable if \code{database = "uniprotkb"}.}
@@ -49,9 +46,12 @@ search results. Only applicable if \code{database = "uniprotkb"}.}
 \item{compressed}{\code{logical}, should results be returned gzipped? Default is
 \code{FALSE}.}
 
-\item{method}{Description.}
+\item{method}{\code{string}, method for getting results. Either \code{stream} (default) or \code{paged}.
+Stream method should be used with small queries, and can fail at times. Paged
+method is a bit slower but more reliable and useful for large queries.}
 
-\item{size}{Description.}
+\item{size}{\code{integer}, number of entries to output per 'page' of results.
+Probably don't change this from the default to avoid hammering UniProt's servers.}
 
 \item{verbosity}{Optional \code{integer}, how much information to print? This is
 a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
@@ -70,9 +70,9 @@ Bad Request error i.e. your \code{query} was not written correctly.}
 }
 \value{
 If the request was successful (i.e. the request was successfully
-performed and a response with HTTP status code <400 was received), an HTTP
-response is returned; otherwise an error is thrown. Use the \code{path} argument
-to save the body of the response to a file.
+performed and a response with HTTP status code <400 was received), a data.frame
+(\code{tsv}) or a list (\code{json}) is returned; otherwise an error is thrown.
+Use the \code{path} argument to save to a file instead.
 
 If \code{dry_run = TRUE}, then prints the HTTP request and returns,
 invisibly, a list containing information about the request without actually

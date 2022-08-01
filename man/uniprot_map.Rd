@@ -30,9 +30,10 @@ database names.}
 See \code{\link{from_to}} for a list of all possible database names.}
 
 \item{format}{\code{string}, output format for mapping results.
-To do: add available formats.}
+Only \code{tsv} (default) implemented properly at the moment.}
 
-\item{path}{Description.}
+\item{path}{Optional \code{string}, file path to save API response. Useful for
+large queries to avoid storing in memory.}
 
 \item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
 results. Applies to the \code{tsv}, and \code{xlsx} formats only.}
@@ -43,7 +44,9 @@ search results. Only applicable if \code{to} is \code{UniProtKB} or \code{UniPro
 \item{compressed}{\code{logical}, should results be returned gzipped? Default is
 \code{FALSE}.}
 
-\item{method}{Description.}
+\item{method}{\code{string}, method for getting results. Either \code{stream} (default) or \code{paged}.
+Stream method should be used with small queries, and can fail at times. Paged
+method is a bit slower but more reliable and useful for large queries.}
 
 \item{size}{\code{integer}, number of entries to output per 'page' of results.
 Probably don't change this from the default to avoid hammering UniProt's servers.}
@@ -65,9 +68,9 @@ Bad Request error i.e. your \code{ids} or \code{fields} were not written correct
 }
 \value{
 If the request was successful (i.e. the request was successfully
-performed and a response with HTTP status code <400 was received), a list of HTTP
-responses is returned; otherwise an error is thrown. Use the \code{path} argument
-to save the body of the response to a file.
+performed and a response with HTTP status code <400 was received), a data.frame
+(\code{tsv}) or a list (\code{json}) is returned; otherwise an error is thrown.
+Use the \code{path} argument to save to a file instead.
 
 If \code{dry_run = TRUE}, then prints the HTTP request and returns,
 invisibly, a list containing information about the request without actually

@@ -9,17 +9,20 @@
 #' @param to `string`, name of database to map to. The default is `UniProtKB`.
 #'   See \code{\link{from_to}} for a list of all possible database names.
 #' @param format `string`, output format for mapping results.
-#'   To do: add available formats.
-#' @param path Description.
+#'   Only `tsv` (default) implemented properly at the moment.
+#' @param path Optional `string`, file path to save API response. Useful for
+#'   large queries to avoid storing in memory.
 #' @param fields Optional `character vector`. Columns to retrieve in the search
 #'   results. Applies to the `tsv`, and `xlsx` formats only.
 #' @param isoform Optional `logical`. Whether or not to include isoforms in the
 #'   search results. Only applicable if `to` is `UniProtKB` or `UniProt-Swiss-Prot`.
 #' @param compressed `logical`, should results be returned gzipped? Default is
 #'   `FALSE`.
-#' @param method Description.
+#' @param method `string`, method for getting results. Either `stream` (default) or `paged`.
+#'   Stream method should be used with small queries, and can fail at times. Paged
+#'   method is a bit slower but more reliable and useful for large queries.
 #' @param size `integer`, number of entries to output per 'page' of results.
-#' Probably don't change this from the default to avoid hammering UniProt's servers.
+#'   Probably don't change this from the default to avoid hammering UniProt's servers.
 #' @param verbosity Optional `integer`, how much information to print? This is
 #'   a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
 #'   control verbosity:
@@ -35,9 +38,9 @@
 #'   Bad Request error i.e. your `ids` or `fields` were not written correctly.
 #'
 #' @return If the request was successful (i.e. the request was successfully
-#'   performed and a response with HTTP status code <400 was received), a list of HTTP
-#'   responses is returned; otherwise an error is thrown. Use the `path` argument
-#'   to save the body of the response to a file.
+#'   performed and a response with HTTP status code <400 was received), a data.frame
+#'   (`tsv`) or a list (`json`) is returned; otherwise an error is thrown.
+#'   Use the `path` argument to save to a file instead.
 #'
 #'   If `dry_run = TRUE`, then prints the HTTP request and returns,
 #'   invisibly, a list containing information about the request without actually
