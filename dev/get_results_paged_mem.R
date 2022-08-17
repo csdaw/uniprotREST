@@ -27,7 +27,7 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
         lapply(resp_body_tsv) %>%
         do.call(rbind, .)
     },
-    json = out,
+    json = out
     stop("Only format = `tsv` implemented currently")
   )
 }

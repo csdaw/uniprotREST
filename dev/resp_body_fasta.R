@@ -3,9 +3,11 @@ library(here)
 get_req <- httr2::request("https://rest.uniprot.org/uniprotkb/search") %>%
   httr2::req_url_query(
     query = "Major capsid protein 2073",
-    size = 500L,
+    size = 2L,
     format = "fasta"
   )
+
+
 
 #### functions ####
 str2fasta <- function(x, biostrings = TRUE) {
@@ -34,10 +36,52 @@ str2fasta <- function(x, biostrings = TRUE) {
   }
 }
 
+resp_body_fasta_paged <- function(resp, con, encoding = NULL) {
+  uniprotREST:::check_response(resp)
+
+  if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
+
+  resp$body %>%
+    readBin(character()) %>%
+    iconv(from = encoding, to = "UTF-8") %>%
+    writeLines(con = con, sep = "")
+}
+
+resp_body_fasta <- function(resp, biostrings = TRUE, encoding = NULL) {
+  uniprotREST:::check_response(resp)
+
+  if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
+
+  resp$body %>%
+    readBin(character()) %>%
+    iconv(from = encoding, to = "UTF-8") %>%
+    str2fasta(biostrings = TRUE)
+}
+
 #### method = paged ####
-## to disk
+## to disk = also straightforward
+source(here("dev/get_results_paged.R"))
+
+get_results_paged(
+  req = get_req,
+  n_pages = 2,
+  format = "fasta",
+  path = here("dev/test_to_disk/fasta_paged.fasta"),
+  verbosity = 1
+)
+
+Biostrings::readAAStringSet(here("dev/test_to_disk/fasta_paged.fasta"))
+# or
+str2fasta(readLines(here("dev/test_to_disk/fasta_paged.fasta")), biostrings = FALSE)
 
 ## to memory
+test <- get_results_paged(
+  req = get_req,
+  n_pages = 2,
+  format = "fasta",
+  path = NULL,
+  verbosity = 1
+)
 
 #### method = stream ####
 ## to disk = straightforward

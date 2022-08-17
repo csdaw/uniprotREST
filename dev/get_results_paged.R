@@ -25,6 +25,7 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
         format,
         tsv = resp_body_tsv_paged(resp, page = i, con = file_con),
         json = resp_body_json_paged(resp, con = file_con),
+        fasta = resp_body_fasta_paged(resp, con = file_con),
         stop("Only format = `tsv` implemented currently")
       )
     } else {
@@ -44,6 +45,9 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
   i <- 1L
 
   out <- vector("list", n_pages)
+
+  if (format == "fasta" && requireNamespace("Biostrings", quietly = TRUE))
+    out <- Biostrings::AAStringSetList(out)
 
   # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
   repeat({
@@ -73,6 +77,12 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
       out
       # out %>% sapply(httr2::resp_body_json) %>%
       #   unlist(recursive = FALSE, use.names = FALSE)
+    },
+    fasta = {
+      out %>%
+        sapply(resp_body_fasta) %>%
+        Biostrings::AAStringSetList() %>%
+        unlist()
     },
     stop("Only format = `tsv` and `json` implemented currently")
   )
