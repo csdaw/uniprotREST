@@ -1,5 +1,68 @@
+library(here)
+
+get_req <- httr2::request("https://rest.uniprot.org/uniprotkb/search") %>%
+  httr2::req_url_query(
+    query = "Major capsid protein 2073",
+    size = 500L,
+    format = "fasta"
+  )
+
+#### functions ####
+str2fasta <- function(x, biostrings = TRUE) {
+  xlines <- unlist(strsplit(x, "\n"))
+
+  hdr_idx <- grep(">", xlines)
+
+  seq_idx <- data.frame(
+    hdr = hdr_idx,
+    from = hdr_idx + 1,
+    to = c((hdr_idx - 1)[-1], length(xlines))
+  )
+
+  seqs <- vector(mode = "character", length = length(hdr_idx))
+
+  for (i in seq_along(hdr_idx)) {
+    seqs[i] <- paste(xlines[seq_idx$from[i]:seq_idx$to[i]], collapse = "")
+  }
+
+  names(seqs) <- substring(xlines[hdr_idx], 2)
+
+  if (biostrings && requireNamespace("Biostrings", quietly = TRUE)) {
+    Biostrings::AAStringSet(seqs)
+  } else {
+    seqs
+  }
+}
+
+#### method = paged ####
+## to disk
+
+## to memory
+
+#### method = stream ####
+## to disk = straightforward
+httr2::req_perform(get_req, path = here("dev/test_to_disk/fasta_stream.fasta"), verbosity = 1)
+
+Biostrings::readAAStringSet(here("dev/test_to_disk/fasta_stream.fasta"))
+# or
+str2fasta(readLines(here("dev/test_to_disk/fasta_stream.fasta")), biostrings = FALSE)
+
+## to memory
+get_resp <- httr2::req_perform(get_req, verbosity = 1)
+
+str2fasta(get_resp %>% httr2::resp_body_string())
+# or
+str2fasta(get_resp %>% httr2::resp_body_string(), biostrings = FALSE)
+
+
+
+
+
+
+
+
 xxx <- c(
-">protein1
+  ">protein1
 AAAAAAAAA
 >protein2
 BBBBBBBBB"
@@ -34,6 +97,8 @@ for (i in seq_along(ind)) {
 hdrs <- aaa[ind]
 
 names(seqs) <- substring(hdrs, 2)
+
+seqs
 
 bbb <- Biostrings::AAStringSet(seqs)
 
