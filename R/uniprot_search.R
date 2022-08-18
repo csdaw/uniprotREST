@@ -96,7 +96,7 @@ uniprot_search <- function(query,
                            fields = NULL,
                            isoform = NULL,
                            compressed = NULL,
-                           method = c("stream", "paged"),
+                           method = c("paged", "stream"),
                            size = 500L,
                            verbosity = NULL,
                            dry_run = FALSE) {

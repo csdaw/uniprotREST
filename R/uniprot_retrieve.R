@@ -84,7 +84,7 @@ uniprot_retrieve <- function(id,
     if (!is.null(path)) {
       httr2::req_perform(get_req, path = path, verbosity = verbosity)
     } else {
-      get_resp <- httr2::req_perform(req, verbosity = verbosity)
+      get_resp <- httr2::req_perform(get_req, verbosity = verbosity)
 
       switch(
         format,
