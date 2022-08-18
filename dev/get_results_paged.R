@@ -46,9 +46,6 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
 
   out <- vector("list", n_pages)
 
-  if (format == "fasta" && requireNamespace("Biostrings", quietly = TRUE))
-    out <- Biostrings::AAStringSetList(out)
-
   # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
   repeat({
     message(paste("Page", i, "of", n_pages))
@@ -80,9 +77,9 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
     },
     fasta = {
       out %>%
-        sapply(resp_body_fasta) %>%
-        Biostrings::AAStringSetList() %>%
-        unlist()
+        lapply(., resp_body_fasta_paged, con = NULL) %>%
+        unlist() %>%
+        str2fasta()
     },
     stop("Only format = `tsv` and `json` implemented currently")
   )

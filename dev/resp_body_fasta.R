@@ -1,4 +1,5 @@
 library(here)
+library(magrittr)
 
 get_req <- httr2::request("https://rest.uniprot.org/uniprotkb/search") %>%
   httr2::req_url_query(
@@ -41,10 +42,17 @@ resp_body_fasta_paged <- function(resp, con, encoding = NULL) {
 
   if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
 
-  resp$body %>%
-    readBin(character()) %>%
-    iconv(from = encoding, to = "UTF-8") %>%
-    writeLines(con = con, sep = "")
+  if (!is.null(con)) {
+    resp$body %>%
+      readBin(character()) %>%
+      iconv(from = encoding, to = "UTF-8") %>%
+      writeLines(con = con, sep = "")
+  } else {
+    resp$body %>%
+      readBin(character()) %>%
+      iconv(from = encoding, to = "UTF-8") %>%
+      strsplit(split = "\n")
+  }
 }
 
 resp_body_fasta <- function(resp, biostrings = TRUE, encoding = NULL) {
@@ -75,6 +83,7 @@ Biostrings::readAAStringSet(here("dev/test_to_disk/fasta_paged.fasta"))
 str2fasta(readLines(here("dev/test_to_disk/fasta_paged.fasta")), biostrings = FALSE)
 
 ## to memory
+debugonce(get_results_paged_mem)
 test <- get_results_paged(
   req = get_req,
   n_pages = 2,
