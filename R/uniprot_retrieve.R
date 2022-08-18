@@ -68,27 +68,30 @@ uniprot_retrieve <- function(id,
   ## Access REST API
   rest_url <- "https://rest.uniprot.org"
 
-  req <- httr2::request(rest_url) %>%
+  get_req <- httr2::request(rest_url) %>%
     httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
     httr2::req_url_path_append(database, paste(id, format, sep = ".")) %>%
     httr2::req_url_query(
       `fields` = fields,
       `includeIsoform` = isoform
     ) %>%
-    httr2::req_retry(max_tries = 5)
-  # To do: consider adding throttle here
+    httr2::req_retry(max_tries = 5) %>%
+    httr2::req_throttle(rate = 1 / 1) # limit: 1 request every 1 second
 
-  if (!is.null(path)) {
-    if (dry_run) httr2::req_dry_run(req) else
-      httr2::req_perform(req, path = path, verbosity = verbosity)
+  if (dry_run) {
+    return(httr2::req_dry_run(get_req))
   } else {
-    resp <- httr2::req_perform(req, verbosity = verbosity)
+    if (!is.null(path)) {
+      httr2::req_perform(get_req, path = path, verbosity = verbosity)
+    } else {
+      get_resp <- httr2::req_perform(req, verbosity = verbosity)
 
-    switch(
-      format,
-      tsv = resp_body_tsv(resp),
-      json = httr2::resp_body_json(resp), # To do: add ... ?
-      stop("Only format = `tsv` or `json` implemented currently")
-    )
+      switch(
+        format,
+        tsv = resp_body_tsv(get_resp),
+        json = httr2::resp_body_json(get_resp),
+        stop("Only format = `tsv` or `json` implemented currently")
+      )
+    }
   }
 }

@@ -130,6 +130,7 @@ uniprot_map <- function(ids,
     httr2::req_url_query(
       `format` = format,
       `fields` = fields,
+      `includeIsoform` = isoform,
       `compressed` = compressed
     ) %>%
     httr2::req_retry(max_tries = 5) %>%

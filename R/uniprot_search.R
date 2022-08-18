@@ -131,8 +131,8 @@ uniprot_search <- function(query,
       `includeIsoform` = isoform,
       `compressed` = compressed
     ) %>%
-    httr2::req_retry(max_tries = 5)
-  # To do: consider adding throttle here
+    httr2::req_retry(max_tries = 5) %>%
+    httr2::req_throttle(rate = 1 / 1)
 
   if (dry_run) {
     httr2::req_dry_run(get_req)
@@ -147,6 +147,7 @@ uniprot_search <- function(query,
       verbosity = verbosity
     )
   } else if (method == "paged") {
+    # n pages = n results / page size
     n_pages <- httr2::request(result_url) %>%
       httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
       httr2::req_url_query(
