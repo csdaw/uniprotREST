@@ -60,10 +60,14 @@ resp_body_fasta <- function(resp, biostrings = TRUE, encoding = NULL) {
 
   if (is.null(encoding)) encoding <- httr2::resp_encoding(resp)
 
+  if (length(resp$body) == 0) {
+    stop("Can not retrieve empty body")
+  }
+
   resp$body %>%
     readBin(character()) %>%
     iconv(from = encoding, to = "UTF-8") %>%
-    str2fasta(biostrings = TRUE)
+    str2fasta()
 }
 
 #### method = paged ####
