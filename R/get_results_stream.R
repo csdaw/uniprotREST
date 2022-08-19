@@ -9,7 +9,8 @@ get_results_stream <- function(req, format, path, fields, isoform, compressed, v
     switch(
       format,
       tsv = resp_body_tsv(resp),
-      stop("Only format = `tsv` implemented currently")
+      fasta = httr2::resp_body_string(resp) %>% str2fasta(),
+      stop("Only format = `tsv` or `fasta` implemented currently")
     )
   }
 }

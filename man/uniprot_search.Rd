@@ -8,7 +8,7 @@ uniprot_search(
   query,
   database = c("uniprotkb", "uniref", "uniparc", "proteomes", "taxonomy", "keywords",
     "citations", "diseases", "database", "locations", "unirule", "arba"),
-  format = c("tsv", "json"),
+  format = c("tsv", "fasta"),
   path = NULL,
   fields = NULL,
   isoform = NULL,

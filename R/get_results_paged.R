@@ -24,7 +24,8 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
       switch(
         format,
         tsv = resp_body_tsv_paged(resp, page = i, con = file_con),
-        stop("Only format = `tsv` implemented currently")
+        fasta = resp_body_fasta_paged(resp, con = file_con),
+        stop("Only format = `tsv` or `fasta` implemented currently")
       )
     } else {
       message(paste("Something went wrong. Status code:", resp$status_code))
@@ -68,7 +69,13 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
         lapply(resp_body_tsv) %>%
         do.call(rbind, .)
     },
-    stop("Only format = `tsv` implemented currently")
+    fasta = {
+      out %>%
+        lapply(resp_body_fasta_paged, con = NULL) %>%
+        unlist() %>%
+        str2fasta()
+    },
+    stop("Only format = `tsv` or `fasta` implemented currently")
   )
 }
 

@@ -91,7 +91,7 @@ uniprot_search <- function(query,
                            database = c("uniprotkb", "uniref", "uniparc", "proteomes",
                                         "taxonomy", "keywords", "citations", "diseases",
                                         "database", "locations", "unirule", "arba"),
-                           format = c("tsv", "json"),
+                           format = c("tsv", "fasta"),
                            path = NULL,
                            fields = NULL,
                            isoform = NULL,
@@ -148,7 +148,7 @@ uniprot_search <- function(query,
     )
   } else if (method == "paged") {
     # n pages = n results / page size
-    n_pages <- httr2::request(result_url) %>%
+    page_ratio <- httr2::request(result_url) %>%
       httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
       httr2::req_url_query(
         `query` = query,
@@ -163,9 +163,10 @@ uniprot_search <- function(query,
       httr2::req_perform(verbosity = verbosity) %>%
       httr2::resp_header("x-total-results") %>%
       as.integer() %>%
-      `/`(size) %>%
-      ceiling()
+      magrittr::divide_by(size)
     # To do: consider adding throttle here
+
+    n_pages <- ceiling(page_ratio)
 
     get_results_paged(
       req = get_req %>%
