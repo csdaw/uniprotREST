@@ -42,7 +42,7 @@ lst %>% str(max.level = 1)
     ##  $ secondaryAccessions     :List of 6
     ##  $ uniProtkbId             : chr "CYC_HUMAN"
     ##  $ entryAudit              :List of 5
-    ##  $ annotationScore         : num 263
+    ##  $ annotationScore         : num 5
     ##  $ organism                :List of 4
     ##  $ proteinExistence        : chr "1: Evidence at protein level"
     ##  $ proteinDescription      :List of 1
@@ -51,7 +51,7 @@ lst %>% str(max.level = 1)
     ##  $ features                :List of 36
     ##  $ keywords                :List of 14
     ##  $ references              :List of 19
-    ##  $ uniProtKBCrossReferences:List of 175
+    ##  $ uniProtKBCrossReferences:List of 177
     ##  $ sequence                :List of 5
     ##  $ extraAttributes         :List of 3
 
@@ -60,26 +60,33 @@ lst %>% str(max.level = 1)
 [API description](https://www.uniprot.org/help/api_queries).
 
 ``` r
-df <- uniprot_search(
+seqs <- uniprot_search(
   query = "Major capsid protein 723",
-  format = "tsv", 
-  fields = c("accession", "gene_primary", "length")
+  format = "fasta",
+  method = "paged"
 )
-
-df
 ```
 
-    ##         Entry Gene.Names..primary. Length
-    ## 1      P12499              gag-pol   1436
-    ## 2  A0A2D3QNK9                   HA    566
-    ## 3      G2TSP5                   HA    566
-    ## 4      Q0R7D7                   HA    566
-    ## 5      T1S005                   HA    560
-    ## 6  A0A0G2S1S8                   HA    326
-    ## 7      M1GNV6                   HA    344
-    ## 8  A0A0N9R076                         116
-    ## 9      W6HUJ6                   HA    319
-    ## 10 A0A8B6X312                         418
+    ## Page 1 of 1
+
+    ## Success
+
+``` r
+seqs
+```
+
+    ## AAStringSet object of length 10:
+    ##      width seq                                              names               
+    ##  [1]  1436 MGARASVLSGGKLDAWEKIRLRP...IIRDYGKQMAGDDCVASRQDED sp|P12499|POL_HV1...
+    ##  [2]   418 MSTKLQALRERHNTLVAEVHKIN...QRQGGNLIDAGGAVKYYQNSAT tr|A0A8B6X312|A0A...
+    ##  [3]   566 MKTIIALSYILCLVFAQKLPGND...VALLGFIMWACQKGNIRCNICI tr|A0A2D3QNK9|A0A...
+    ##  [4]   566 MKAILVVLLYTFATANADTLCIG...VSLGAISFWMCSNGSLQCRICI tr|G2TSP5|G2TSP5_...
+    ##  [5]   566 MKTIIALSYILCLVFAQKLPGND...VVLLGFIMWACQKGNIRCNICI tr|Q0R7D7|Q0R7D7_...
+    ##  [6]   560 METVSLITILLVVTVSNADKICI...MGFAAFLFWAMSNGSCRCNICI tr|T1S005|T1S005_...
+    ##  [7]   116 VMFCIHGSPVNSYFNTPYTGALG...LTLFNLADTLLGGLPTELISSA tr|A0A0N9R076|A0A...
+    ##  [8]   326 DRICTGITSSNSPHVVKTATQGE...SKPYYTGEHAKAIGNCPIWVKT tr|A0A0G2S1S8|A0A...
+    ##  [9]   344 CTGITSSNSPHVVKTATQGEVNV...KTPLKLANGTKYRPPAKLLKER tr|M1GNV6|M1GNV6_...
+    ## [10]   319 YILCLVFAQKLPGNDNSTATLCL...NDKPFQNVNRITYGACPRYVKQ tr|W6HUJ6|W6HUJ6_...
 
 ### Map database identifiers
 
@@ -91,7 +98,8 @@ df <- uniprot_map(
   from = "Ensembl",
   to = "UniProtKB-Swiss-Prot",
   format = "tsv",
-  fields = c("accession", "gene_names", "organism_name")
+  fields = c("accession", "gene_names", "organism_name"),
+  method = "stream"
 )
 ```
 
