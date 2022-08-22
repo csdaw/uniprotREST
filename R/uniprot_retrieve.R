@@ -48,7 +48,7 @@ uniprot_retrieve <- function(id,
                              database = c("uniprotkb", "uniref", "uniparc", "proteomes",
                                           "taxonomy", "keywords", "citations", "diseases",
                                           "database", "locations", "unirule", "arba"),
-                             format = c("tsv", "json"),
+                             format = c("tsv", "fasta", "json"),
                              path = NULL,
                              fields = NULL,
                              isoform = NULL,
@@ -89,6 +89,7 @@ uniprot_retrieve <- function(id,
       switch(
         format,
         tsv = resp_body_tsv(get_resp),
+        fasta = httr2::resp_body_string(get_resp) %>% str2fasta(),
         json = httr2::resp_body_json(get_resp),
         stop("Only format = `tsv` or `json` implemented currently")
       )
