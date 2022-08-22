@@ -1,10 +1,4 @@
-check_response <- function(req) {
-  if (inherits(req, "httr2_response")) {
-    return()
-  }
-  stop("`resp` must be an HTTP response object")
-}
-
+## Type checking
 check_string <- function(x) {
   if (!(is.character(x) && length(x) == 1))
     stop(sprintf( "`%s` must be a single string.", deparse(substitute(x))))
@@ -35,6 +29,8 @@ check_numeric <- function(x) {
   if (!is.numeric(x)) stop(sprintf("`%s` must be numeric.", deparse(substitute(x))))
 }
 
+
+## Specific argument checking
 check_from_to <- function(from, to) {
   # Check from is valid
   if (!from %in% names(from_to_list))
@@ -48,3 +44,13 @@ check_from_to <- function(from, to) {
   if (!to %in% from_to_list[[from]])
     stop(sprintf("Unable to map IDs from `%s` to `%s`.", from, to))
 }
+
+## Other object checking
+
+check_response <- function(req) {
+  if (inherits(req, "httr2_response")) {
+    return()
+  }
+  stop("`resp` must be an HTTP response object")
+}
+
