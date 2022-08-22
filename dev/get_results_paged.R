@@ -76,6 +76,7 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
         unlist() %>%
         str2fasta()
     },
+    json = out,
     stop("Only format = `tsv` or `fasta` implemented currently")
   )
 }

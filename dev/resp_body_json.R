@@ -97,7 +97,7 @@ n_pages <- ceiling(as.integer(status_resp$headers$`x-total-results`) / pg_size)
 
 test <- get_results_paged(
   req = get_req %>%
-    httr2::req_url_query(`size` = size) %>%
+    httr2::req_url_query(`size` = pg_size) %>%
     httr2::req_error(is_error = function(resp) FALSE),
   n_pages = n_pages,
   format = "json",
@@ -110,6 +110,11 @@ test <- get_results_paged(
 
 paged_mem <- test %>% sapply(httr2::resp_body_json) %>%
   unlist(recursive = FALSE, use.names = FALSE)
+
+# potential alternative method:
+out <- vector("list", 187)
+
+out[1:20] <- unlist(httr2::resp_body_json(test[[1]]), recursive = FALSE, use.names = FALSE)
 
 ## into disk
 

@@ -25,7 +25,8 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
         format,
         tsv = resp_body_tsv_paged(resp, page = i, con = file_con),
         fasta = resp_body_fasta_paged(resp, con = file_con),
-        stop("Only format = `tsv` or `fasta` implemented currently")
+        json = resp_body_json_paged(resp, page = i, n_pages = n_pages, con = file_con),
+        stop("`format` must be one of: tsv, fasta, json")
       )
     } else {
       message(paste("Something went wrong. Status code:", resp$status_code))
@@ -75,7 +76,13 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
         unlist() %>%
         str2fasta()
     },
-    stop("Only format = `tsv` or `fasta` implemented currently")
+    json = {
+      out %>%
+        sapply(httr2::resp_body_json) %>%
+        unlist(recursive = FALSE, use.names = FALSE)
+
+    },
+    stop("`format` must be one of: tsv, fasta, json")
   )
 }
 

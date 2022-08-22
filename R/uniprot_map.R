@@ -53,7 +53,7 @@
 uniprot_map <- function(ids,
                         from = "UniProtKB_AC-ID",
                         to = "UniProtKB",
-                        format = c("tsv", "fasta"),
+                        format = c("tsv", "fasta", "json"),
                         path = NULL,
                         fields = NULL,
                         isoform = NULL,
