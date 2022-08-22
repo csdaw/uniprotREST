@@ -98,7 +98,8 @@ uniprot_map <- function(ids,
 
   # Extract and print job id (useful for manually looking up results)
   jobid <- httr2::resp_body_json(post_resp)$jobId
-  message(paste("Job ID:", jobid))
+
+  if (is.null(verbosity) || verbosity != 0L) message(paste("Job ID:", jobid))
 
   ## Construct and send status GET request
   # Check job status and automatically fetch results if job is complete

@@ -15,11 +15,11 @@ get_results_paged_disk <- function(req, format, path, page_size, n_pages, verbos
 
   # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
   repeat({
-    message(paste("Page", i, "of", n_pages))
+    if (is.null(verbosity) || verbosity != 0L) message(paste("Page", i, "of", n_pages))
 
     resp <- httr2::req_perform(req, verbosity = verbosity)
     if (resp$status_code == "200") {
-      message("Success")
+      if (is.null(verbosity) || verbosity != 0L) message("Success")
 
       switch(
         format,
@@ -48,13 +48,13 @@ get_results_paged_mem <- function(req, format, n_pages, verbosity) {
 
   # Keep getting results pages until the Link header disappears (i.e. becomes NULL)
   repeat({
-    message(paste("Page", i, "of", n_pages))
+    if (is.null(verbosity) || verbosity != 0L) message(paste("Page", i, "of", n_pages))
 
     out[[i]] <- httr2::req_perform(req, verbosity = verbosity)
     if (out[[i]]$status_code == "200") {
-      message("Success")
+      if (is.null(verbosity) || verbosity != 0L) message("Success")
     } else {
-      message(paste("Something went wrong. Status code:", out[[i]]$status_code))
+      if (is.null(verbosity) || verbosity != 0L) message(paste("Something went wrong. Status code:", out[[i]]$status_code))
     }
 
     if (i == n_pages) break
