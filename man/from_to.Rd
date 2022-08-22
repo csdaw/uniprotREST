@@ -15,7 +15,13 @@ from_to
 }
 \description{
 A dataset containing all the databases available to use with
-\code{uniprot_map()}.
+\code{uniprot_map()}. Generally, any \code{from} can be mapped \code{to = "UniProtKB"} or
+\code{"UniProtKB-Swiss-Prot"} and \code{from = "UniProtKB_AC-ID"} can be mapped to any
+\code{to}.
+
+See the \code{from_to} object for a list of allowed \code{from}-\code{to} mappings.
+Alternatively use the function \code{\link{check_from_to}} to check if
+the \code{from} and \code{to} pair is valid.
 }
 \details{
 Columns:

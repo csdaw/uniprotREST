@@ -3,10 +3,10 @@
 #' @description This function queries the UniProt REST API and gets the current
 #' release number.
 #'
-#' @param dry_run `logical`, default is `FALSE`. If `TRUE` print the HTTP
+#' @param dry_run `logical`, default is `FALSE`. Used for debugging purposes.
+#'   If `TRUE` print the HTTP
 #'   request using \code{\link[httr2]{req_dry_run}} without actually sending
-#'   anything to the UniProt server. Useful for debugging if you get an HTTP 400
-#'   Bad Request error i.e. your `query` was not written correctly.
+#'   anything to the UniProt server.
 #'
 #' @return Returns a `string` with the current UniProt release number in the
 #' format `"DDDD_DD"` e.g. `2022_02`.
@@ -15,7 +15,7 @@
 #' @examples
 #' # Useful for constructing file names e.g.
 #' \dontrun{
-#' paste0(currentt_release(), "_a_protein.fasta")
+#' paste0(current_release(), "_a_protein.fasta")
 #' }
 #'
 current_release <- function(dry_run = FALSE) {

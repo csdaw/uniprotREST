@@ -7,10 +7,10 @@
 current_release(dry_run = FALSE)
 }
 \arguments{
-\item{dry_run}{\code{logical}, default is \code{FALSE}. If \code{TRUE} print the HTTP
+\item{dry_run}{\code{logical}, default is \code{FALSE}. Used for debugging purposes.
+If \code{TRUE} print the HTTP
 request using \code{\link[httr2]{req_dry_run}} without actually sending
-anything to the UniProt server. Useful for debugging if you get an HTTP 400
-Bad Request error i.e. your \code{query} was not written correctly.}
+anything to the UniProt server.}
 }
 \value{
 Returns a \code{string} with the current UniProt release number in the
@@ -23,7 +23,7 @@ release number.
 \examples{
 # Useful for constructing file names e.g.
 \dontrun{
-paste0(currentt_release(), "_a_protein.fasta")
+paste0(current_release(), "_a_protein.fasta")
 }
 
 }
