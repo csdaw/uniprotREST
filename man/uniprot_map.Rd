@@ -23,11 +23,11 @@ uniprot_map(
 \item{ids}{\code{string}, comma-separated IDs to map.}
 
 \item{from}{\code{string}, name of database which IDs are from. The default is
-\code{UniProtKB_AC-ID}. See \code{\link{from_to}} for a list of all possible
+\code{UniProtKB_AC-ID}. See \code{\link{map_from_to}} for a list of all possible
 database names.}
 
 \item{to}{\code{string}, name of database to map to. The default is \code{UniProtKB}.
-See \code{\link{from_to}} for a list of all possible database names.}
+See \code{\link{map_from_to}} for a list of all possible database names.}
 
 \item{format}{\code{string}, output format for mapping results.
 Only \code{tsv} (default) implemented properly at the moment.}

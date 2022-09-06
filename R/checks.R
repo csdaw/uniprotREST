@@ -33,15 +33,15 @@ check_numeric <- function(x) {
 ## Specific argument checking
 check_from_to <- function(from, to) {
   # Check from is valid
-  if (!from %in% names(from_to_list))
+  if (!from %in% names(map_from_to))
     stop("`from` database is not valid.")
 
   # Check to is valid
-  if (!to %in% unique(unlist(from_to_list, use.names = FALSE)))
+  if (!to %in% unique(unlist(map_from_to, use.names = FALSE)))
     stop("`to` database is not valid.")
 
   # Check from to pair is valid
-  if (!to %in% from_to_list[[from]])
+  if (!to %in% map_from_to[[from]])
     stop(sprintf("Unable to map IDs from `%s` to `%s`.", from, to))
 }
 

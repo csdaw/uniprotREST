@@ -6,7 +6,7 @@
 #'   `to`.
 #'
 #'   See the `from_to` object for a list of allowed `from`-`to` mappings.
-#'   Alternatively use the function \code{\link{check_from_to}} to check if
+#'   Alternatively use the function \code{check_from_to} to check if
 #'   the `from` and `to` pair is valid.
 #'
 #' @details Columns:
@@ -19,4 +19,4 @@
 #'
 #' @source [UniProt ID mapping](https://www.uniprot.org/help/id_mapping)
 #'
-"from_to"
+"map_dbs"

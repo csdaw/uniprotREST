@@ -4,10 +4,10 @@
 #'
 #' @param ids `string`, comma-separated IDs to map.
 #' @param from `string`, name of database which IDs are from. The default is
-#'   `UniProtKB_AC-ID`. See \code{\link{from_to}} for a list of all possible
+#'   `UniProtKB_AC-ID`. See \code{\link{map_from_to}} for a list of all possible
 #'   database names.
 #' @param to `string`, name of database to map to. The default is `UniProtKB`.
-#'   See \code{\link{from_to}} for a list of all possible database names.
+#'   See \code{\link{map_from_to}} for a list of all possible database names.
 #' @param format `string`, output format for mapping results.
 #'   Only `tsv` (default) implemented properly at the moment.
 #' @param path Optional `string`, file path to save API response. Useful for

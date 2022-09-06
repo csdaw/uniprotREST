@@ -27,20 +27,20 @@ from_to_rules <- from_to_json %>%
 ## Clean up from/to data.frame and save as rds
 ## (exported object)
 ## To do: add example of each identifier
-from_to <- from_to_groups %>%
+map_dbs <- from_to_groups %>%
   select(name, from, to, uriLink) %>%
   rename("url" = uriLink) %>%
   arrange(name) %>%
   as.data.frame()
 
-usethis::use_data(from_to, internal = FALSE, overwrite = TRUE)
+usethis::use_data(map_dbs, internal = FALSE, overwrite = TRUE)
 
 ## Combine from/to groups and rules into list and save as rds
 ## (internal object exposed via function)
-from_to_list <- left_join(from_to_groups, from_to_rules, by = "ruleId") %>%
+map_from_to <- left_join(from_to_groups, from_to_rules, by = "ruleId") %>%
   filter(from) %>%
   select(name, tos) %>%
   rev() %>%
   unstack()
 
-usethis::use_data(from_to_list, internal = TRUE, overwrite = TRUE)
+usethis::use_data(map_from_to, internal = FALSE, overwrite = TRUE)
