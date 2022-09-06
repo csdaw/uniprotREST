@@ -1,0 +1,30 @@
+## Use like:
+# post_resp <- uniprot_post(
+#   url = paste(rest_url, "run", sep = "/"),
+#   from = "UniProtKB_AC-ID",
+#   to = "UniProtKB",
+#   ids = paste(input, collapse = ","),
+#   dry_run = FALSE
+# )
+#
+# get_jobid(post_resp)
+uniprot_post <- function(url,
+                         ...,
+                         max_tries = 5,
+                         rate = 1,
+                         verbosity = NULL,
+                         dry_run = FALSE) {
+  post_req <- httr2::request(url) %>%
+    httr2::req_method("POST") %>%
+    httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
+    httr2::req_retry(max_tries = max_tries) %>%
+    httr2::req_throttle(rate = rate) %>%
+    httr2::req_body_form(...)
+
+  if (dry_run) return(httr2::req_dry_run(post_req))
+  else httr2::req_perform(post_req, verbosity = verbosity)
+}
+
+get_job_id <- function(resp) {
+  httr2::resp_body_json(resp)$jobId
+}
