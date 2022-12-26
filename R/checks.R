@@ -17,6 +17,11 @@ check_character <- function(x, convert = FALSE) {
   }
 }
 
+check_url <- function(x) {
+  if (!any(grepl("^(https?|ftp)://[^\\s/$.?#].[^\\s]*$", x)))
+    stop(sprintf("`%s` is not a valid url.", deparse(substitute(x))))
+}
+
 check_logical <- function(x) {
   if (!is.logical(x)) stop(sprintf("`%s` must be TRUE or FALSE.", deparse(substitute(x))))
 }
