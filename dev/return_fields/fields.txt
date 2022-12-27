@@ -61,3 +61,48 @@ taxonomy	parent	Taxonomy	Parent
 taxonomy	hosts	Taxonomy	Virus hosts
 taxonomy	links	Taxonomy	Links
 taxonomy	statistics	Taxonomy	Statistics
+keywords	id	Keywords	Keyword ID
+keywords	name	Keywords	Name
+keywords	definition	Keywords	Definition
+keywords	category	Keywords	Category
+keywords	synonyms	Keywords	Synonyms
+keywords	gene_ontologies	Keywords	Gene Ontologies
+keywords	links	Keywords	Links
+keywords	children	Keywords	Children
+keywords	parents	Keywords	Parents
+keywords	statistics	Keywords	Statistics
+citations	id	Literature	Citation Id
+citations	doi	Literature	Doi
+citations	title	Literature	Title
+citations	authors	Literature	Authors
+citations	authoring_group	Literature	Authoring Group
+citations	journal	Literature	Journal
+citations	publication_date	Literature	Publication date
+citations	first_page	Literature	First page
+citations	last_page	Literature	Last page
+citations	volume	Literature	Volume
+citations	reference	Literature	Reference
+citations	lit_abstract	Literature	Abstract/Summary
+citations	statistics	Literature	Statistics
+diseases	id	Disease	DiseaseEntry ID
+diseases	name	Disease	Name
+diseases	acronym	Disease	Mnemonic
+diseases	definition	Disease	Description
+diseases	alternative_names	Disease	Alternative Names
+diseases	cross_references	Disease	Cross Reference
+diseases	keywords	Disease	Keywords
+diseases	statistics	Disease	Statistics
+locations	id	Subcellular location	Subcellular location ID
+locations	name	Subcellular location	Name
+locations	definition	Subcellular location	Description
+locations	category	Subcellular location	Category
+locations	keyword	Subcellular location	Keyword
+locations	synonyms	Subcellular location	Synonyms
+locations	content	Subcellular location	Content
+locations	gene_ontologies	Subcellular location	Gene Ontologies
+locations	note	Subcellular location	Note
+locations	references	Subcellular location	References
+locations	links	Subcellular location	Links
+locations	is_a	Subcellular location	Is a
+locations	part_of	Subcellular location	Is part of
+locations	statistics	Subcellular location	Statistics

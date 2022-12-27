@@ -17,6 +17,8 @@ databases:
 
 ## uniparc
 (upi:UPI000013C9AF)
+...
+but want something less large for including with package
 
 CDD HAMAP PANTHER SFLD TIGRFAMS
 ## proteomes
@@ -24,9 +26,19 @@ CDD HAMAP PANTHER SFLD TIGRFAMS
 ## taxonomy
 - search: (tax_id:587200)
 ## keywords
+- search: (keyword_id:KW-0904)
 ## citations
+- search: (id:100133)
 ## diseases
+- search: (id:DI-00007)
 ## database
+- search: (id:DB-0004)
+- This output only seems to do json
 ## locations
+- search: (id:SL-0011)
 ## unirule
+- search: UR00000121
+- This output only seems to do json, list
 ## arba
+- search: ARBA00000001
+- This output only seems to do json, list
