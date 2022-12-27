@@ -16,9 +16,9 @@ uniprot_post <- function(url,
                          dry_run = FALSE) {
   assert_url(url)
   assert_integerish(max_tries, max.len = 1)
-  assert_numeric(rate, lower = 0)
+  assert_numeric(rate, lower = 0, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)
-  assert_logical(dry_run)
+  assert_logical(dry_run, max.len = 1)
 
   post_req <- httr2::request(url) %>%
     httr2::req_method("POST") %>%
@@ -27,8 +27,11 @@ uniprot_post <- function(url,
     httr2::req_throttle(rate = rate) %>%
     httr2::req_body_form(...)
 
-  if (dry_run) return(httr2::req_dry_run(post_req, quiet = ifelse(is.null(verbosity), TRUE, FALSE)))
-  else httr2::req_perform(post_req, verbosity = verbosity)
+  if (dry_run) {
+    httr2::req_dry_run(post_req, quiet = ifelse(is.null(verbosity), TRUE, FALSE))
+  } else {
+    httr2::req_perform(post_req, verbosity = verbosity)
+  }
 }
 
 get_job_id <- function(resp) {
