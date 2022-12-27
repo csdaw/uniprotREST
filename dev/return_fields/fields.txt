@@ -1,0 +1,63 @@
+database	field	section	label
+uniref	id	Names & Taxonomy	Cluster ID
+uniref	name	Names & Taxonomy	Cluster Name
+uniref	common_taxon	Names & Taxonomy	Common taxon
+uniref	common_taxonid	Names & Taxonomy	Common taxon ID
+uniref	organism_id	Names & Taxonomy	Organism IDs
+uniref	organism	Names & Taxonomy	Organisms
+uniref	identity	Sequences	Identity
+uniref	length	Sequences	Length
+uniref	sequence	Sequences	Reference sequence
+uniref	types	Miscellaneous	Types
+uniref	members	Miscellaneous	Cluster members
+uniref	count	Miscellaneous	Size
+uniref	created	Date of	Date of creation
+uniparc	upi	Names & Taxonomy	Entry
+uniparc	gene	Names & Taxonomy	Gene names
+uniparc	organism_id	Names & Taxonomy	Organism ID
+uniparc	organism	Names & Taxonomy	Organisms
+uniparc	protein	Names & Taxonomy	Protein names
+uniparc	proteome	Names & Taxonomy	Proteomes
+uniparc	checksum	Sequences	Checksum
+uniparc	length	Sequences	Length
+uniparc	sequence	Sequences	Sequence
+uniparc	accession	Miscellaneous	UniProtKB
+uniparc	first_seen	Date of	First seen
+uniparc	last_seen	Date of	Last seen
+uniparc	CDD	Family & Domains	CDD
+uniparc	Gene3D	Family & Domains	Gene3D
+uniparc	HAMAP	Family & Domains	HAMAP
+uniparc	PANTHER	Family & Domains	PANTHER
+uniparc	Pfam	Family & Domains	Pfam
+uniparc	PIRSF	Family & Domains	PIRSF
+uniparc	PRINTS	Family & Domains	PRINTS
+uniparc	PROSITE	Family & Domains	PROSITE
+uniparc	SFLD	Family & Domains	SFLD
+uniparc	SMART	Family & Domains	SMART
+uniparc	SUPFAM	Family & Domains	SUPFAM
+uniparc	TIGRFAMs	Family & Domains	TIGRFAMs
+proteomes	upid	Names & Taxonomy	Proteome Id
+proteomes	organism	Names & Taxonomy	Organism
+proteomes	organism_id	Names & Taxonomy	Organism Id
+proteomes	components	Names & Taxonomy	Components
+proteomes	mnemonic	Names & Taxonomy	Taxon mnemonic
+proteomes	lineage	Names & Taxonomy	Taxonomic lineage
+proteomes	busco	Names & Taxonomy	BUSCO
+proteomes	cpd	Miscellaneous	CPD
+proteomes	genome_assembly	Miscellaneous	Genome assembly ID
+proteomes	genome_representation	Miscellaneous	Genome representation
+proteomes	protein_count	Miscellaneous	Protein count
+taxonomy	id	Taxonomy	Taxon Id
+taxonomy	mnemonic	Taxonomy	Mnemonic
+taxonomy	scientific_name	Taxonomy	Scientific name
+taxonomy	common_name	Taxonomy	Common name
+taxonomy	synonyms	Taxonomy	Synonyms
+taxonomy	other_names	Taxonomy	Other Names
+taxonomy	rank	Taxonomy	Rank
+taxonomy	reviewed	Taxonomy	Reviewed
+taxonomy	lineage	Taxonomy	Lineage
+taxonomy	strains	Taxonomy	Strains
+taxonomy	parent	Taxonomy	Parent
+taxonomy	hosts	Taxonomy	Virus hosts
+taxonomy	links	Taxonomy	Links
+taxonomy	statistics	Taxonomy	Statistics

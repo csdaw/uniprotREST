@@ -1,0 +1,32 @@
+method to get examples:
+
+search the following query:
+proteome:UP000005640 AND reviewed:true
+
+databases:
+
+## uniprotkb
+- can scrape names of return fields from their website
+
+## alphafold
+- fields are the same as uniprotkb
+
+## uniref
+- search: (id:UniRef90_P61626)
+
+
+## uniparc
+(upi:UPI000013C9AF)
+
+CDD HAMAP PANTHER SFLD TIGRFAMS
+## proteomes
+- SEARCH: (upid:UP000005640)
+## taxonomy
+- search: (tax_id:587200)
+## keywords
+## citations
+## diseases
+## database
+## locations
+## unirule
+## arba
