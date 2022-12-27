@@ -1,0 +1,14 @@
+field	name	example
+id	Cluster ID	UniRef90_P07910
+name	Cluster Name	Cluster: Heterogeneous nuclear ribonucleoproteins C1/C2
+types	Types	UniProtKB Reviewed (Swiss-Prot); UniProtKB Unreviewed (TrEMBL); UniParc
+count	Size	28
+organism	Organism	Homo sapiens (Human); Pongo abelii (Sumatran orangutan); Pan troglodytes (Chimpanzee); Callithrix jacchus (White-tufted-ear marmoset); Sapajus apella (Brown-capped capuchin); Macaca mulatta (Rhesus macaque); Papio anubis (Olive baboon); Aotus nancymaae (Ma's night monkey); Piliocolobus tephrosceles (Ugandan red Colobus); Mandrillus leucophaeus (Drill); Gorilla gorilla gorilla (Western lowland gorilla); Macaca fascicularis (Crab-eating macaque); Rhinopithecus bieti (Black snub-nosed monkey); Colobus angolensis palliatus (Peters' Angolan colobus); Theropithecus gelada (Gelada baboon); Desmodus rotundus (Vampire bat); Tursiops truncatus (Atlantic bottle-nosed dolphin); Neophocaena asiaeorientalis asiaeorientalis (Yangtze finless porpoise); Delphinapterus leucas (Beluga whale)
+length	Length	306
+identity	Identity	0.9
+common_taxon	Common taxon	Boreoeutheria
+common_taxonid	Common taxon ID	1437010
+members	Cluster members	"P07910,0; Q5RA82,0; A0A2J8TSI4,1; H2R462,1; U3DFP3,1; A0A6J3F8G7,1; A0A6D2XXL7,1; I0FI33,1; A0A096NNP8,1; A0A2K5ENE6,1; A0A8C9HL24,1; A0A2K5ZXZ5,1; A0A2I2ZNA6,1; A0A2K5U148,1; A0A2K6LZY9,1; A0A2K5J682,1; A0A8D2FFP5,1; G7P9N7,1; K9J016,1; K9IID7,1; K9IIT7,1; K9IZW1,1; A0A2U4BBZ0,1; A0A341CTA7,1; A0A2Y9PJA5,1; A0A2Y9P8J3,1; A0A341CTB1,1; A0A341CQW5,1"
+sequence	Reference sequence	MASNVTNKTDPRSMNSRVFIGNLNTLVVKKSDVEAIFSKYGKIVGCSVHKGFAFVQYVNERNARAAVAGEDGRMIAGQVLDINLAAEPKVNRGKAGVKRSAAEMYGSVTEHPSPSPLLSSSFDLDYDFQRDYYDRMYSYPARVPPPPPIARAVVPSKRQRVSGNTSRRGKSGFNSKSGQRGSSKSGKLKGDDLQAIKKELTQIKQKVDSLLENLEKIEKEQSKQAVEMKNDKSEEEQSSSSVKKDETNVKMESEGGADDSAEEGDLLDDDDNEDRGDDQLELIKDDEKEAEEGEDDRDSANGEDDS
+organism_id	Organism IDs	9606; 9601; 9598; 9483; 9515; 9544; 9555; 37293; 591936; 9568; 9595; 9541; 61621; 336983; 9565; 9430; 9739; 1706337; 9749
+created	Date of creation	27/4/2022
