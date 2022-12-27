@@ -1,27 +1,29 @@
 uniprot_search <- function(query,
-                           database = c("uniprotkb", "uniref", "uniparc", "proteomes",
-                                        "taxonomy", "keywords", "citations", "diseases",
-                                        "database", "locations", "unirule", "arba"),
-                           format = c("tsv", "fasta", "json"),
+                           database = "uniprotkb",
+                           format = "tsv",
                            path = NULL,
                            fields = NULL,
                            isoform = NULL,
                            compressed = NULL,
-                           method = c("paged", "stream"),
-                           size = 500L,
+                           #method = c("paged", "stream"),
+                           #size = 500L,
                            verbosity = NULL,
                            dry_run = FALSE) {
   ## Argument checking
-  check_string(query) # query must be single string
-  database <- match.arg.exact(database) # database must be exactly one of the options
-  format <- match.arg.exact(format) # format must be exactly one of the options
-  if (!is.null(path)) check_string(path) # path must be single string
-  if (!is.null(fields))
-    fields <- check_character(fields, convert = TRUE) # convert fields to single string if necessary
-  if (!is.null(isoform)) check_logical(isoform) # isoform must be T or F
-  if (!is.null(compressed)) check_logical(compressed) # compressed must be T or F
-  method <- match.arg.exact(method) # method must be stream or paged
-  check_numeric(size) # size must be a number (ideally an integer)
-  if (!is.null(verbosity)) check_verbosity(verbosity) # verbosity must be in 0:3
-  check_logical(dry_run) # dry_run must be T or F
+  assert_string(query)
+  assert_choice(database, c("uniprotkb", "alphafold", "uniref",
+                            "uniparc", "proteomes", "taxonomy",
+                            "keywords", "citations", "diseases",
+                            "database", "locations", "unirule",
+                            "arba"))
+  assert_choice(format, c("tsv"))
+  if (!is.null(path)) assert_path_for_output(path)
+  if (!is.null(fields)) {
+    if (check_character(fields)) fields <- paste(fields, collapse = ",")
+    assert_string(fields)
+  }
+  if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
+  assert_logical(compressed, max.len = 1)
+  if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
+  assert_logical(dry_run, max.len = 1)
 }
