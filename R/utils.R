@@ -53,29 +53,3 @@ match.arg.exact <- function (arg, choices, several.ok = FALSE, exact = TRUE) {
     stop("there is more than one match in 'match.arg'")
   choices[i]
 }
-
-str2fasta <- function(x, biostrings = TRUE) {
-  xlines <- unlist(strsplit(x, "\n"))
-
-  hdr_idx <- grep(">", xlines)
-
-  seq_idx <- data.frame(
-    hdr = hdr_idx,
-    from = hdr_idx + 1,
-    to = c((hdr_idx - 1)[-1], length(xlines))
-  )
-
-  seqs <- vector(mode = "character", length = length(hdr_idx))
-
-  for (i in seq_along(hdr_idx)) {
-    seqs[i] <- paste(xlines[seq_idx$from[i]:seq_idx$to[i]], collapse = "")
-  }
-
-  names(seqs) <- substring(xlines[hdr_idx], 2)
-
-  if (biostrings && requireNamespace("Biostrings", quietly = TRUE)) {
-    Biostrings::AAStringSet(seqs)
-  } else {
-    seqs
-  }
-}
