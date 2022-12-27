@@ -1,26 +1,29 @@
 uniprot_map <- function(ids,
-                        from = "UniProtKB_AC-ID",
-                        to = "UniProtKB",
-                        format = c("tsv", "fasta", "json"),
+                        # from = "UniProtKB_AC-ID",
+                        # to = "UniProtKB",
+                        format = "tsv",
                         path = NULL,
                         fields = NULL,
                         isoform = NULL,
                         compressed = NULL,
-                        method = c("paged", "stream"),
-                        size = 500L,
+                        # method = c("paged", "stream"),
+                        # size = 500L,
                         verbosity = NULL,
                         dry_run = FALSE) {
   ## Argument checking
-  ids <- check_character(ids, convert = TRUE) # convert ids to single string if necessary
-  check_from_to(from, to) # from/to pair must be okay
-  format <- match.arg.exact(format) # format must be exactly one of the options
-  if (!is.null(path)) check_string(path) # path must be single string
-  if (!is.null(fields))
-    fields <- check_character(fields, convert = TRUE) # convert fields to single string if necessary
-  if (!is.null(isoform)) check_logical(isoform) # isoform must be T or F
-  if (!is.null(compressed)) check_logical(compressed) # compressed must be T or F
-  method <- match.arg.exact(method) # method must be stream or paged
-  check_numeric(size) # size must be a number (ideally an integer)
-  if (!is.null(verbosity)) check_verbosity(verbosity) # verbosity must be in 0:3
-  check_logical(dry_run) # dry_run must be T or F
+  if (!is.null(ids)) {
+    if (check_character(ids, min.len = 2)) fields <- paste(ids, collapse = ",")
+    assert_string(ids)
+  }
+  # assert_from_to
+  assert_choice(format, c("tsv"))
+  if (!is.null(path)) assert_path_for_output(path)
+  if (!is.null(fields)) {
+    if (check_character(fields, min.len = 2)) fields <- paste(fields, collapse = ",")
+    assert_string(fields)
+  }
+  if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
+  if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
+  if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)
+  assert_logical(dry_run, max.len = 1)
 }

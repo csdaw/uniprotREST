@@ -16,7 +16,7 @@ uniprot_retrieve <- function(id,
   assert_choice(format, c("tsv"))
   if (!is.null(path)) assert_path_for_output(path)
   if (!is.null(fields)) {
-    if (check_character(fields)) fields <- paste(fields, collapse = ",")
+    if (check_character(fields, min.len = 2)) fields <- paste(fields, collapse = ",")
     assert_string(fields)
   }
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
