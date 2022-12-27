@@ -2,6 +2,7 @@ uniprot_get <- function(url,
                         ...,
                         max_tries = 5,
                         rate = 1 / 1,
+                        path = NULL,
                         verbosity = NULL,
                         dry_run = FALSE) {
   assert_url(url)
@@ -20,10 +21,6 @@ uniprot_get <- function(url,
   if (dry_run) {
     httr2::req_dry_run(get_req, quiet = ifelse(is.null(verbosity), TRUE, FALSE))
   } else {
-    httr2::req_perform(get_req, verbosity = verbosity)
+    httr2::req_perform(get_req, path = path, verbosity = verbosity)
   }
-}
-
-get_job_id <- function(resp) {
-  httr2::resp_body_json(resp)$jobId
 }
