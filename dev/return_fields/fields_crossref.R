@@ -1,4 +1,6 @@
 library(dplyr)
+library(httr2)
+library(here)
 
 # Get README describing available cross-reference databases via FTP
 # (`txt` object is character vector where each value is a line in the text file)
@@ -49,7 +51,7 @@ cross_ref_fields$description <- utils::read.delim(
 # Save to tsv
 write.table(
   cross_ref_fields,
-  file = "dev/data-raw/fields_crossref.txt",
+  file = here("dev/return_fields/fields_crossref.txt"),
   sep = "\t",
   row.names = FALSE,
   col.names = TRUE,
