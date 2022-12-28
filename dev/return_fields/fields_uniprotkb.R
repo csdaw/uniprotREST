@@ -1,25 +1,28 @@
-library(httr2)
 library(dplyr)
+library(httr2)
+library(here)
 library(purrr)
 
-# https://stackoverflow.com/questions/61220346/web-scraping-with-rvest-and-xml2
+# Get return fields from table in UniProt website
 req <- httr2::request("https://rest.uniprot.org/help/return_fields") %>%
   httr2::req_user_agent("https://github.com/csdaw")
 
 resp <- httr2::req_perform(req)
 
-aaa <- resp %>% httr2::resp_body_json()
-bbb <- aaa$content
-ccc <- unlist(strsplit(bbb, "\n"))
-ddd <- grep("#|\\|&[^**|^:]", ccc, value = TRUE)[-1]
+resp_body <- resp %>% httr2::resp_body_json() %>% pluck("content")
 
-idx <- base::intersect(
-  grep("# |\\|", ccc),
-  grep("\\*\\*|\\:\\-", ccc, invert = TRUE)
+# Content is in a single string of markdown which we need to parse
+
+each_line <- unlist(strsplit(resp_body, "\n"))
+table_headings <- grep("#|\\|&[^**|^:]", each_line, value = TRUE)[-1]
+
+table_idx <- base::intersect(
+  grep("# |\\|", each_line),
+  grep("\\*\\*|\\:\\-", each_line, invert = TRUE)
 )
 
-ddd <- ccc[idx[-1]]
-head(ddd)
+table_lines <- each_line[table_idx[-1]]
+head(table_lines)
 
 # https://stackoverflow.com/questions/16357962/r-split-numeric-vector-at-position
 split_at <- function(x, pos) {
@@ -31,30 +34,43 @@ split_at <- function(x, pos) {
   out
 }
 
-splits <- grep("#", ddd)
+splits <- grep("#", table_lines)
 
-eee <- split_at(ddd, splits)
+tables <- split_at(table_lines, splits)
 
-names(eee) <- gsub(
+names(tables) <- gsub(
   "# ",
   "",
-  lapply(eee, "[[", 1)
+  lapply(tables, "[[", 1)
 )
 
-fff <- lapply(eee, "[", -1)
-fff
+tables2 <- lapply(tables, "[", -1)
+head(tables2)
 
 # https://gist.github.com/alistaire47/8bf30e30d66fd0a9225d5d82e0922757
-ggg <- lapply(fff, function(i) {
+tables3 <- lapply(tables2, function(i) {
   i <- gsub('(^\\s*?\\|)|(\\|\\s*?$)', '', i)
   read.delim(text = paste(i, collapse = "\n"),
              sep = "|", strip.white = TRUE,
              header = FALSE)
 })
+head(tables3)
 
-hhh <- purrr::map_df(ggg, c, .id = "section") %>%
-  `colnames<-`(c("section", "name", "old_field", "field")) %>%
+out <- purrr::map_df(tables3, c, .id = "section") %>%
+  `colnames<-`(c("section", "label", "old_field", "field")) %>%
   rev() %>%
-  select(-old_field) %>%
   filter(field != "\\<does not exist\\>") %>%
-  mutate(field = gsub(" \\\\", "", field))
+  mutate(field = gsub(" \\\\", "", field),
+         database = "uniprotkb",
+         example = "") %>%
+  select(database, field, section, label, example)
+
+# Save to tsv
+write.table(
+  out,
+  file = here("dev/return_fields/fields_uniprotkb.tsv"),
+  sep = "\t",
+  row.names = FALSE,
+  col.names = TRUE,
+  fileEncoding = "UTF8"
+)
