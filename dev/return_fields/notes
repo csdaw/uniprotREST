@@ -14,9 +14,8 @@ databases:
 ## uniref
 - search: (id:UniRef90_P61626)
 
-
 ## uniparc
-(upi:UPI000013C9AF)
+- search: (upi:UPI00021CF2DE)
 ...
 but want something less large for including with package
 
