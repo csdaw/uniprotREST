@@ -68,7 +68,7 @@ out <- purrr::map_df(tables3, c, .id = "section") %>%
 # Save to tsv
 write.table(
   out,
-  file = here("dev/return_fields/fields_uniprotkb.tsv"),
+  file = here("data-raw/return_fields/fields_uniprotkb.tsv"),
   sep = "\t",
   row.names = FALSE,
   col.names = TRUE,

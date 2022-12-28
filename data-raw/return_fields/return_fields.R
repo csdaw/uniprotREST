@@ -4,10 +4,10 @@ library(here)
 library(dplyr)
 library(tidyr)
 
-uniprot_kb <- read_tsv(here("dev/return_fields/fields_uniprotkb.tsv"), col_select = -example,
+uniprot_kb <- read_tsv(here("data-raw/return_fields/fields_uniprotkb.tsv"), col_select = -example,
                        show_col_types = FALSE)
 
-other <- read_tsv(here("dev/return_fields/fields_other.txt"),
+other <- read_tsv(here("data-raw/return_fields/fields_other.tsv"),
                   show_col_types = FALSE)
 
 return_fields <- rbind(uniprot_kb, other) %>%
@@ -35,3 +35,5 @@ return_fields <- rbind(uniprot_kb, other) %>%
 # )
 
 ## Save table
+write_tsv(return_fields, here("data-raw/return_fields/return_fields.tsv"))
+usethis::use_data(return_fields)
