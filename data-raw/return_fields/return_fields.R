@@ -4,14 +4,12 @@ library(here)
 library(dplyr)
 library(tidyr)
 
-uniprot_kb <- read_tsv(here("data-raw/return_fields/fields_uniprotkb.tsv"), col_select = -example,
-                       show_col_types = FALSE)
+uniprot_kb <- read_tsv(here("data-raw/return_fields/fields_uniprotkb.tsv"), show_col_types = FALSE)
 
 other <- read_tsv(here("data-raw/return_fields/fields_other.tsv"),
                   show_col_types = FALSE)
 
 return_fields <- rbind(uniprot_kb, other) %>%
-  select(database, section, field, label) %>%
   mutate(database = factor(database, levels = c("uniprotkb", "uniref", "uniparc",
                                                 "proteomes", "taxonomy", "keywords",
                                                 "citations", "diseases", "locations"))) %>%

@@ -2,6 +2,7 @@ library(dplyr)
 library(httr2)
 library(here)
 library(purrr)
+library(tibble)
 
 # Get return fields from table in UniProt website
 req <- httr2::request("https://rest.uniprot.org/help/return_fields") %>%
@@ -58,12 +59,11 @@ head(tables3)
 
 out <- purrr::map_df(tables3, c, .id = "section") %>%
   `colnames<-`(c("section", "label", "old_field", "field")) %>%
-  rev() %>%
   filter(field != "\\<does not exist\\>") %>%
   mutate(field = gsub(" \\\\", "", field),
-         database = "uniprotkb",
-         example = "") %>%
-  select(database, field, section, label, example)
+         database = "uniprotkb") %>%
+  select(database, section, field, label)
+
 
 # Save to tsv
 write.table(

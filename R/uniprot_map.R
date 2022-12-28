@@ -18,11 +18,7 @@ uniprot_map <- function(ids,
   # assert_from_to
   assert_choice(format, c("tsv"))
   if (!is.null(path)) assert_path_for_output(path)
-  # check fields are valid
-  # if (!is.null(fields)) {
-  #   if (check_character(fields, min.len = 2)) fields <- paste(fields, collapse = ",")
-  #   assert_string(fields)
-  # }
+  # check fields are valid, need to check from to first and define database from that
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
   if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)

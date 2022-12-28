@@ -7,6 +7,8 @@ databases:
 
 ## uniprotkb
 - can scrape names of return fields from their website
+- 'alphafold' seems to be a possible return field, but gives an error when
+I try and download tsv.
 
 ## alphafold
 - fields are the same as uniprotkb

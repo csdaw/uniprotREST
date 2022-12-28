@@ -1,108 +1,108 @@
-database	field	section	label
-uniref	id	Names & Taxonomy	Cluster ID
-uniref	name	Names & Taxonomy	Cluster Name
-uniref	common_taxon	Names & Taxonomy	Common taxon
-uniref	common_taxonid	Names & Taxonomy	Common taxon ID
-uniref	organism_id	Names & Taxonomy	Organism IDs
-uniref	organism	Names & Taxonomy	Organisms
-uniref	identity	Sequences	Identity
-uniref	length	Sequences	Length
-uniref	sequence	Sequences	Reference sequence
-uniref	types	Miscellaneous	Types
-uniref	members	Miscellaneous	Cluster members
-uniref	count	Miscellaneous	Size
-uniref	created	Date of	Date of creation
-uniparc	upi	Names & Taxonomy	Entry
-uniparc	gene	Names & Taxonomy	Gene names
-uniparc	organism_id	Names & Taxonomy	Organism ID
-uniparc	organism	Names & Taxonomy	Organisms
-uniparc	protein	Names & Taxonomy	Protein names
-uniparc	proteome	Names & Taxonomy	Proteomes
-uniparc	checksum	Sequences	Checksum
-uniparc	length	Sequences	Length
-uniparc	sequence	Sequences	Sequence
-uniparc	accession	Miscellaneous	UniProtKB
-uniparc	first_seen	Date of	First seen
-uniparc	last_seen	Date of	Last seen
-uniparc	CDD	Family & Domains	CDD
-uniparc	Gene3D	Family & Domains	Gene3D
-uniparc	HAMAP	Family & Domains	HAMAP
-uniparc	PANTHER	Family & Domains	PANTHER
-uniparc	Pfam	Family & Domains	Pfam
-uniparc	PIRSF	Family & Domains	PIRSF
-uniparc	PRINTS	Family & Domains	PRINTS
-uniparc	PROSITE	Family & Domains	PROSITE
-uniparc	SFLD	Family & Domains	SFLD
-uniparc	SMART	Family & Domains	SMART
-uniparc	SUPFAM	Family & Domains	SUPFAM
-uniparc	TIGRFAMs	Family & Domains	TIGRFAMs
-proteomes	upid	Names & Taxonomy	Proteome Id
-proteomes	organism	Names & Taxonomy	Organism
-proteomes	organism_id	Names & Taxonomy	Organism Id
-proteomes	components	Names & Taxonomy	Components
-proteomes	mnemonic	Names & Taxonomy	Taxon mnemonic
-proteomes	lineage	Names & Taxonomy	Taxonomic lineage
-proteomes	busco	Names & Taxonomy	BUSCO
-proteomes	cpd	Miscellaneous	CPD
-proteomes	genome_assembly	Miscellaneous	Genome assembly ID
-proteomes	genome_representation	Miscellaneous	Genome representation
-proteomes	protein_count	Miscellaneous	Protein count
-taxonomy	id	Taxonomy	Taxon Id
-taxonomy	mnemonic	Taxonomy	Mnemonic
-taxonomy	scientific_name	Taxonomy	Scientific name
-taxonomy	common_name	Taxonomy	Common name
-taxonomy	synonyms	Taxonomy	Synonyms
-taxonomy	other_names	Taxonomy	Other Names
-taxonomy	rank	Taxonomy	Rank
-taxonomy	reviewed	Taxonomy	Reviewed
-taxonomy	lineage	Taxonomy	Lineage
-taxonomy	strains	Taxonomy	Strains
-taxonomy	parent	Taxonomy	Parent
-taxonomy	hosts	Taxonomy	Virus hosts
-taxonomy	links	Taxonomy	Links
-taxonomy	statistics	Taxonomy	Statistics
-keywords	id	Keywords	Keyword ID
-keywords	name	Keywords	Name
-keywords	definition	Keywords	Definition
-keywords	category	Keywords	Category
-keywords	synonyms	Keywords	Synonyms
-keywords	gene_ontologies	Keywords	Gene Ontologies
-keywords	links	Keywords	Links
-keywords	children	Keywords	Children
-keywords	parents	Keywords	Parents
-keywords	statistics	Keywords	Statistics
-citations	id	Literature	Citation Id
-citations	doi	Literature	Doi
-citations	title	Literature	Title
-citations	authors	Literature	Authors
-citations	authoring_group	Literature	Authoring Group
-citations	journal	Literature	Journal
-citations	publication_date	Literature	Publication date
-citations	first_page	Literature	First page
-citations	last_page	Literature	Last page
-citations	volume	Literature	Volume
-citations	reference	Literature	Reference
-citations	lit_abstract	Literature	Abstract/Summary
-citations	statistics	Literature	Statistics
-diseases	id	Disease	DiseaseEntry ID
-diseases	name	Disease	Name
-diseases	acronym	Disease	Mnemonic
-diseases	definition	Disease	Description
-diseases	alternative_names	Disease	Alternative Names
-diseases	cross_references	Disease	Cross Reference
-diseases	keywords	Disease	Keywords
-diseases	statistics	Disease	Statistics
-locations	id	Subcellular location	Subcellular location ID
-locations	name	Subcellular location	Name
-locations	definition	Subcellular location	Description
-locations	category	Subcellular location	Category
-locations	keyword	Subcellular location	Keyword
-locations	synonyms	Subcellular location	Synonyms
-locations	content	Subcellular location	Content
-locations	gene_ontologies	Subcellular location	Gene Ontologies
-locations	note	Subcellular location	Note
-locations	references	Subcellular location	References
-locations	links	Subcellular location	Links
-locations	is_a	Subcellular location	Is a
-locations	part_of	Subcellular location	Is part of
-locations	statistics	Subcellular location	Statistics
+database	section	field	label
+uniref	Names & Taxonomy	id	Cluster ID
+uniref	Names & Taxonomy	name	Cluster Name
+uniref	Names & Taxonomy	common_taxon	Common taxon
+uniref	Names & Taxonomy	common_taxonid	Common taxon ID
+uniref	Names & Taxonomy	organism_id	Organism IDs
+uniref	Names & Taxonomy	organism	Organisms
+uniref	Sequences	identity	Identity
+uniref	Sequences	length	Length
+uniref	Sequences	sequence	Reference sequence
+uniref	Miscellaneous	types	Types
+uniref	Miscellaneous	members	Cluster members
+uniref	Miscellaneous	count	Size
+uniref	Date of	created	Date of creation
+uniparc	Names & Taxonomy	upi	Entry
+uniparc	Names & Taxonomy	gene	Gene names
+uniparc	Names & Taxonomy	organism_id	Organism ID
+uniparc	Names & Taxonomy	organism	Organisms
+uniparc	Names & Taxonomy	protein	Protein names
+uniparc	Names & Taxonomy	proteome	Proteomes
+uniparc	Sequences	checksum	Checksum
+uniparc	Sequences	length	Length
+uniparc	Sequences	sequence	Sequence
+uniparc	Miscellaneous	accession	UniProtKB
+uniparc	Date of	first_seen	First seen
+uniparc	Date of	last_seen	Last seen
+uniparc	Family & Domains	CDD	CDD
+uniparc	Family & Domains	Gene3D	Gene3D
+uniparc	Family & Domains	HAMAP	HAMAP
+uniparc	Family & Domains	PANTHER	PANTHER
+uniparc	Family & Domains	Pfam	Pfam
+uniparc	Family & Domains	PIRSF	PIRSF
+uniparc	Family & Domains	PRINTS	PRINTS
+uniparc	Family & Domains	PROSITE	PROSITE
+uniparc	Family & Domains	SFLD	SFLD
+uniparc	Family & Domains	SMART	SMART
+uniparc	Family & Domains	SUPFAM	SUPFAM
+uniparc	Family & Domains	TIGRFAMs	TIGRFAMs
+proteomes	Names & Taxonomy	upid	Proteome Id
+proteomes	Names & Taxonomy	organism	Organism
+proteomes	Names & Taxonomy	organism_id	Organism Id
+proteomes	Names & Taxonomy	components	Components
+proteomes	Names & Taxonomy	mnemonic	Taxon mnemonic
+proteomes	Names & Taxonomy	lineage	Taxonomic lineage
+proteomes	Names & Taxonomy	busco	BUSCO
+proteomes	Miscellaneous	cpd	CPD
+proteomes	Miscellaneous	genome_assembly	Genome assembly ID
+proteomes	Miscellaneous	genome_representation	Genome representation
+proteomes	Miscellaneous	protein_count	Protein count
+taxonomy	Taxonomy	id	Taxon Id
+taxonomy	Taxonomy	mnemonic	Mnemonic
+taxonomy	Taxonomy	scientific_name	Scientific name
+taxonomy	Taxonomy	common_name	Common name
+taxonomy	Taxonomy	synonyms	Synonyms
+taxonomy	Taxonomy	other_names	Other Names
+taxonomy	Taxonomy	rank	Rank
+taxonomy	Taxonomy	reviewed	Reviewed
+taxonomy	Taxonomy	lineage	Lineage
+taxonomy	Taxonomy	strains	Strains
+taxonomy	Taxonomy	parent	Parent
+taxonomy	Taxonomy	hosts	Virus hosts
+taxonomy	Taxonomy	links	Links
+taxonomy	Taxonomy	statistics	Statistics
+keywords	Keywords	id	Keyword ID
+keywords	Keywords	name	Name
+keywords	Keywords	definition	Definition
+keywords	Keywords	category	Category
+keywords	Keywords	synonyms	Synonyms
+keywords	Keywords	gene_ontologies	Gene Ontologies
+keywords	Keywords	links	Links
+keywords	Keywords	children	Children
+keywords	Keywords	parents	Parents
+keywords	Keywords	statistics	Statistics
+citations	Literature	id	Citation Id
+citations	Literature	doi	Doi
+citations	Literature	title	Title
+citations	Literature	authors	Authors
+citations	Literature	authoring_group	Authoring Group
+citations	Literature	journal	Journal
+citations	Literature	publication_date	Publication date
+citations	Literature	first_page	First page
+citations	Literature	last_page	Last page
+citations	Literature	volume	Volume
+citations	Literature	reference	Reference
+citations	Literature	lit_abstract	Abstract/Summary
+citations	Literature	statistics	Statistics
+diseases	Disease	id	DiseaseEntry ID
+diseases	Disease	name	Name
+diseases	Disease	acronym	Mnemonic
+diseases	Disease	definition	Description
+diseases	Disease	alternative_names	Alternative Names
+diseases	Disease	cross_references	Cross Reference
+diseases	Disease	keywords	Keywords
+diseases	Disease	statistics	Statistics
+locations	Subcellular location	id	Subcellular location ID
+locations	Subcellular location	name	Name
+locations	Subcellular location	definition	Description
+locations	Subcellular location	category	Category
+locations	Subcellular location	keyword	Keyword
+locations	Subcellular location	synonyms	Synonyms
+locations	Subcellular location	content	Content
+locations	Subcellular location	gene_ontologies	Gene Ontologies
+locations	Subcellular location	note	Note
+locations	Subcellular location	references	References
+locations	Subcellular location	links	Links
+locations	Subcellular location	is_a	Is a
+locations	Subcellular location	part_of	Is part of
+locations	Subcellular location	statistics	Statistics
