@@ -14,14 +14,14 @@ uniprot_search <- function(query,
   assert_choice(database, c("uniprotkb", "alphafold", "uniref",
                             "uniparc", "proteomes", "taxonomy",
                             "keywords", "citations", "diseases",
-                            "database", "locations", "unirule",
-                            "arba"))
+                            "locations"))
   assert_choice(format, c("tsv"))
   if (!is.null(path)) assert_path_for_output(path)
-  if (!is.null(fields)) {
-    if (check_character(fields, min.len = 2)) fields <- paste(fields, collapse = ",")
-    assert_string(fields)
-  }
+  # check fields are valid
+  # if (!is.null(fields)) {
+  #   if (check_character(fields, min.len = 2)) fields <- paste(fields, collapse = ",")
+  #   assert_string(fields)
+  # }
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
   if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
