@@ -8,7 +8,9 @@
 #'     **name** \tab `character`. Database name. \cr
 #'     **from** \tab `character`. Is the database allowed to be mapped `from`? \cr
 #'     **to** \tab `character`. Is the database allowed to be mapped `to`? \cr
-#'     **url** \tab `character`. Database URL.\cr
+#'     **url** \tab `character`. Database URL. \cr
+#'     **return_fields_db** \tab `character`. Relevant return fields database,
+#'     see [return_fields] for which fields i.e. columns can be requested. \cr
 #'   }
 #'
 #' @seealso [from_to_rules] for rules of which database identifiers can be

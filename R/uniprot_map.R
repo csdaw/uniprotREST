@@ -1,6 +1,6 @@
 uniprot_map <- function(ids,
-                        # from = "UniProtKB_AC-ID",
-                        # to = "UniProtKB",
+                        from = "UniProtKB_AC-ID",
+                        to = "UniProtKB",
                         format = "tsv",
                         path = NULL,
                         fields = NULL,
@@ -12,13 +12,23 @@ uniprot_map <- function(ids,
                         dry_run = FALSE) {
   ## Argument checking
   if (!is.null(ids)) {
-    if (check_character(ids, min.len = 2)) fields <- paste(ids, collapse = ",")
-    assert_string(ids)
+    assert_character(ids)
+    if (test_character(ids, min.len = 2)) ids <- paste(ids, collapse = ",")
   }
-  # assert_from_to
+  assert_from_to(from, to)
+  database <- uniprotREST::from_to_dbs[uniprotREST::from_to_dbs$name == to, "return_fields_db"]
   assert_choice(format, c("tsv"))
   if (!is.null(path)) assert_path_for_output(path)
-  # check fields are valid, need to check from to first and define database from that
+  if (!is.null(fields)) {
+    if (!test_string(database)) {
+      warning("Skipping `fields`... this argument can't be used with this `to` database.")
+      # do nothing
+    } else {
+      assert_fields(fields, database = database)
+      if (length(fields) > 1)
+        fields <- paste(fields, collapse = ",")
+    }
+  }
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
   if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)

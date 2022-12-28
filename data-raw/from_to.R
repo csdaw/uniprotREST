@@ -27,11 +27,17 @@ from_to_rules <- from_to_json %>%
 ## Clean up from/to data.frame and save as rds
 ## (exported object)
 ## To do: maybe add example of each identifier
+return_fields_dbs <- data.frame(
+  name = c("UniProtKB", "UniProtKB-Swiss-Prot", "UniRef50", "UniRef90", "UniRef100", "UniParc"),
+  return_fields_db = c(rep("uniprotkb", 2), rep("uniref", 3), "uniparc")
+)
+
 from_to_dbs <- from_to_groups %>%
   select(name, from, to, uriLink) %>%
   rename("url" = uriLink) %>%
   arrange(name) %>%
-  as.data.frame()
+  as.data.frame() %>%
+  left_join(return_fields_dbs, by = "name")
 
 usethis::use_data(from_to_dbs, internal = FALSE, overwrite = TRUE)
 

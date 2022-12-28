@@ -5,7 +5,7 @@
 \alias{from_to_dbs}
 \title{UniProt ID mapping from/to databases}
 \format{
-An object of class \code{data.frame} with 100 rows and 4 columns.
+An object of class \code{data.frame} with 100 rows and 5 columns.
 }
 \source{
 From/to pairs have been downloaded according to the "Valid from and
@@ -25,7 +25,9 @@ Columns:
 \strong{name} \tab \code{character}. Database name. \cr
 \strong{from} \tab \code{character}. Is the database allowed to be mapped \code{from}? \cr
 \strong{to} \tab \code{character}. Is the database allowed to be mapped \code{to}? \cr
-\strong{url} \tab \code{character}. Database URL.\cr
+\strong{url} \tab \code{character}. Database URL. \cr
+\strong{return_fields_db} \tab \code{character}. Relevant return fields database,
+see \link{return_fields} for which fields i.e. columns can be requested. \cr
 }
 }
 \seealso{
