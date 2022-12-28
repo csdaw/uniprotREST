@@ -1,5 +1,5 @@
 Package: uniprotREST
-Title: R interface for the new UniProt REST API
+Title: R interface for the UniProt REST API
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Charlotte", 
@@ -7,10 +7,9 @@ Authors@R:
            email = "csdaw@outlook.com", 
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7151-5971"))
-Description: Simple functions to access the updated UniProt REST API. Wraps
+Description: Simple functions to access the updated (2022) UniProt REST API. Wraps
     httr2 functions to easily map IDs and query all available databases (UniProtKB, 
-    UniRef, UniParc, proteomes, taxonomy, keywords, literature citations, 
-    human diseases, cross-references databases, subcellular locations, UniRule, and ARBA). 
+    UniRef, UniParc, proteomes, etc.)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
