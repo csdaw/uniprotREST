@@ -1,3 +1,4 @@
+#' @export
 uniprot_get <- function(url,
                         ...,
                         max_tries = 5,
