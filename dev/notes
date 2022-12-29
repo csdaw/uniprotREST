@@ -1,11 +1,6 @@
-## ID mapping
+#### To do (eventually)
 
-Using the beta web app, use the ID mapper. Then click on the 'Download' button.
-Then click on 'generate URL for API'. This gives 2 ways to obtain the results
-which you should put into the function. This sort of helps explain the two
-ways of downloading results described in this page https://beta.uniprot.org/help/id_mapping.
-
-Also see more info about the paginated results here https://beta.uniprot.org/help/pagination
+- assert_fields needs to check the format type eventually
 
 TO: UniProt.
  - Valid formats = fasta, fasta (isoforms), tsv, xlsx, json, xml, rdf, txt, gff, list
@@ -19,32 +14,46 @@ TO: UniRef
  - Valid formats = fasta, tsv, json, xlsx, list
  - Valid fields (tsv, xlsx only)
 
-## Functions
+- assert_database needs to be written and needs to check fields at least
 
-Main 3:
- 1. uniprot_retrieve()
- 2. uniprot_search()
- 3. uniprot_map()
+- rename uniprot_request to uniprot_single?
 
-Accessory:
- - get_return_fields(database = c("uniprotkb", "uniparc", "uniref", "crossref"))?
-   output is a data.frame
- - get_query_fields()
-   output is a data.frame
- - get_from_to(from = NULL, to = NULL)
-     - if no input is given then output a named list of from-to mappings
-     - if otherwise one should be a string
-     - if both are a string then error and tell people to use check_from_to()?
-     Or just use check_from_to and output TRUE or FALSE (a bit complicated..)
- - check_from_to(from, to)
-     - given a pair of from and to strings, check if they are okay i.e. output is a logical
+- function to check get/save method, something like...
+get_fetch_type <- function(path, method) {
+  if (!is.null(path)) {
+    if (method == "paged") {
+      out <- "fetch_disk_paged"
+    } else {
+      out <- "fetch_disk_stream"
+    }
+  } else {
+    if (method == "paged") {
+      out <- "fetch_mem_paged"
+    } else {
+      out <- "fetch_mem_stream"
+    }
+  }
 
-## Datasets
+  out
+}
 
- - from_to = data.frame of id mapping databases (maybe change name of this to `map_dbs` or equivalent)
- and then have `from_to` be the list object instead of `from_to_list`
- - return_fields = list of data.frames of valid column fields
- - query_fields = data.frame of valid query fields
+get_fetch_type(path, method)
 
+- use httptest2
 
+with_mock_dir("httptest2", {
+  test_that("uniprot_get works", {
+    resp <- uniprot_get(
+      "https://rest.uniprot.org/uniprotkb/P99999?fields=accession,gene_names&format=tsv",
+      fields = "accession,gene_primary",
+      format = "tsv"
+    )
+
+    expect_length(read.delim(text = httr2::resp_body_string(resp), sep = "\t"), 2)
+  })
+})
+
+#### Ideas (don't need to implement immediately)
+- `query_fields` object/function
+- progress bar
 
