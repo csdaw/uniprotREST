@@ -3,3 +3,4 @@
 ^README.Rmd$
 ^dev
 ^data-raw
+^codecov\.yml$

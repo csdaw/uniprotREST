@@ -22,18 +22,18 @@ library(magrittr)
 ```
 
 
-### Retrieve individual entries
+### Retrieve single entries
 
 [API description](https://www.uniprot.org/help/api_retrieve_entries)
 
 ```{r}
-lst <- uniprot_retrieve(
-  id = "P99999",
-  database = "uniprotkb",
-  format = "json"
-)
-
-lst %>% str(max.level = 1)
+# lst <- uniprot_single(
+#   id = "P99999",
+#   database = "uniprotkb",
+#   format = "json"
+# )
+# 
+# lst %>% str(max.level = 1)
 ```
 
 
@@ -42,13 +42,13 @@ lst %>% str(max.level = 1)
 [API description](https://www.uniprot.org/help/api_queries).
 
 ```{r}
-seqs <- uniprot_search(
-  query = "Major capsid protein 723",
-  format = "fasta",
-  method = "paged"
-)
-
-seqs
+# seqs <- uniprot_search(
+#   query = "Major capsid protein 723",
+#   format = "fasta",
+#   method = "paged"
+# )
+# 
+# seqs
 ```
 
 ### Map database identifiers
@@ -56,15 +56,15 @@ seqs
 [API description](https://www.uniprot.org/help/id_mapping)
 
 ```{r}
-df <- uniprot_map(
-  ids = c("ENSG00000092199", "ENSG00000136997"),
-  from = "Ensembl",
-  to = "UniProtKB-Swiss-Prot",
-  format = "tsv",
-  fields = c("accession", "gene_names", "organism_name"),
-  method = "stream"
-)
-
-df
+# df <- uniprot_map(
+#   ids = c("ENSG00000092199", "ENSG00000136997"),
+#   from = "Ensembl",
+#   to = "UniProtKB-Swiss-Prot",
+#   format = "tsv",
+#   fields = c("accession", "gene_names", "organism_name"),
+#   method = "stream"
+# )
+# 
+# df
 ```
 
