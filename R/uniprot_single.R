@@ -1,11 +1,11 @@
-uniprot_retrieve <- function(id,
-                             database = "uniprotkb",
-                             format = "tsv",
-                             path = NULL,
-                             fields = NULL,
-                             isoform = NULL,
-                             verbosity = NULL,
-                             dry_run = FALSE) {
+uniprot_single <- function(id,
+                           database = "uniprotkb",
+                           format = "tsv",
+                           path = NULL,
+                           fields = NULL,
+                           isoform = NULL,
+                           verbosity = NULL,
+                           dry_run = FALSE) {
   ## Argument checking
   assert_string(id)
   assert_choice(database, c("uniprotkb", "uniref", "uniparc",

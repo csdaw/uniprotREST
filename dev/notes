@@ -16,10 +16,10 @@ TO: UniRef
 
 - assert_database needs to be written and needs to check fields at least
 
-- rename uniprot_request to uniprot_single?
+- rename uniprot_retrieve to uniprot_single?
 
 - function to check get/save method, something like...
-get_fetch_type <- function(path, method) {
+get_fetch_fun <- function(path, method) {
   if (!is.null(path)) {
     if (method == "paged") {
       out <- "fetch_disk_paged"
@@ -37,7 +37,9 @@ get_fetch_type <- function(path, method) {
   out
 }
 
-get_fetch_type(path, method)
+fetch_results <- match.fun(get_fetch_fun(path, method))
+
+resp <- fetch_results(req)
 
 - use httptest2
 
