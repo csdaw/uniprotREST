@@ -46,9 +46,12 @@ check_to <- function(x) {
 assert_to <- checkmate::makeAssertionFunction(check_to)
 
 check_from_to <- function(f, t) {
-  res <- check_from(f) && check_to(t)
-  if (!isTRUE(res))
-    return(res)
+  res_f <- check_from(f)
+  res_t <- check_to(t)
+  if (!isTRUE(res_f))
+    return(res_f)
+  if (!isTRUE(res_t))
+    return(res_t)
   if (!test_choice(t, uniprotREST::from_to_rules[[f]]))
     return("`from` and `to` pair is invalid. See `?from_to_rules` for valid values")
   return(TRUE)

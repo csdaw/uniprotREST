@@ -102,6 +102,20 @@ test_that("assert_from_to works", {
   )
 })
 
+test_that("assert_from_to errors if from is invalid", {
+  expect_error(
+    uniprotREST:::assert_from_to("apple", "Ensembl"),
+    "is invalid"
+  )
+})
+
+test_that("assert_from_to errors if to is invalid", {
+  expect_error(
+    uniprotREST:::assert_from_to("SGD", "apple"),
+    "is invalid"
+  )
+})
+
 test_that("assert_from_to errors if from/to pair is invalid", {
   expect_error(
     uniprotREST:::assert_from_to("SGD", "Ensembl"),
