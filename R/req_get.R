@@ -1,8 +1,8 @@
 #' @export
-uniprot_request <- function(url,
-                            ...,
-                            max_tries = 5,
-                            rate = 1 / 1) {
+req_get <- function(url,
+                    ...,
+                    max_tries = 5,
+                    rate = 1 / 1) {
   ## Argument checks
   # ensure request isn't malformed
   assert_url(url)
