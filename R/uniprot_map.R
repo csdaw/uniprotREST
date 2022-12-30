@@ -33,4 +33,20 @@ uniprot_map <- function(ids,
   if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)
   assert_logical(dry_run, max.len = 1)
+
+  # construct post request
+
+  # define a post request (need to make a req_post() function)
+
+  # get job id
+
+  # define a status request (need to make a req_head() function)
+
+  # make status request
+
+  # construct results request
+
+  # define a get request
+
+  # if method = paged fetch_paged else if method = stream fetch_stream
 }

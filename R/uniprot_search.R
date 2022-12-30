@@ -26,4 +26,8 @@ uniprot_search <- function(query,
   if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
   assert_logical(dry_run, max.len = 1)
+
+  # define a get request
+
+  # if method = paged fetch_paged else if method = stream fetch_stream
 }
