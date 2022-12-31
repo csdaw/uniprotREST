@@ -58,3 +58,14 @@ check_from_to <- function(f, t) {
 }
 
 assert_from_to <- checkmate::makeAssertionFunction(check_from_to)
+
+check_compressed <- function(x, method, path) {
+  res <- check_logical(x, max.len = 1)
+  if (!isTRUE(res))
+    return(res)
+  if (x && (method == "paged" | is.null(path)))
+    return('Compressed output only works when method = "stream" and path is defined')
+  return(TRUE)
+}
+
+assert_compressed <- checkmate::makeAssertionFunction(check_compressed)

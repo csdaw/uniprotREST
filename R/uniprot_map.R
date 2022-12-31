@@ -5,9 +5,9 @@ uniprot_map <- function(ids,
                         path = NULL,
                         fields = NULL,
                         isoform = NULL,
+                        method = "paged",
+                        page_size = 500,
                         compressed = NULL,
-                        # method = c("paged", "stream"),
-                        # size = 500L,
                         verbosity = NULL,
                         dry_run = FALSE) {
   ## Argument checking
@@ -30,7 +30,9 @@ uniprot_map <- function(ids,
     }
   }
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
-  if (!is.null(compressed)) assert_logical(compressed, max.len = 1)
+  assert_choice(method, c("paged", "stream"))
+  assert_integerish(page_size, lower = 0, max.len = 1)
+  if (!is.null(compressed)) assert_compressed(compressed, method, path)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)
   assert_logical(dry_run, max.len = 1)
 

@@ -122,3 +122,30 @@ test_that("assert_from_to errors if from/to pair is invalid", {
     "is invalid"
   )
 })
+
+## assert_compressed()
+test_that("assert_compressed works if FALSE", {
+  expect_no_error(
+    uniprotREST:::assert_compressed(FALSE, "apple", "banana")
+  )
+})
+
+test_that("assert_compressed works if TRUE", {
+  expect_no_error(
+    uniprotREST:::assert_compressed(TRUE, "stream", "some/file/path")
+  )
+})
+
+test_that("assert_compressed errors if method is paged", {
+  expect_error(
+    uniprotREST:::assert_compressed(TRUE, "paged", "some/file/path"),
+    "Compressed output only works when"
+  )
+})
+
+test_that("assert_compressed errors if path is not provided", {
+  expect_error(
+    uniprotREST:::assert_compressed(TRUE, "stream", NULL),
+    "Compressed output only works when"
+  )
+})
