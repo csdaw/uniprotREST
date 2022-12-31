@@ -1,4 +1,4 @@
-## assert_url()
+## assert_url() ----------------------------------------------------------------
 test_that("assert_url works", {
   expect_no_error(
     uniprotREST:::assert_url("https://rest.uniprot.org/somestring1234")
@@ -19,7 +19,7 @@ test_that("assert_url errors if string isn't a url", {
   )
 })
 
-## assert_fields()
+## assert_fields() -------------------------------------------------------------
 test_that("assert_fields works", {
   expect_no_error(
     uniprotREST:::assert_fields(c("accession", "gene_names"))
@@ -53,7 +53,7 @@ test_that("assert_fields errors if input is not an accepted field", {
   )
 })
 
-## assert_from()
+## assert_from() ---------------------------------------------------------------
 test_that("assert_from works", {
   expect_no_error(
     uniprotREST:::assert_from("UniParc")
@@ -74,7 +74,7 @@ test_that("assert_from errors if string isn't valid", {
   )
 })
 
-## assert_to()
+## assert_to() -----------------------------------------------------------------
 test_that("assert_to works", {
   expect_no_error(
     uniprotREST:::assert_to("UniParc")
@@ -95,7 +95,7 @@ test_that("assert_to errors if string isn't valid", {
   )
 })
 
-## assert_from_to()
+## assert_from_to() ------------------------------------------------------------
 test_that("assert_from_to works", {
   expect_no_error(
     uniprotREST:::assert_from_to("UniProtKB_AC-ID", "Ensembl")
@@ -123,7 +123,7 @@ test_that("assert_from_to errors if from/to pair is invalid", {
   )
 })
 
-## assert_compressed()
+## assert_compressed() ---------------------------------------------------------
 test_that("assert_compressed works if FALSE", {
   expect_no_error(
     uniprotREST:::assert_compressed(FALSE, "apple", "banana")
@@ -154,5 +154,20 @@ test_that("assert_compressed errors if path is not provided", {
   expect_error(
     uniprotREST:::assert_compressed(TRUE, "stream", NULL),
     "Compressed output only works when"
+  )
+})
+
+## assert_request() ------------------------------------------------------------
+test_that("assert_request works", {
+  req <- httr2::request("http://example.com")
+  expect_no_error(
+    uniprotREST:::assert_request(req)
+  )
+})
+
+test_that("assert_request errors if req is wrong class", {
+  expect_error(
+    uniprotREST:::assert_request("banana"),
+    "Not an httr2 request object"
   )
 })

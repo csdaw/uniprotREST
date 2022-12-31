@@ -69,3 +69,11 @@ check_compressed <- function(x, method, path) {
 }
 
 assert_compressed <- checkmate::makeAssertionFunction(check_compressed)
+
+check_request <- function(x) {
+  if (!inherits(x, "httr2_request"))
+    return("Not an httr2 request object")
+  return(TRUE)
+}
+
+assert_request <- checkmate::makeAssertionFunction(check_request)
