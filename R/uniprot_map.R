@@ -13,7 +13,7 @@ uniprot_map <- function(ids,
   ## Argument checking
   if (!is.null(ids)) {
     assert_character(ids)
-    if (test_character(ids, min.len = 2)) ids <- paste(ids, collapse = ",")
+    if (length(ids) > 1) ids <- paste(ids, collapse = ",")
   }
   assert_from_to(from, to)
   database <- uniprotREST::from_to_dbs[uniprotREST::from_to_dbs$name == to, "return_fields_db"]
@@ -25,8 +25,7 @@ uniprot_map <- function(ids,
       # do nothing
     } else {
       assert_fields(fields, database = database)
-      if (length(fields) > 1)
-        fields <- paste(fields, collapse = ",")
+      if (length(fields) > 1) fields <- paste(fields, collapse = ",")
     }
   }
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)

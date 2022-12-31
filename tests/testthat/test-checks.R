@@ -136,6 +136,13 @@ test_that("assert_compressed works if TRUE", {
   )
 })
 
+test_that("assert_compressed errors if type is not logical", {
+  expect_error(
+    uniprotREST:::assert_compressed("aaa", "stream", "some/file/path"),
+    "Must be of type 'logical', not 'character'."
+  )
+})
+
 test_that("assert_compressed errors if method is paged", {
   expect_error(
     uniprotREST:::assert_compressed(TRUE, "paged", "some/file/path"),
