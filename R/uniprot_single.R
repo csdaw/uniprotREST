@@ -5,7 +5,9 @@ uniprot_single <- function(id,
                            fields = NULL,
                            isoform = NULL,
                            verbosity = NULL,
-                           dry_run = FALSE) {
+                           dry_run = FALSE,
+                           max_tries = 5,
+                           rate = 1 / 1) {
   ## Argument checking
   assert_string(id)
   assert_choice(database, c("uniprotkb", "uniref", "uniparc",
@@ -22,7 +24,15 @@ uniprot_single <- function(id,
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
   assert_logical(dry_run, max.len = 1)
 
-  # define a get request
+  ## Define GET request with correct structure
+  req <- uniprot_request(
+    url = "https://rest.uniprot.org",
+    fields = fields,
+    includeIsoform = isoform,
+    max_tries = max_tries,
+    rate = rate
+  ) %>%
+    httr2::req_url_path_append(database, paste(id, format, sep = "."))
 
   # fetch_stream()
 }
