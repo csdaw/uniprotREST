@@ -1,0 +1,13 @@
+structure(list(method = "GET", url = "https://rest.uniprot.org/uniprotkb/P99999?format=tsv&fields=accession%2Cgene_primary", 
+    status_code = 200L, headers = structure(list(Server = "nginx/1.17.7", 
+        Vary = "Accept, Accept-Encoding, X-UniProt-Release, X-API-Deployment-Date", 
+        Vary = "User-Agent", `Cache-Control` = "public, max-age=86400", 
+        `x-cache` = "hit cached", `Content-Type` = "text/plain; format=tsv", 
+        `Access-Control-Allow-Credentials` = "true", `Access-Control-Expose-Headers` = "Link, X-Total-Results, X-UniProt-Release, X-UniProt-Release-Date, X-API-Deployment-Date", 
+        `X-API-Deployment-Date` = "20-December-2022", `Strict-Transport-Security` = "max-age=31536000; includeSubDomains", 
+        Date = "Sun, 01 Jan 2023 02:14:38 GMT", `X-UniProt-Release` = "2022_05", 
+        `Access-Control-Allow-Origin` = "*", `Accept-Ranges` = "bytes", 
+        Connection = "keep-alive", `Access-Control-Allow-Methods` = "GET, PUT, POST, DELETE, PATCH, OPTIONS", 
+        `Access-Control-Allow-Headers` = "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization", 
+        `Content-Length` = "39", `X-UniProt-Release-Date` = "14-December-2022"), class = "httr2_headers"), 
+    body = charToRaw("Entry\tGene Names (primary)\nP99999\tCYCS\n")), class = "httr2_response")
