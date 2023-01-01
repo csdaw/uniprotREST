@@ -8,8 +8,7 @@ uniprot_map <- function(ids,
                         method = "paged",
                         page_size = 500,
                         compressed = NULL,
-                        verbosity = NULL,
-                        dry_run = FALSE) {
+                        verbosity = NULL) {
   ## Argument checking
   if (!is.null(ids)) {
     assert_character(ids)
@@ -33,7 +32,6 @@ uniprot_map <- function(ids,
   assert_integerish(page_size, lower = 0, max.len = 1)
   if (!is.null(compressed)) assert_compressed(compressed, method, path)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1)
-  assert_logical(dry_run, max.len = 1)
 
   # construct post request
 

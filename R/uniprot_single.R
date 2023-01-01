@@ -5,7 +5,6 @@ uniprot_single <- function(id,
                            fields = NULL,
                            isoform = NULL,
                            verbosity = NULL,
-                           dry_run = FALSE,
                            max_tries = 5,
                            rate = 1 / 1) {
   ## Argument checking
@@ -22,7 +21,6 @@ uniprot_single <- function(id,
   }
   if (!is.null(isoform)) assert_logical(isoform, max.len = 1)
   if (!is.null(verbosity)) assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
-  assert_logical(dry_run, max.len = 1)
 
   ## Define GET request with correct structure
   req <- uniprot_request(
