@@ -77,3 +77,11 @@ check_request <- function(x) {
 }
 
 assert_request <- checkmate::makeAssertionFunction(check_request)
+
+check_response <- function(x) {
+  if (!inherits(x, "httr2_response"))
+    return("Not an httr2 response object")
+  return(TRUE)
+}
+
+assert_response <- checkmate::makeAssertionFunction(check_response)

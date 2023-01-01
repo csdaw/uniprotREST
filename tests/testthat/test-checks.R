@@ -171,3 +171,19 @@ test_that("assert_request errors if req is wrong class", {
     "Not an httr2 request object"
   )
 })
+
+## assert_response() ------------------------------------------------------------
+test_that("assert_response works", {
+  resp <- structure(list(url = "http://example.com", body = NULL),
+                    class = "httr2_response")
+  expect_no_error(
+    uniprotREST:::assert_response(resp)
+  )
+})
+
+test_that("assert_response errors if resp is wrong class", {
+  expect_error(
+    uniprotREST:::assert_response("banana"),
+    "Not an httr2 response object"
+  )
+})
