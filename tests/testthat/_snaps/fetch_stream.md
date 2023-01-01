@@ -1,4 +1,4 @@
-# resp is returned
+# fetch_stream works with tsv format
 
     Code
       fetch_stream(req, parse = FALSE)
@@ -9,4 +9,12 @@
       Status: 200 OK
       Content-Type: text/plain
       Body: In memory (39 bytes)
+
+---
+
+    Code
+      fetch_stream(req, parse = TRUE)
+    Output
+         Entry Gene.Names..primary.
+      1 P99999                 CYCS
 
