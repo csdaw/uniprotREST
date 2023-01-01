@@ -1,0 +1,2 @@
+Entry	Gene Names (primary)
+P99999	CYCS

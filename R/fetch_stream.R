@@ -1,3 +1,4 @@
+#' @export
 fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosity = NULL, dry_run = FALSE) {
   ## Argument checking
   assert_request(req)
