@@ -39,8 +39,8 @@ By default, returns an object whose type depends on \code{format}:
 }
 
 If \code{parse = FALSE}, returns an \code{httr2_response}. If \code{path} is specified,
-also returns an \code{httr2_response}, and saves the parsed results to
-the file path indicated.
+saves the parsed results to the file path indicated, and returns \code{NULL}
+invisibly.
 }
 \description{
 This function performs a request for data from the UniProt REST

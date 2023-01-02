@@ -32,8 +32,8 @@
 #'   - **tsv**: `data.frame`
 #'
 #'   If `parse = FALSE`, returns an `httr2_response`. If `path` is specified,
-#'   also returns an `httr2_response`, and saves the parsed results to
-#'   the file path indicated.
+#'   saves the parsed results to the file path indicated, and returns `NULL`
+#'   invisibly.
 #'
 #' @export
 #'
@@ -54,7 +54,9 @@ fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosi
   ## Perform request
   resp <- httr2::req_perform(req, path = path, verbosity = verbosity)
 
-  if (!is.null(path) | !parse) {
+  if (!is.null(path)) {
+    return(invisible)
+  } else if (!parse) {
     return(resp)
   } else if (parse) {
     switch(
