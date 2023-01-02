@@ -1,6 +1,6 @@
 #' Fetch results via stream endpoint
 #'
-#' @description This functions performs a request for data from the UniProt REST
+#' @description This function performs a request for data from the UniProt REST
 #'   API, fetches the results using the stream endpoint, and saves them to a
 #'   file or into memory.
 #'
@@ -25,17 +25,7 @@
 #'   Does nothing if `path` is provided.
 #' @param path Optional `string`, file path to save the results, e.g.
 #'   `"path/to/results.tsv"`
-#' @param verbosity Optional `integer`, how much information to print? This is
-#'   a wrapper around [httr2::req_verbose()] that uses an integer to control
-#'   verbosity:
-#'
-#'   - 0: no output
-#'   - 1: show headers
-#'   - 2: show headers and bodies
-#'   - 3: show headers, bodies, and curl status messages.
-#'
-#'   Use [httr2::with_verbosity()] to control the verbosity of requests that you
-#'   can't affect directly.
+#' @inheritParams httr2::req_perform
 #'
 #' @return By default, returns an object whose type depends on `format`:
 #'

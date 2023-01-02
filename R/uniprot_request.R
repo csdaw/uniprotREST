@@ -1,6 +1,6 @@
 #' Create UniProt HTTP request
 #'
-#' @description The function creates a request object for the UniProt REST API.
+#' @description This function creates a request object for the UniProt REST API.
 #'   You likely won't use this function directly, but rather one of the
 #'   wrapper functions: [uniprot_map()], [uniprot_search()], or [uniprot_single()].
 #'

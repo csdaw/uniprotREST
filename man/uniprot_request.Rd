@@ -26,7 +26,7 @@ HTTP request. Default is \code{5}.}
 Returns an \code{httr2_request} object.
 }
 \description{
-The function creates a request object for the UniProt REST API.
+This function creates a request object for the UniProt REST API.
 You likely won't use this function directly, but rather one of the
 wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=uniprot_search]{uniprot_search()}}, or \code{\link[=uniprot_single]{uniprot_single()}}.
 }

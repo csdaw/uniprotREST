@@ -20,9 +20,8 @@ Does nothing if \code{path} is provided.}
 \item{path}{Optional \code{string}, file path to save the results, e.g.
 \code{"path/to/results.tsv"}}
 
-\item{verbosity}{Optional \code{integer}, how much information to print? This is
-a wrapper around \code{\link[httr2:req_verbose]{httr2::req_verbose()}} that uses an integer to control
-verbosity:
+\item{verbosity}{How much information to print? This is a wrapper
+around \code{req_verbose()} that uses an integer to control verbosity:
 \itemize{
 \item 0: no output
 \item 1: show headers
@@ -30,8 +29,8 @@ verbosity:
 \item 3: show headers, bodies, and curl status messages.
 }
 
-Use \code{\link[httr2:with_verbosity]{httr2::with_verbosity()}} to control the verbosity of requests that you
-can't affect directly.}
+Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
+you can't affect directly.}
 }
 \value{
 By default, returns an object whose type depends on \code{format}:
@@ -44,7 +43,7 @@ also returns an \code{httr2_response}, and saves the parsed results to
 the file path indicated.
 }
 \description{
-This functions performs a request for data from the UniProt REST
+This function performs a request for data from the UniProt REST
 API, fetches the results using the stream endpoint, and saves them to a
 file or into memory.
 
