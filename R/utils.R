@@ -1,3 +1,4 @@
+# cat to console, but respect verbosity
 vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
   if (!is.null(verbosity)) {
     assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
@@ -11,4 +12,43 @@ vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
     else
       invisible()
   }
+}
+
+# Modified from httr package
+# https://github.com/r-lib/httr/blob/main/R/progress.R
+progress_stream <- function(con = stdout()) {
+  show_progress <- function(down, up) {
+    total <- down[[1]]
+    now <- down[[2]]
+
+    # We don't know the size of the data beforehand
+    if (total == 0) {
+      cat("\rDownloading: ", bytes(now, digits = 2), "     ", sep = "", file = con)
+      utils::flush.console()
+      # No way to tell when then the file has finished downloading until
+      # total is not zero
+    }
+
+    TRUE
+  }
+
+  show_progress
+}
+
+# Copied from httr package
+bytes <- function(x, digits = 3, ...) {
+  power <- min(floor(log(abs(x), 1000)), 4)
+  if (power < 1) {
+    unit <- "B"
+  } else {
+    unit <- c("kB", "MB", "GB", "TB")[[power]]
+    x <- x / (1000^power)
+  }
+
+  formatted <- format(signif(x, digits = digits),
+                      big.mark = ",",
+                      scientific = FALSE
+  )
+
+  paste0(formatted, " ", unit)
 }

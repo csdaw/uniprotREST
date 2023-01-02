@@ -52,7 +52,15 @@ fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosi
     assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
 
   ## Perform request
-  resp <- httr2::req_perform(req, path = path, verbosity = verbosity)
+  resp <- httr2::req_perform(
+    req %>%
+      httr2::req_options(
+        noprogress = FALSE,
+        progressfunction = progress_stream(con = stdout())
+      ),
+    path = path,
+    verbosity = verbosity
+  )
 
   if (!is.null(path)) {
     return(invisible)

@@ -19,7 +19,8 @@ Depends:
 Imports: 
     checkmate,
     httr2,
-    magrittr
+    magrittr,
+    utils
 Suggests: 
     covr,
     httptest2,

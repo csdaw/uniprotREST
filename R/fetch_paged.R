@@ -8,9 +8,15 @@ fetch_paged <- function(req, n_pages, format = "tsv", path = NULL, verbosity = N
   i <- 1L
 
   # Open file connection if necessary
-  if (!is.null(path)) con = file(path, "w")
+  if (!is.null(path)) con = file(path, "w") else con = NULL
 
-  repeat({
+  while (i <= n_pages) {
+    vcat(
+      "\r", "Downloading: page", i, "of", n_pages,
+      verbosity = verbosity, null_prints = TRUE
+    )
+    utils::flush.console()
+
     resp <- httr2::req_perform(req, verbosity = verbosity)
 
     # Parse response body
@@ -19,17 +25,14 @@ fetch_paged <- function(req, n_pages, format = "tsv", path = NULL, verbosity = N
       tsv = resp_body_tsv(resp, page = i, con = con)
     )
 
-    # Exit if no more pages
-    if (i == n_pages) break
-
     next_url <- get_next_link(resp)
 
-    # Get URL of next page or exit if missing
-    if (!is.null(next_url)) req$url <- next_url else break
+    # Get URL of next page
+    if (!is.null(next_url)) req$url <- next_url
 
     # Increment counter
     i <- i + 1L
-  })
+  }
 
   if (!is.null(path)) {
     close(con)
