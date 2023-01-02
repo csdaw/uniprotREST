@@ -1,12 +1,14 @@
-vmessage <- function(..., verbosity = NULL, vlimit = 0) {
+vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
   if (!is.null(verbosity)) {
     assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
-
     if (verbosity > vlimit)
-      message(...)
+      cat(...)
     else
       invisible()
   } else {
-    invisible()
+    if (null_prints)
+      cat(...)
+    else
+      invisible()
   }
 }
