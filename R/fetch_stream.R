@@ -7,10 +7,10 @@
 #'   You likely won't use this function directly, but rather one of the
 #'   wrapper functions: [uniprot_map()], [uniprot_search()], or [uniprot_single()].
 #'
-#'   ### Stream limitations
+#'   ### Things to note:
 #'
 #'   1. The stream endpoint is expensive for the API to process. If this endpoint
-#'      gas too many requests a `429` status error will occur. In this case use
+#'      has too many requests a `429` status error will occur. In this case use
 #'      `fetch_paged()` or try `fetch_stream()` again later.
 #'   2. Up to 10,000,000 results can be fetched via stream. If you want to get
 #'      more results you should use `fetch_paged()`, or consider downloading
@@ -24,7 +24,7 @@
 #'   or should the `httr2_response` object be returned instead? Default is `TRUE`.
 #'   Does nothing if `path` is provided.
 #' @param path Optional `string`, file path to save the results, e.g.
-#'   `"path/to/results.tsv"`
+#'   `"path/to/results.tsv"`.
 #' @inheritParams httr2::req_perform
 #'
 #' @return By default, returns an object whose type depends on `format`:
@@ -70,8 +70,6 @@ fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosi
     switch(
       format,
       tsv = resp_body_tsv(resp)
-      # fasta = httr2::resp_body_string(resp) %>% str2fasta(),
-      # json = httr2::resp_body_json(resp)
     )
   }
 }

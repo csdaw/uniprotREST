@@ -18,7 +18,7 @@ or should the \code{httr2_response} object be returned instead? Default is \code
 Does nothing if \code{path} is provided.}
 
 \item{path}{Optional \code{string}, file path to save the results, e.g.
-\code{"path/to/results.tsv"}}
+\code{"path/to/results.tsv"}.}
 
 \item{verbosity}{How much information to print? This is a wrapper
 around \code{req_verbose()} that uses an integer to control verbosity:
@@ -49,10 +49,10 @@ file or into memory.
 
 You likely won't use this function directly, but rather one of the
 wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=uniprot_search]{uniprot_search()}}, or \code{\link[=uniprot_single]{uniprot_single()}}.
-\subsection{Stream limitations}{
+\subsection{Things to note:}{
 \enumerate{
 \item The stream endpoint is expensive for the API to process. If this endpoint
-gas too many requests a \code{429} status error will occur. In this case use
+has too many requests a \code{429} status error will occur. In this case use
 \code{fetch_paged()} or try \code{fetch_stream()} again later.
 \item Up to 10,000,000 results can be fetched via stream. If you want to get
 more results you should use \code{fetch_paged()}, or consider downloading
