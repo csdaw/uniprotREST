@@ -1,3 +1,5 @@
+#' @noRd
+#' @export
 uniprot_single <- function(id,
                            database = "uniprotkb",
                            format = "tsv",
@@ -6,7 +8,8 @@ uniprot_single <- function(id,
                            isoform = NULL,
                            verbosity = NULL,
                            max_tries = 5,
-                           rate = 1 / 1) {
+                           rate = 1 / 1,
+                           dry_run = FALSE) {
   ## Argument checking
   assert_string(id)
   assert_choice(database, c("uniprotkb", "uniref", "uniparc",
@@ -32,5 +35,15 @@ uniprot_single <- function(id,
   ) %>%
     httr2::req_url_path_append(database, paste(id, format, sep = "."))
 
-  # fetch_stream()
+  if (dry_run) {
+    httr2::req_dry_run(req, quiet = if (is.null(verbosity)) FALSE else as.logical(verbosity))
+  } else {
+    fetch_stream(
+      req,
+      format = format,
+      parse = TRUE,
+      path = path,
+      verbosity = verbosity
+    )
+  }
 }
