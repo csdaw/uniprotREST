@@ -1,7 +1,7 @@
-# fetch_stream works with tsv format
+# fetch_stream works
 
     Code
-      fetch_stream(req, parse = FALSE, verbosity = 0)
+      result
     Message <cliMessage>
       <httr2_response>
       GET
@@ -10,10 +10,10 @@
       Content-Type: text/plain
       Body: In memory (154 bytes)
 
----
+# fetch_stream can parse tsv format
 
     Code
-      fetch_stream(req, parse = TRUE, verbosity = 0)
+      result
     Output
               Cluster.ID          Cluster.Name Size
       1 UniRef100_P99999 Cluster: Cytochrome c   18
