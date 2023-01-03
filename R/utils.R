@@ -16,14 +16,15 @@ vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
 
 # Modified from httr package
 # https://github.com/r-lib/httr/blob/main/R/progress.R
-progress_stream <- function(con = stdout()) {
+progress_stream <- function(con = stdout(), verbosity = NULL) {
   show_progress <- function(down, up) {
     total <- down[[1]]
     now <- down[[2]]
 
     # We don't know the size of the data beforehand
     if (total == 0) {
-      cat("\rDownloading: ", bytes(now, digits = 2), "     ", sep = "", file = con)
+      vcat("\rDownloading: ", bytes(now, digits = 2), "     ", sep = "",
+           file = con, verbosity = verbosity, null_prints = TRUE)
       utils::flush.console()
       # No way to tell when then the file has finished downloading until
       # total is not zero

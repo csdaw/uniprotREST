@@ -39,7 +39,13 @@
 #'
 #' @examples
 #' \dontrun{
-#'   req <- request("https://rest.uniprot.org/uniref/UniRef90_P99999.tsv")
+#'   req <- uniprot_request(
+#'     "https://rest.uniprot.org/uniref/stream",
+#'     query = "P99999",
+#'     format = "tsv",
+#'     fields = "id,name,count"
+#'   )
+#'
 #'   fetch_stream(req)
 #' }
 fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosity = NULL) {
@@ -56,7 +62,7 @@ fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosi
     req %>%
       httr2::req_options(
         noprogress = FALSE,
-        progressfunction = progress_stream(con = stdout())
+        progressfunction = progress_stream(con = stdout(), verbosity = verbosity)
       ),
     path = path,
     verbosity = verbosity

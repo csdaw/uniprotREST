@@ -31,8 +31,12 @@
 #'
 #' @examples
 #' \dontrun{
-#'   req <- httr2::request(
-#'   "https://rest.uniprot.org/uniref/search?fields=id%2Ccount&format=tsv&query=%28P99999%29&size=1"
+#'   req <- uniprot_request(
+#'     "https://rest.uniprot.org/uniref/search",
+#'     query = "P99999",
+#'     format = "tsv",
+#'     fields = "id,name,count",
+#'     size = 1
 #'   )
 #'
 #'   fetch_paged(req, n_pages = 3)

@@ -1,20 +1,22 @@
 # fetch_stream works with tsv format
 
     Code
-      fetch_stream(req, parse = FALSE)
+      fetch_stream(req, parse = FALSE, verbosity = 0)
     Message <cliMessage>
       <httr2_response>
       GET
-      https://rest.uniprot.org/uniprotkb/P99999?format=tsv&fields=accession%2Cgene_primary
+      https://rest.uniprot.org/uniref/stream?query=P99999&format=tsv&fields=id%2Cname%2Ccount
       Status: 200 OK
       Content-Type: text/plain
-      Body: In memory (39 bytes)
+      Body: In memory (154 bytes)
 
 ---
 
     Code
-      fetch_stream(req, parse = TRUE)
+      fetch_stream(req, parse = TRUE, verbosity = 0)
     Output
-         Entry Gene.Names..primary.
-      1 P99999                 CYCS
+              Cluster.ID          Cluster.Name Size
+      1 UniRef100_P99999 Cluster: Cytochrome c   18
+      2  UniRef50_P99999 Cluster: Cytochrome c  170
+      3  UniRef90_P99999 Cluster: Cytochrome c   99
 
