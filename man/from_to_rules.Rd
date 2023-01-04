@@ -3,7 +3,7 @@
 \docType{data}
 \name{from_to_rules}
 \alias{from_to_rules}
-\title{UniProt ID mapping from/to rules}
+\title{(Dataset) From/to rules for ID mapping}
 \format{
 An object of class \code{list} of length 98.
 }
@@ -17,12 +17,14 @@ from_to_rules
 }
 \description{
 This list contains the valid from/to pairings that can be used
-with \code{uniprot_map()}.
+with \code{uniprot_map()}. See \strong{Examples} below for how to use this object.
+}
+\examples{
+# Show valid `from` values
+names(from_to_rules)
 
-\code{names(from_to_rules)} shows all the valid values for \code{from}.
-
-\code{from_to_rules[["SGD"]]} shows all the valid \code{to} values for a certain
-\code{from}, for example in this case is \code{"SGD"}.
+# Show valid `to` values for a given `from` e.g. SGD
+from_to_rules[["SGD"]]
 }
 \seealso{
 \link{from_to_dbs} for details of each database available for ID mapping.

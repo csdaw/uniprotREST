@@ -1,7 +1,8 @@
-#' UniProt ID mapping from/to databases
+#' (Dataset) From/to databases for ID mapping
 #'
 #' @description This dataframe contains details of the databases that can be
-#'   mapped from/to with `uniprot_map()`.
+#'   mapped from/to with `uniprot_map()`. See [from_to_rules] for the info on
+#'   which database identifiers can be mapped to what other database.
 #'
 #' @details Columns:
 #'   \tabular{ll}{
@@ -13,8 +14,7 @@
 #'     see [return_fields] for which fields i.e. columns can be requested. \cr
 #'   }
 #'
-#' @seealso [from_to_rules] for rules of which database identifiers can be
-#'   mapped to what other database.
+#' @seealso [from_to_rules]
 #'
 #' @source From/to pairs have been downloaded according to the "Valid from and
 #'   to databases pairs" section on the UniProt

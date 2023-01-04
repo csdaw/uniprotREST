@@ -3,7 +3,7 @@
 \docType{data}
 \name{return_fields}
 \alias{return_fields}
-\title{UniProt return fields}
+\title{(Dataset) UniProt return fields}
 \format{
 An object of class \code{data.frame} with 411 rows and 4 columns.
 }
@@ -21,6 +21,7 @@ return_fields
 This dataframe contains the valid fields (i.e. columns) of
 data you can request from UniProt. The strings in the \code{field} column is what
 you'll use with the functions in this package.
+See \strong{Examples} below for how to use this object.
 }
 \details{
 Columns:
@@ -30,5 +31,15 @@ Columns:
 \strong{field} \tab \code{character}. The return field i.e. the string used to request the desired column of information. \cr
 \strong{label} \tab \code{character}. Human readable column name that will be returned by the API.\cr
 }
+}
+\examples{
+# What UniProt databases are available to query?
+levels(return_fields$database)
+
+# What fields are available for the `proteomes` database?
+return_fields[return_fields$database == "proteomes", "field"]
+}
+\seealso{
+\link{from_to_dbs}
 }
 \keyword{datasets}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{from_to_dbs}
 \alias{from_to_dbs}
-\title{UniProt ID mapping from/to databases}
+\title{(Dataset) From/to databases for ID mapping}
 \format{
 An object of class \code{data.frame} with 100 rows and 5 columns.
 }
@@ -17,7 +17,8 @@ from_to_dbs
 }
 \description{
 This dataframe contains details of the databases that can be
-mapped from/to with \code{uniprot_map()}.
+mapped from/to with \code{uniprot_map()}. See \link{from_to_rules} for the info on
+which database identifiers can be mapped to what other database.
 }
 \details{
 Columns:
@@ -31,7 +32,6 @@ see \link{return_fields} for which fields i.e. columns can be requested. \cr
 }
 }
 \seealso{
-\link{from_to_rules} for rules of which database identifiers can be
-mapped to what other database.
+\link{from_to_rules}
 }
 \keyword{datasets}

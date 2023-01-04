@@ -2,7 +2,7 @@
 % Please edit documentation in R/fetch_stream.R
 \name{fetch_stream}
 \alias{fetch_stream}
-\title{Fetch results via stream endpoint}
+\title{Fetch results via stream}
 \usage{
 fetch_stream(req, format = "tsv", parse = TRUE, path = NULL, verbosity = NULL)
 }
@@ -54,9 +54,9 @@ wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=unipr
 \enumerate{
 \item The stream endpoint is expensive for the API to process. If this endpoint
 has too many requests a \code{429} status error will occur. In this case use
-\code{fetch_paged()} or try \code{fetch_stream()} again later.
+\code{\link[=fetch_paged]{fetch_paged()}} or try again later.
 \item Up to 10,000,000 results can be fetched via stream. If you want to get
-more results you should use \code{fetch_paged()}, or consider downloading
+more results you should use \code{\link[=fetch_paged]{fetch_paged()}}, or consider downloading
 some datasets from UniProt's FTP website.
 }
 }
