@@ -29,8 +29,8 @@
 #'
 #' @return By default, returns an object whose type depends on `format`:
 #'
-#'   - **tsv**: `data.frame`
-#'   - **json**: `list`
+#'   - **`tsv`**: `data.frame`
+#'   - **`json`**: `list`
 #'
 #'   If `parse = FALSE`, returns an `httr2_response`. If `path` is specified,
 #'   saves the parsed results to the file path indicated, and returns `NULL`

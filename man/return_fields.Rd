@@ -5,13 +5,14 @@
 \alias{return_fields}
 \title{UniProt return fields}
 \format{
-An object of class \code{data.frame} with 391 rows and 4 columns.
+An object of class \code{data.frame} with 411 rows and 4 columns.
 }
 \source{
 UniProtKB return fields have been scraped from the
 \href{https://www.uniprot.org/help/return_fields}{UniProtKB return fields} page.
 The return fields from other Uniprot databases have been determined by hand
-from the 'Generate URL for API' section of the 'Download' widget.
+using Web Developer Tools (F12) to inspect the GET request made when
+searching the different database on the UniProt website.
 }
 \usage{
 return_fields

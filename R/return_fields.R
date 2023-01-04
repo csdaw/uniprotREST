@@ -15,5 +15,6 @@
 #' @source UniProtKB return fields have been scraped from the
 #'   [UniProtKB return fields](https://www.uniprot.org/help/return_fields) page.
 #'   The return fields from other Uniprot databases have been determined by hand
-#'   from the 'Generate URL for API' section of the 'Download' widget.
+#'   using Web Developer Tools (F12) to inspect the GET request made when
+#'   searching the different database on the UniProt website.
 "return_fields"

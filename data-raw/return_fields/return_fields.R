@@ -12,7 +12,8 @@ other <- read_tsv(here("data-raw/return_fields/fields_other.tsv"),
 return_fields <- rbind(uniprot_kb, other) %>%
   mutate(database = factor(database, levels = c("uniprotkb", "uniref", "uniparc",
                                                 "proteomes", "taxonomy", "keywords",
-                                                "citations", "diseases", "locations"))) %>%
+                                                "citations", "diseases", "database",
+                                                "locations", "unirule", "arba"))) %>%
   as.data.frame()
 
 ## Optionally add some examples

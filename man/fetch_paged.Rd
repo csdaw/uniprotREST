@@ -35,8 +35,8 @@ you can't affect directly.}
 \value{
 By default, returns an object whose type depends on \code{format}:
 \itemize{
-\item \strong{tsv}: \code{data.frame}
-\item \strong{json}: \code{list}
+\item \strong{\code{tsv}}: \code{data.frame}
+\item \strong{\code{json}}: \code{list}
 }
 
 If \code{parse = FALSE}, returns an \code{httr2_response}. If \code{path} is specified,
