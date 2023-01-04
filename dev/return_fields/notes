@@ -38,8 +38,8 @@ CDD HAMAP PANTHER SFLD TIGRFAMS
 ## locations
 - search: (id:SL-0011)
 ## unirule
-- search: UR00000121
+- search: (rule_id:UR00000121)
 - This output only seems to do json, list
 ## arba
-- search: ARBA00000001
+- search: (rule_id:ARBA00000001)
 - This output only seems to do json, list

@@ -33,5 +33,5 @@ return_fields <- rbind(uniprot_kb, other) %>%
 # )
 
 ## Save table
-write_tsv(return_fields, here("data-raw/return_fields/return_fields.tsv"))
-usethis::use_data(return_fields)
+# write_tsv(return_fields, here("data-raw/return_fields/return_fields.tsv"))
+usethis::use_data(return_fields, overwrite = TRUE)

@@ -92,6 +92,16 @@ diseases	Disease	alternative_names	Alternative Names
 diseases	Disease	cross_references	Cross Reference
 diseases	Disease	keywords	Keywords
 diseases	Disease	statistics	Statistics
+database	Cross Reference	id	
+database	Cross Reference	name	
+database	Cross Reference	abbrev	
+database	Cross Reference	pubmed_id	
+database	Cross Reference	doi_id	
+database	Cross Reference	link_type	
+database	Cross Reference	server	
+database	Cross Reference	dbUrl	
+database	Cross Reference	category	
+database	Cross Reference	statistics	
 locations	Subcellular location	id	Subcellular location ID
 locations	Subcellular location	name	Name
 locations	Subcellular location	definition	Description
@@ -106,3 +116,13 @@ locations	Subcellular location	links	Links
 locations	Subcellular location	is_a	Is a
 locations	Subcellular location	part_of	Is part of
 locations	Subcellular location	statistics	Statistics
+unirule	UniRule	rule_id	
+unirule	UniRule	statistics	
+unirule	UniRule	taxonomic_scope	
+unirule	UniRule	annotation_covered	
+unirule	UniRule	predicted_protein_name	
+unirule	UniRule	template_entries	
+arba	ARBA	rule_id	
+arba	ARBA	statistics	
+arba	ARBA	taxonomic_scope	
+arba	ARBA	annotation_covered	
