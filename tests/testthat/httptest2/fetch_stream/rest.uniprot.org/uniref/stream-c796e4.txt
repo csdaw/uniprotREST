@@ -1,0 +1,4 @@
+Cluster ID	Cluster Name	Size
+UniRef100_P99999	Cluster: Cytochrome c	18
+UniRef50_P99999	Cluster: Cytochrome c	170
+UniRef90_P99999	Cluster: Cytochrome c	99
