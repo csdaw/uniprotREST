@@ -60,7 +60,8 @@ formats <- bind_rows("single" = df_single, "search" = df_search, "map" = df_map,
                                       "taxonomy", "keywords", "citations", "diseases",
                                       "database", "locations", "unirule", "arba", "other"))) %>%
   separate_rows(format, sep = " ") %>%
-  arrange(func, database, format)
+  arrange(func, database, format) %>%
+  as.data.frame()
 
 # Save to rda
 usethis::use_data(formats, internal = FALSE, overwrite = TRUE)

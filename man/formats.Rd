@@ -5,7 +5,7 @@
 \alias{formats}
 \title{(Dataset) UniProt download formats}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 144 rows and 3 columns.
+An object of class \code{data.frame} with 144 rows and 3 columns.
 }
 \source{
 UniProtKB download formats have been determined by hand by querying
