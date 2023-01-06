@@ -187,3 +187,74 @@ test_that("assert_response errors if resp is wrong class", {
     "Not an httr2 response object"
   )
 })
+
+## assert_database() ---------------------------------------------------------------
+test_that("assert_database works", {
+  expect_no_error(
+    uniprotREST:::assert_database("uniprotkb")
+  )
+})
+
+test_that("assert_database errors if input not string", {
+  expect_error(
+    uniprotREST:::assert_database(222),
+    "Must be of type 'string', not 'double'"
+  )
+})
+
+test_that("assert_database errors if string isn't valid", {
+  expect_error(
+    uniprotREST:::assert_database("banana"),
+    "is invalid"
+  )
+})
+
+## assert_format() -----------------------------------------------------------------
+test_that("assert_format works", {
+  expect_no_error(
+    uniprotREST:::assert_format("tsv")
+  )
+})
+
+test_that("assert_format errors if input not string", {
+  expect_error(
+    uniprotREST:::assert_format(222),
+    "Must be of type 'string', not 'double'"
+  )
+})
+
+test_that("assert_format errors if string isn't valid", {
+  expect_error(
+    uniprotREST:::assert_format("banana"),
+    "is invalid"
+  )
+})
+
+## assert_database_format() ------------------------------------------------------------
+test_that("assert_database_format works", {
+  expect_no_error(
+    uniprotREST:::assert_database_format(func = "single", "unirule", "json")
+  )
+})
+
+test_that("assert_database_format errors if database is invalid", {
+  expect_error(
+    uniprotREST:::assert_database_format(func = "single", "banana", "json"),
+    "is invalid"
+  )
+})
+
+test_that("assert_database_format errors if format is invalid", {
+  expect_error(
+    uniprotREST:::assert_database_format(func = "single", "uniprotkb", "banana"),
+    "is invalid"
+  )
+})
+
+test_that("assert_database_format errors if database/format pair is invalid", {
+  expect_error(
+    uniprotREST:::assert_database_format(func = "single", "unirule", "txt"),
+    "not available"
+  )
+})
+
