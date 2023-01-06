@@ -76,11 +76,7 @@ uniprot_single <- function(id,
                            dry_run = FALSE) {
   ## Argument checking
   assert_string(id)
-  assert_choice(database, c("uniprotkb", "uniref", "uniparc",
-                            "proteomes", "taxonomy", "keywords",
-                            "citations", "diseases", "database",
-                            "locations", "unirule", "arba"))
-  assert_choice(format, c("tsv", "json"))
+  assert_database_format(func = "single", d = database, f = format)
   if (!is.null(path)) assert_path_for_output(path)
   if (!is.null(fields)) {
     assert_fields(fields, database = database)

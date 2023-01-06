@@ -253,7 +253,7 @@ test_that("assert_database_format errors if format is invalid", {
 
 test_that("assert_database_format errors if database/format pair is invalid", {
   expect_error(
-    uniprotREST:::assert_database_format(func = "single", "unirule", "txt"),
+    uniprotREST:::assert_database_format(func = "single", "database", "tsv"),
     "not available"
   )
 })

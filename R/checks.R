@@ -98,7 +98,7 @@ check_database <- function(x) {
   res <- check_string(x)
   if (!isTRUE(res))
     return(res)
-  if (!test_choice(x, levels(formats$database)[-13]))
+  if (!test_choice(x, levels(uniprotREST::formats$database)))
     return("`database` is invalid. See `?formats` for valid `database` values")
   return(TRUE)
 }
@@ -110,7 +110,7 @@ check_format <- function(x) {
   res <- check_string(x)
   if (!isTRUE(res))
     return(res)
-  if (!test_choice(x, unique(formats$format)))
+  if (!test_choice(x, unique(uniprotREST::formats$format)))
     return("`format` is invalid. See `?formats` for valid `format` values")
   return(TRUE)
 }
@@ -125,7 +125,11 @@ check_database_format <- function(func, d, f) {
     return(res_d)
   if (!isTRUE(res_f))
     return(res_f)
-  if (!test_choice(f, formats[formats$func == func & formats$database == d, "format"]))
+  if (!test_choice(f, uniprotREST::formats[
+    uniprotREST::formats$func == func &
+    uniprotREST::formats$database == d,
+    "format"
+  ]))
     return("This `format` is not available for this `database`. See `?formats` for valid values.")
   return(TRUE)
 }
