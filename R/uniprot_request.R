@@ -41,7 +41,7 @@ uniprot_request <- function(url,
 
   ## Construct base request object
   req <- httr2::request(url) %>%
-    httr2::req_user_agent("uniprotREST https://github.com/csdaw/uniprotREST") %>%
+    httr2::req_user_agent("https://github.com/csdaw/uniprotREST") %>%
     httr2::req_method(method) %>%
     httr2::req_retry(max_tries = max_tries) %>%
     httr2::req_throttle(rate = rate)
