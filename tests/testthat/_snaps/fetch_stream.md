@@ -1,4 +1,4 @@
-# fetch_stream works
+# works
 
     Code
       result
@@ -10,7 +10,7 @@
       Content-Type: text/plain
       Body: In memory (154 bytes)
 
-# fetch_stream can parse tsv format
+# can parse tsv format
 
     Code
       result
@@ -20,7 +20,7 @@
       2  UniRef50_P99999 Cluster: Cytochrome c  170
       3  UniRef90_P99999 Cluster: Cytochrome c   99
 
-# fetch_stream can parse json format
+# can parse json format
 
     Code
       str(result, max.level = 3)

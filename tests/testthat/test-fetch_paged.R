@@ -1,5 +1,5 @@
 with_mock_dir("httptest2/fetch_paged", {
-  test_that("fetch_paged works with tsv format", {
+  test_that("works with tsv format", {
     req <- uniprot_request(
       "https://rest.uniprot.org/uniref/search",
       query = "P99999",

@@ -1,4 +1,4 @@
-# fetch_paged works with tsv format
+# works with tsv format
 
     Code
       fetch_paged(req, n_pages = 3)

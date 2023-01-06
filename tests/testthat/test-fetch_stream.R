@@ -1,5 +1,5 @@
 with_mock_dir("httptest2/fetch_stream", {
-  test_that("fetch_stream works", {
+  test_that("works", {
     req <- uniprot_request(
       "https://rest.uniprot.org/uniref/stream",
       query = "P99999",
@@ -14,7 +14,7 @@ with_mock_dir("httptest2/fetch_stream", {
     })
   })
 
-  test_that("fetch_stream can parse tsv format", {
+  test_that("can parse tsv format", {
     req <- uniprot_request(
       "https://rest.uniprot.org/uniref/stream",
       query = "P99999",
@@ -29,7 +29,7 @@ with_mock_dir("httptest2/fetch_stream", {
     })
   })
 
-  test_that("fetch_stream can parse json format", {
+  test_that("can parse json format", {
     req <- uniprot_request(
       "https://rest.uniprot.org/uniref/stream",
       query = "P99999",

@@ -1,4 +1,4 @@
-# uniprot_single works with tsv
+# works with tsv
 
     Code
       result
