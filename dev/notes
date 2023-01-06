@@ -2,6 +2,8 @@
 
 - In `formats` documentation, add full name of formats.
 
+- Change name of `from_to_dbs` to `uniprot_dbs`?
+
 - Add fasta as an allowed format
 
 ## Vignettes

@@ -1,5 +1,62 @@
-#' @noRd
+#' Search UniProt
+#'
+#' @description Search Uniprot via REST API. By default it searches the supplied
+#'   query against UniProtKB and returns a `data.frame` of matching proteins.
+#'   It is a wrapper for
+#'   [this](https://www.uniprot.org/help/api_queries) UniProt API
+#'   endpoint.
+#'
+#' @param query `string`, the search query. See
+#'   [this page](https://www.uniprot.org/help/text-search) for helping
+#'   constructing search queries.
+#' @param database See the **Databases** section below or `?uniprot_dbs` for all
+#'   available databases.
+#' @param format `string`, data format to fetch. Default is `"tsv"`.
+#'   Can only be `"tsv"` at the moment.
+#' @param path Optional `string`, file path to save the results, e.g.
+#'   `"path/to/results.tsv"`.
+#' @param fields Optional `character`, fields (i.e. columns) of data to get.
+#'   The fields available depends on the database used, see [return_fields]
+#'   for all available fields.
+#' @param isoform Optional `logical`, should protein isoforms be included in the
+#'   results? Not necessarily relevant for all formats and databases.
+#' @param method `string`, download method to use. Either `"paged"` (default) or
+#'   `"stream"`. Paged is more robust to connection issues and takes less
+#'   memory. Stream may be faster, but uses more memory and is more sensitive
+#'   to connection issues.
+#' @param page_size Optional `integer`, how many entries per page to request?
+#'   Only relevant if `method = "paged"`. It's best to leave this at `500`.
+#' @param compressed Optional `logical`, should gzipped data be requested?
+#'   Only relevant if `method = "stream"` and `path` is specified.
+#' @inheritParams fetch_stream
+#' @inheritParams uniprot_request
+#'
+#' @return By default, returns an object whose type depends on `format`:
+#'
+#'   - **`tsv`**: `data.frame`
+#'
+#'   If `path` is specified, saves the results to the file path indicated,
+#'   and returns `NULL` invisibly. If `dry_run = TRUE`, returns a
+#'   list containing information about the request, including the request
+#'   `method`, `path`, and `headers`.
+#'
+#' @inheritSection uniprot_single Databases
+#'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#'   # Search for all human glycoproteins from SwissProt
+#'   res <- uniprot_search(
+#'     query = "(proteome:UP000005640) AND (keyword:KW-0325) AND (reviewed:true)",
+#'     database = "uniprotkb",
+#'     format = "tsv",
+#'     fields = c("accession", "gene_primary", "feature_count")
+#'   )
+#'
+#'   # Look at the resulting dataframe
+#'   head(res)
+#' }
 uniprot_search <- function(query,
                            database = "uniprotkb",
                            format = "tsv",

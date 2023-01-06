@@ -12,7 +12,7 @@
 #' @param database `string`, database to look up. Default is `"uniprotkb"`.
 #'   See the **Databases** section below or `?uniprot_dbs` for all
 #'   available databases.
-#' @param format format `string`, data format to fetch. Default is `"json"`.
+#' @param format `string`, data format to fetch. Default is `"json"`.
 #'   Can only be `"tsv"` or `"json"` at the moment.
 #' @param path Optional `string`, file path to save the results, e.g.
 #'   `"path/to/results.tsv"`.
