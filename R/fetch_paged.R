@@ -42,6 +42,14 @@
 #'   fetch_paged(req, n_pages = 3)
 #' }
 fetch_paged <- function(req, n_pages, format = "tsv", path = NULL, verbosity = NULL) {
+  ## Argument checking
+  assert_request(req)
+  assert_integerish(n_pages, lower = 1, max.len = 1)
+  assert_format(format)
+  if (!is.null(path)) assert_path_for_output(path)
+  if (!is.null(verbosity))
+    assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
+
   # Make an empty list to save outputs to
   out <- vector("list", n_pages)
 

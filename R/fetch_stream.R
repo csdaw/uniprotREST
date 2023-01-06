@@ -52,7 +52,7 @@
 fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosity = NULL) {
   ## Argument checking
   assert_request(req)
-  assert_choice(format, c("tsv", "json"))
+  assert_format(format)
   assert_logical(parse, max.len = 1)
   if (!is.null(path)) assert_path_for_output(path)
   if (!is.null(verbosity))
