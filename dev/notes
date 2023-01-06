@@ -1,61 +1,13 @@
-#### To do (eventually)
+## To do
 
-- assert_fields needs to check the format type eventually
+- In `formats` documentation, add full name of formats.
 
-TO: UniProt.
- - Valid formats = fasta, fasta (isoforms), tsv, xlsx, json, xml, rdf, txt, gff, list
- - Valid fields (tsv/xlsx only)
+- Add fasta as an allowed format
 
-TO: UniParc.
- - Valid formats = fasta, tsv, xslx, json, xml, rdf, list.
- - Valid fields (tsv/xslx only)
+## Vignettes
 
-TO: UniRef
- - Valid formats = fasta, tsv, json, xlsx, list
- - Valid fields (tsv, xlsx only)
-
-- assert_database needs to be written and needs to check fields at least
-
-- rename uniprot_retrieve to uniprot_single?
-
-- function to check get/save method, something like...
-get_fetch_fun <- function(path, method) {
-  if (!is.null(path)) {
-    if (method == "paged") {
-      out <- "fetch_disk_paged"
-    } else {
-      out <- "fetch_disk_stream"
-    }
-  } else {
-    if (method == "paged") {
-      out <- "fetch_mem_paged"
-    } else {
-      out <- "fetch_mem_stream"
-    }
-  }
-
-  out
-}
-
-fetch_results <- match.fun(get_fetch_fun(path, method))
-
-resp <- fetch_results(req)
-
-- use httptest2
-
-with_mock_dir("httptest2", {
-  test_that("uniprot_get works", {
-    resp <- uniprot_get(
-      "https://rest.uniprot.org/uniprotkb/P99999?fields=accession,gene_names&format=tsv",
-      fields = "accession,gene_primary",
-      format = "tsv"
-    )
-
-    expect_length(read.delim(text = httr2::resp_body_string(resp), sep = "\t"), 2)
-  })
-})
-
-#### Ideas (don't need to implement immediately)
-- `query_fields` object/function
-- progress bar
-
+- README
+- Get started
+- map
+- search
+- single
