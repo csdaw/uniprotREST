@@ -1,3 +1,13 @@
+# fetch total results header
+# input: get request, output: integer
+fetch_n_results <- function(req, verbosity = NULL) {
+  req %>%
+    httr2::req_method("HEAD") %>%
+    httr2::req_perform(verbosity = verbosity) %>%
+    httr2::resp_header("x-total-results") %>%
+    as.integer()
+}
+
 # cat to console, but respect verbosity
 vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
   if (!is.null(verbosity)) {
