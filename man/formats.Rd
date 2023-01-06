@@ -5,7 +5,7 @@
 \alias{formats}
 \title{(Dataset) UniProt download formats}
 \format{
-An object of class \code{data.frame} with 144 rows and 3 columns.
+An object of class \code{data.frame} with 36 rows and 3 columns.
 }
 \source{
 UniProtKB download formats have been determined by hand by querying
@@ -31,7 +31,7 @@ i.e. the string you'll use with the \code{uniprotREST} function. \cr
 }
 \examples{
 # What UniProt databases are available to query?
-levels(formats$database)
+levels(formats$database)[1:12]
 
 # What formats are available for querying the `proteomes` database,
 # using `uniprot_search()`

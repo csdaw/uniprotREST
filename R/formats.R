@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' # What UniProt databases are available to query?
-#' levels(formats$database)
+#' levels(formats$database)[1:12]
 #'
 #' # What formats are available for querying the `proteomes` database,
 #' # using `uniprot_search()`
