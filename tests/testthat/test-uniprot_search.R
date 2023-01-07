@@ -1,4 +1,4 @@
-with_mock_dir("httptest2/uniprot_search", {
+with_mock_dir("_mocks/uniprot_search", {
   test_that("works with tsv", {
     result <- uniprot_search(
       "FUBP3",

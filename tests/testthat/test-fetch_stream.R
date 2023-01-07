@@ -1,4 +1,4 @@
-with_mock_dir("httptest2/fetch_stream", {
+with_mock_dir("_mocks/fetch_stream", {
   test_that("can parse tsv format", {
     req <- uniprot_request(
       "https://rest.uniprot.org/uniref/stream",
