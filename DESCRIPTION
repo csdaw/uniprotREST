@@ -24,6 +24,7 @@ Imports:
 Suggests: 
     covr,
     httptest2,
+    httpuv,
     testthat (>= 3.0.0)
 LazyData: true
 Config/testthat/edition: 3

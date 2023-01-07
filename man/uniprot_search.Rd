@@ -61,6 +61,9 @@ around \code{req_verbose()} that uses an integer to control verbosity:
 
 Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
 you can't affect directly.}
+
+\item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
+Default is \code{FALSE}.}
 }
 \value{
 By default, returns an object whose type depends on \code{format}:

@@ -28,8 +28,8 @@
 #'   Only relevant if `method = "paged"`. It's best to leave this at `500`.
 #' @param compressed Optional `logical`, should gzipped data be requested?
 #'   Only relevant if `method = "stream"` and `path` is specified.
-#' @inheritParams fetch_stream
-#' @inheritParams uniprot_request
+#' @inheritParams httr2::req_perform
+#' @inheritParams uniprot_single
 #'
 #' @return By default, returns an object whose type depends on `format`:
 #'
