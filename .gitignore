@@ -3,4 +3,3 @@
 .RData
 .Ruserdata
 *.DS_Store
-tests/testthat/httptest2/uniprot_map/rest.uniprot.org/idmapping/rename_files.sh
