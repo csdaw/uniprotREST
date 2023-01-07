@@ -53,7 +53,7 @@ uniprot_map <- function(ids,
 
   ## Make POST request
   if (dry_run) {
-    httr2::req_dry_run(post_req, quiet = if (is.null(verbosity)) FALSE else as.logical(verbosity))
+    return(httr2::req_dry_run(post_req, quiet = if (is.null(verbosity)) FALSE else as.logical(verbosity)))
   } else {
     post_resp <- httr2::req_perform(post_req, verbosity = verbosity)
   }

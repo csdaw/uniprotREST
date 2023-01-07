@@ -108,7 +108,7 @@ uniprot_search <- function(query,
 
   ## Perform request via stream or pagination endpoint
   if (dry_run) {
-    httr2::req_dry_run(req, quiet = if (is.null(verbosity)) FALSE else as.logical(verbosity))
+    return(httr2::req_dry_run(req, quiet = if (is.null(verbosity)) FALSE else as.logical(verbosity)))
   } else if (method == "stream") {
     fetch_stream(
       req = req,
