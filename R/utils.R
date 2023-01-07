@@ -10,18 +10,24 @@ fetch_n_results <- function(req, verbosity = NULL) {
 
 # cat to console, but respect verbosity
 vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
-  if (!is.null(verbosity)) {
+  if (!is.null(verbosity))
     assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
-    if (verbosity > vlimit)
-      cat(...)
-    else
-      invisible()
-  } else {
-    if (null_prints)
-      cat(...)
-    else
-      invisible()
-  }
+
+  if (verbosity > vlimit || (is.null(verbosity) & null_prints))
+    cat(...)
+  else
+    invisible()
+}
+
+# print message, but respect verbosity
+vmessage <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
+  if (!is.null(verbosity))
+    assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
+
+  if (verbosity > vlimit || (is.null(verbosity) & null_prints))
+    message(...)
+  else
+    invisible()
 }
 
 # Modified from httr package
