@@ -1,15 +1,3 @@
-# works
-
-    Code
-      result
-    Message <cliMessage>
-      <httr2_response>
-      GET
-      https://rest.uniprot.org/uniref/stream?query=P99999&format=tsv&fields=id%2Cname%2Ccount
-      Status: 200 OK
-      Content-Type: text/plain
-      Body: In memory (154 bytes)
-
 # can parse tsv format
 
     Code
