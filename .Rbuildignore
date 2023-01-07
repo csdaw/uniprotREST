@@ -4,3 +4,4 @@
 ^dev
 ^data-raw
 ^codecov\.yml$
+^tests/testthat/_mocks/map/rest.uniprot.org/idmapping/rename_files.sh$
