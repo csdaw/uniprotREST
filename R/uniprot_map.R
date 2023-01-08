@@ -1,5 +1,47 @@
-#' @noRd
+#' Map from/to UniProt IDs
+#'
+#' @description This function wraps the
+#'   [UniProt ID Mapping](https://www.uniprot.org/help/id_mapping) service which
+#'   maps between the identifiers used in one database, to the identifiers of
+#'   another. By default it maps UniProtKB accessions to UniProt and returns a
+#'   `data.frame`, so you can get information about a set of IDs e.g. gene names,
+#'   protein lengths, domains, etc. You can also map IDs from/to other databases
+#'   e.g. `from = "Ensembl", to = "UniProtKB"`.
+#'
+#' @param ids `character`, vector of identifiers to map from.
+#' @param from `string`, database to map from. Default is `"UniProtKB_AC-ID"`.
+#'   See [from_to_dbs] possible databases whose identifiers you can map from.
+#' @param to `string`, database to map to. Default is `"UniProtKB"`.
+#'   See [from_to_rules] for the possible databases you can map to, depending on
+#'   the `from` database.
+#' @param fields Optional `character`, fields (i.e. columns) of data to get.
+#'   Only used if `to` is a UniProtKB, UniRef, or UniParc database. See
+#'   [return_fields] for all available fields.
+#' @inheritParams uniprot_search
+#' @inherit uniprot_search return
+#'
+#' @seealso Other API wrapper functions: [uniprot_search()], [uniprot_single()]
+#'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#'   # Default, get info about UniProt IDs
+#'   uniprot_map(
+#'     "P99999",
+#'     format = "tsv",
+#'     fields = c("accession", "gene_primary", "feature_count")
+#'   )
+#'
+#'   # Other common use, mapping other IDs to UniProt
+#'   # (or vice-versa)
+#'   uniprot_map(
+#'     c("ENSG00000088247", "ENSG00000162613"),
+#'     from = "Ensembl",
+#'     to = "UniProtKB"
+#'   )
+#'
+#' }
 uniprot_map <- function(ids,
                         from = "UniProtKB_AC-ID",
                         to = "UniProtKB",

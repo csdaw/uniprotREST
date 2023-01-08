@@ -109,3 +109,6 @@ The following databases are available to query:
   str(res, max.level = 1)
 }
 }
+\seealso{
+Other API wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=uniprot_search]{uniprot_search()}}
+}

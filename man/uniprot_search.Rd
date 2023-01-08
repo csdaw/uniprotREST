@@ -118,3 +118,6 @@ The following databases are available to query:
   head(res)
 }
 }
+\seealso{
+Other API wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=uniprot_single]{uniprot_single()}}
+}

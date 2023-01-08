@@ -54,6 +54,8 @@
 #'   - **`arba`**: [ARBA](https://www.uniprot.org/help/automatic_annotation)
 #'     (Association-Rule-Based Annotator)
 #'
+#' @seealso Other API wrapper functions: [uniprot_map()], [uniprot_search()]
+#'
 #' @export
 #'
 #' @examples

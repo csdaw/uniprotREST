@@ -42,6 +42,8 @@
 #'
 #' @inheritSection uniprot_single Databases
 #'
+#' @seealso Other API wrapper functions: [uniprot_map()], [uniprot_single()]
+#'
 #' @export
 #'
 #' @examples
