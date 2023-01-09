@@ -28,4 +28,18 @@ with_mock_dir("_mocks/fetch_stream", {
       str(result, max.level = 3)
     })
   })
+
+  test_that("can parse fasta format", {
+    req <- uniprot_request(
+      "https://rest.uniprot.org/uniref/stream",
+      query = "P99999",
+      format = "fasta"
+    )
+
+    result <- fetch_stream(req, format = "fasta", parse = TRUE)
+
+    expect_snapshot({
+      result
+    })
+  })
 }, simplify = TRUE)
