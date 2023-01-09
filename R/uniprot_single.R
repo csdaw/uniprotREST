@@ -22,7 +22,7 @@
 #' @param isoform Optional `logical`, should protein isoforms be included in the
 #'   results? Not necessarily relevant for all formats and databases.
 #' @param dry_run `logical`, perform request with [httr2::req_dry_run()]?
-#'   Default is `FALSE`.
+#'   Requires the `httpuv` package to be installed. Default is `FALSE`.
 #' @inheritParams fetch_stream
 #' @inheritParams uniprot_request
 #'

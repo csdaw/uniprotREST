@@ -57,7 +57,7 @@ HTTP request. Default is \code{5}.}
 \code{1 / 1} i.e. 1 request per 1 second.}
 
 \item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
-Default is \code{FALSE}.}
+Requires the \code{httpuv} package to be installed. Default is \code{FALSE}.}
 }
 \value{
 By default, returns an object whose type depends on \code{format}:
