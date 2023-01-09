@@ -1,0 +1,128 @@
+database	section	field	label
+uniref	Names & Taxonomy	id	Cluster ID
+uniref	Names & Taxonomy	name	Cluster Name
+uniref	Names & Taxonomy	common_taxon	Common taxon
+uniref	Names & Taxonomy	common_taxonid	Common taxon ID
+uniref	Names & Taxonomy	organism_id	Organism IDs
+uniref	Names & Taxonomy	organism	Organisms
+uniref	Sequences	identity	Identity
+uniref	Sequences	length	Length
+uniref	Sequences	sequence	Reference sequence
+uniref	Miscellaneous	types	Types
+uniref	Miscellaneous	members	Cluster members
+uniref	Miscellaneous	count	Size
+uniref	Date of	created	Date of creation
+uniparc	Names & Taxonomy	upi	Entry
+uniparc	Names & Taxonomy	gene	Gene names
+uniparc	Names & Taxonomy	organism_id	Organism ID
+uniparc	Names & Taxonomy	organism	Organisms
+uniparc	Names & Taxonomy	protein	Protein names
+uniparc	Names & Taxonomy	proteome	Proteomes
+uniparc	Sequences	checksum	Checksum
+uniparc	Sequences	length	Length
+uniparc	Sequences	sequence	Sequence
+uniparc	Miscellaneous	accession	UniProtKB
+uniparc	Date of	first_seen	First seen
+uniparc	Date of	last_seen	Last seen
+uniparc	Family & Domains	CDD	CDD
+uniparc	Family & Domains	Gene3D	Gene3D
+uniparc	Family & Domains	HAMAP	HAMAP
+uniparc	Family & Domains	PANTHER	PANTHER
+uniparc	Family & Domains	Pfam	Pfam
+uniparc	Family & Domains	PIRSF	PIRSF
+uniparc	Family & Domains	PRINTS	PRINTS
+uniparc	Family & Domains	PROSITE	PROSITE
+uniparc	Family & Domains	SFLD	SFLD
+uniparc	Family & Domains	SMART	SMART
+uniparc	Family & Domains	SUPFAM	SUPFAM
+uniparc	Family & Domains	TIGRFAMs	TIGRFAMs
+proteomes	Names & Taxonomy	upid	Proteome Id
+proteomes	Names & Taxonomy	organism	Organism
+proteomes	Names & Taxonomy	organism_id	Organism Id
+proteomes	Names & Taxonomy	components	Components
+proteomes	Names & Taxonomy	mnemonic	Taxon mnemonic
+proteomes	Names & Taxonomy	lineage	Taxonomic lineage
+proteomes	Names & Taxonomy	busco	BUSCO
+proteomes	Miscellaneous	cpd	CPD
+proteomes	Miscellaneous	genome_assembly	Genome assembly ID
+proteomes	Miscellaneous	genome_representation	Genome representation
+proteomes	Miscellaneous	protein_count	Protein count
+taxonomy	Taxonomy	id	Taxon Id
+taxonomy	Taxonomy	mnemonic	Mnemonic
+taxonomy	Taxonomy	scientific_name	Scientific name
+taxonomy	Taxonomy	common_name	Common name
+taxonomy	Taxonomy	synonyms	Synonyms
+taxonomy	Taxonomy	other_names	Other Names
+taxonomy	Taxonomy	rank	Rank
+taxonomy	Taxonomy	reviewed	Reviewed
+taxonomy	Taxonomy	lineage	Lineage
+taxonomy	Taxonomy	strains	Strains
+taxonomy	Taxonomy	parent	Parent
+taxonomy	Taxonomy	hosts	Virus hosts
+taxonomy	Taxonomy	links	Links
+taxonomy	Taxonomy	statistics	Statistics
+keywords	Keywords	id	Keyword ID
+keywords	Keywords	name	Name
+keywords	Keywords	definition	Definition
+keywords	Keywords	category	Category
+keywords	Keywords	synonyms	Synonyms
+keywords	Keywords	gene_ontologies	Gene Ontologies
+keywords	Keywords	links	Links
+keywords	Keywords	children	Children
+keywords	Keywords	parents	Parents
+keywords	Keywords	statistics	Statistics
+citations	Literature	id	Citation Id
+citations	Literature	doi	Doi
+citations	Literature	title	Title
+citations	Literature	authors	Authors
+citations	Literature	authoring_group	Authoring Group
+citations	Literature	journal	Journal
+citations	Literature	publication_date	Publication date
+citations	Literature	first_page	First page
+citations	Literature	last_page	Last page
+citations	Literature	volume	Volume
+citations	Literature	reference	Reference
+citations	Literature	lit_abstract	Abstract/Summary
+citations	Literature	statistics	Statistics
+diseases	Disease	id	DiseaseEntry ID
+diseases	Disease	name	Name
+diseases	Disease	acronym	Mnemonic
+diseases	Disease	definition	Description
+diseases	Disease	alternative_names	Alternative Names
+diseases	Disease	cross_references	Cross Reference
+diseases	Disease	keywords	Keywords
+diseases	Disease	statistics	Statistics
+database	Cross Reference	id	
+database	Cross Reference	name	
+database	Cross Reference	abbrev	
+database	Cross Reference	pubmed_id	
+database	Cross Reference	doi_id	
+database	Cross Reference	link_type	
+database	Cross Reference	server	
+database	Cross Reference	dbUrl	
+database	Cross Reference	category	
+database	Cross Reference	statistics	
+locations	Subcellular location	id	Subcellular location ID
+locations	Subcellular location	name	Name
+locations	Subcellular location	definition	Description
+locations	Subcellular location	category	Category
+locations	Subcellular location	keyword	Keyword
+locations	Subcellular location	synonyms	Synonyms
+locations	Subcellular location	content	Content
+locations	Subcellular location	gene_ontologies	Gene Ontologies
+locations	Subcellular location	note	Note
+locations	Subcellular location	references	References
+locations	Subcellular location	links	Links
+locations	Subcellular location	is_a	Is a
+locations	Subcellular location	part_of	Is part of
+locations	Subcellular location	statistics	Statistics
+unirule	UniRule	rule_id	
+unirule	UniRule	statistics	
+unirule	UniRule	taxonomic_scope	
+unirule	UniRule	annotation_covered	
+unirule	UniRule	predicted_protein_name	
+unirule	UniRule	template_entries	
+arba	ARBA	rule_id	
+arba	ARBA	statistics	
+arba	ARBA	taxonomic_scope	
+arba	ARBA	annotation_covered	

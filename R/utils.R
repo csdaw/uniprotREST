@@ -1,60 +1,7 @@
-#' Argument verification using exact matching
-#'
-#' @description Works the same as \code{\link[base]{match.arg}} but
-#' with the default of using exact matching with \code{\link[base]{match}}
-#' instead of partial matching with \code{\link[base]{pmatch}}.
-#'
-#' @param arg `character vector` (of length one unless `several.ok = TRUE`) or
-#' `NULL`.
-#' @param choices `character vector` of candidate values.
-#' @param several.ok `logical` specifying if `arg` should be allowed to have
-#' more than one element. Default is `FALSE`.
-#' @param exact `logical` specifying if exact matching should be used. Default
-#' is `TRUE`.
-#'
-#' @return Returns the exact match if there is one, otherwise an returns an
-#' error if `several.ok = FALSE`. When `several.ok = TRUE` and more than one
-#' element of `arg` has a match, all matches are returned.
-#'
-#' @source This code was copied from the source of the
-#' [MARSS](https://CRAN.R-project.org/package=MARSS) package which is licensed
-#' under CC0 1.0 Universal.
-#'
-match.arg.exact <- function (arg, choices, several.ok = FALSE, exact = TRUE) {
-  if (missing(choices)) {
-    formal.args <- formals(sys.function(sysP <- sys.parent()))
-    choices <- eval(formal.args[[as.character(substitute(arg))]],
-                    envir = sys.frame(sysP))
-  }
-  if (is.null(arg))
-    return(choices[1L])
-  else if (!is.character(arg))
-    stop("'arg' must be NULL or a character vector")
-  if (!several.ok) {
-    if (identical(arg, choices))
-      return(arg[1L])
-    if (length(arg) > 1L)
-      stop("'arg' must be of length 1")
-  }
-  else if (length(arg) == 0L)
-    stop("'arg' must be of length >= 1")
-  # HERE IS THE MODIFIED CODE
-  if (exact)
-    i <- match(arg, choices, nomatch = 0L)
-  else
-    i <- pmatch(arg, choices, nomatch = 0L, duplicates.ok = TRUE)
-  # END MODIFIED CODE
-
-  if (all(i == 0L))
-    stop(gettextf("'arg' should be one of %s", paste(dQuote(choices),
-                                                     collapse = ", ")), domain = NA)
-  i <- i[i > 0L]
-  if (!several.ok && length(i) > 1)
-    stop("there is more than one match in 'match.arg'")
-  choices[i]
-}
-
-str2fasta <- function(x, biostrings = TRUE) {
+# convert string to AAStringSet
+# return AAStringSet if Biostrings is installed
+# else return named vector
+parse_fasta_string <- function(x) {
   xlines <- unlist(strsplit(x, "\n"))
 
   hdr_idx <- grep(">", xlines)
@@ -73,9 +20,81 @@ str2fasta <- function(x, biostrings = TRUE) {
 
   names(seqs) <- substring(xlines[hdr_idx], 2)
 
-  if (biostrings && requireNamespace("Biostrings", quietly = TRUE)) {
-    Biostrings::AAStringSet(seqs)
+  if (!requireNamespace("Biostrings", quietly = TRUE)) {
+    return(seqs)
   } else {
-    seqs
+    Biostrings::AAStringSet(seqs)
   }
+}
+
+# fetch total results header
+# input: get request, output: integer
+fetch_n_results <- function(req, verbosity = NULL) {
+  req %>%
+    httr2::req_method("HEAD") %>%
+    httr2::req_perform(verbosity = verbosity) %>%
+    httr2::resp_header("x-total-results") %>%
+    as.integer()
+}
+
+# cat to console, but respect verbosity
+vcat <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
+  if (!is.null(verbosity))
+    assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
+
+  if (verbosity > vlimit || (is.null(verbosity) & null_prints))
+    cat(...)
+  else
+    invisible()
+}
+
+# print message, but respect verbosity
+vmessage <- function(..., verbosity = NULL, vlimit = 0, null_prints = FALSE) {
+  if (!is.null(verbosity))
+    assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
+
+  if (verbosity > vlimit || (is.null(verbosity) & null_prints))
+    message(...)
+  else
+    invisible()
+}
+
+# Modified from httr package
+# https://github.com/r-lib/httr/blob/main/R/progress.R
+progress_stream <- function(con = stdout(), verbosity = NULL) {
+  show_progress <- function(down, up) {
+    total <- down[[1]]
+    now <- down[[2]]
+
+    # We don't know the size of the data beforehand
+    if (total == 0) {
+      vcat("\rDownloading: ", bytes(now, digits = 2), "     ", sep = "",
+           file = con, verbosity = verbosity, null_prints = TRUE)
+      utils::flush.console()
+      # No way to tell when then the file has finished downloading until
+      # total is not zero
+    }
+
+    TRUE
+  }
+
+  show_progress
+}
+
+# Copied from httr package
+bytes <- function(x, digits = 3, ...) {
+  power <- min(floor(log(abs(x), 1000)), 4)
+  if (power < 1) {
+    unit <- "B"
+  } else {
+    unit <- c("kB", "MB", "GB", "TB")[[power]]
+    x <- x / (1000^power)
+  }
+
+  formatted <- format(signif(x, digits = digits),
+                      big.mark = ",",
+                      scientific = FALSE
+  )
+
+  paste0(formatted, " ", unit)
 }

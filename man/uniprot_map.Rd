@@ -8,78 +8,107 @@ uniprot_map(
   ids,
   from = "UniProtKB_AC-ID",
   to = "UniProtKB",
-  format = c("tsv", "fasta", "json"),
+  format = "tsv",
   path = NULL,
   fields = NULL,
   isoform = NULL,
+  method = "paged",
+  page_size = 500,
   compressed = NULL,
-  method = c("paged", "stream"),
-  size = 500L,
   verbosity = NULL,
   dry_run = FALSE
 )
 }
 \arguments{
-\item{ids}{\code{string}, comma-separated IDs to map.}
+\item{ids}{\code{character}, vector of identifiers to map from.}
 
-\item{from}{\code{string}, name of database which IDs are from. The default is
-\code{UniProtKB_AC-ID}. See \code{\link{map_from_to}} for a list of all possible
-database names.}
+\item{from}{\code{string}, database to map from. Default is \code{"UniProtKB_AC-ID"}.
+See \link{from_to_dbs} possible databases whose identifiers you can map from.}
 
-\item{to}{\code{string}, name of database to map to. The default is \code{UniProtKB}.
-See \code{\link{map_from_to}} for a list of all possible database names.}
+\item{to}{\code{string}, database to map to. Default is \code{"UniProtKB"}.
+See \link{from_to_rules} for the possible databases you can map to, depending on
+the \code{from} database.}
 
-\item{format}{\code{string}, output format for mapping results.
-Only \code{tsv} (default) implemented properly at the moment.}
+\item{format}{\code{string}, data format to fetch. Default is \code{"tsv"}.
+Can be one of \code{"tsv"} or \code{"fasta"}.}
 
-\item{path}{Optional \code{string}, file path to save API response. Useful for
-large queries to avoid storing in memory.}
+\item{path}{Optional \code{string}, file path to save the results, e.g.
+\code{"path/to/results.tsv"}.}
 
-\item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
-results. Applies to the \code{tsv}, and \code{xlsx} formats only.}
+\item{fields}{Optional \code{character}, fields (i.e. columns) of data to get.
+Only used if \code{to} is a UniProtKB, UniRef, or UniParc database. See
+\link{return_fields} for all available fields.}
 
-\item{isoform}{Optional \code{logical}. Whether or not to include isoforms in the
-search results. Only applicable if \code{to} is \code{UniProtKB} or \code{UniProt-Swiss-Prot}.}
+\item{isoform}{Optional \code{logical}, should protein isoforms be included in the
+results? Not necessarily relevant for all formats and databases.}
 
-\item{compressed}{\code{logical}, should results be returned gzipped? Default is
-\code{FALSE}.}
+\item{method}{\code{string}, download method to use. Either \code{"paged"} (default) or
+\code{"stream"}. Paged is more robust to connection issues and takes less
+memory. Stream may be faster, but uses more memory and is more sensitive
+to connection issues.}
 
-\item{method}{\code{string}, method for getting results. Either \code{stream} (default) or \code{paged}.
-Stream method should be used with small queries, and can fail at times. Paged
-method is a bit slower but more reliable and useful for large queries.}
+\item{page_size}{Optional \code{integer}, how many entries per page to request?
+Only relevant if \code{method = "paged"}. It's best to leave this at \code{500}.}
 
-\item{size}{\code{integer}, number of entries to output per 'page' of results.
-Probably don't change this from the default to avoid hammering UniProt's servers.}
+\item{compressed}{Optional \code{logical}, should gzipped data be requested?
+Only relevant if \code{method = "stream"} and \code{path} is specified.}
 
-\item{verbosity}{Optional \code{integer}, how much information to print? This is
-a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
-control verbosity:
+\item{verbosity}{How much information to print? This is a wrapper
+around \code{req_verbose()} that uses an integer to control verbosity:
 \itemize{
-\item 0: no output.
-\item 1: show headers.
-\item 2: show headers and bodies.
+\item 0: no output
+\item 1: show headers
+\item 2: show headers and bodies
 \item 3: show headers, bodies, and curl status messages.
-}}
+}
 
-\item{dry_run}{\code{logical}, default is \code{FALSE}. If \code{TRUE} print the HTTP
-request using \code{\link[httr2]{req_dry_run}} without actually sending
-anything to the UniProt server. Useful for debugging if you get an HTTP 400
-Bad Request error i.e. your \code{ids} or \code{fields} were not written correctly.}
+Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
+you can't affect directly.}
+
+\item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
+Requires the \code{httpuv} package to be installed. Default is \code{FALSE}.}
 }
 \value{
-If the request was successful (i.e. the request was successfully
-performed and a response with HTTP status code <400 was received), a data.frame
-(\code{tsv}) or a list (\code{json}) is returned; otherwise an error is thrown.
-Use the \code{path} argument to save to a file instead.
+By default, returns an object whose type depends on \code{format}:
+\itemize{
+\item \strong{\code{tsv}}: \code{data.frame}
+\item \strong{\code{fasta}}: \link[Biostrings:XStringSet-class]{Biostrings::AAStringSet} (or \verb{named character} if
+Biostrings not installed)
+}
 
-If \code{dry_run = TRUE}, then prints the HTTP request and returns,
-invisibly, a list containing information about the request without actually
-sending anything to the UniProt server.
+If \code{path} is specified, saves the results to the file path indicated,
+and returns \code{NULL} invisibly. If \code{dry_run = TRUE}, returns a
+list containing information about the request, including the request
+\code{method}, \code{path}, and \code{headers}.
 }
 \description{
-To do: write description.
+This function wraps the
+\href{https://www.uniprot.org/help/id_mapping}{UniProt ID Mapping} service which
+maps between the identifiers used in one database, to the identifiers of
+another. By default it maps UniProtKB accessions to UniProt and returns a
+\code{data.frame}, so you can get information about a set of IDs e.g. gene names,
+protein lengths, domains, etc. You can also map IDs from/to other databases
+e.g. \verb{from = "Ensembl", to = "UniProtKB"}.
 }
 \examples{
-# To do: add some examples
+\dontrun{
+  # Default, get info about UniProt IDs
+  uniprot_map(
+    "P99999",
+    format = "tsv",
+    fields = c("accession", "gene_primary", "feature_count")
+  )
 
+  # Other common use, mapping other IDs to UniProt
+  # (or vice-versa)
+  uniprot_map(
+    c("ENSG00000088247", "ENSG00000162613"),
+    from = "Ensembl",
+    to = "UniProtKB"
+  )
+
+}
+}
+\seealso{
+Other API wrapper functions: \code{\link[=uniprot_search]{uniprot_search()}}, \code{\link[=uniprot_single]{uniprot_single()}}
 }

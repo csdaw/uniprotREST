@@ -1,0 +1,13 @@
+structure(list(method = "GET", url = "https://rest.uniprot.org/uniprotkb/P99999.tsv", 
+    status_code = 200L, headers = structure(list(Server = "nginx/1.17.7", 
+        Vary = "Accept, Accept-Encoding, X-UniProt-Release, X-API-Deployment-Date", 
+        Vary = "User-Agent", `Cache-Control` = "public, max-age=86400", 
+        `x-cache` = "hit cached", `Content-Type` = "text/plain; format=tsv", 
+        `Access-Control-Allow-Credentials` = "true", `Access-Control-Expose-Headers` = "Link, X-Total-Results, X-UniProt-Release, X-UniProt-Release-Date, X-API-Deployment-Date", 
+        `X-API-Deployment-Date` = "20-December-2022", `Strict-Transport-Security` = "max-age=31536000; includeSubDomains", 
+        Date = "Tue, 03 Jan 2023 06:29:19 GMT", `X-UniProt-Release` = "2022_05", 
+        `Access-Control-Allow-Origin` = "*", `Accept-Ranges` = "bytes", 
+        Connection = "keep-alive", `Access-Control-Allow-Methods` = "GET, PUT, POST, DELETE, PATCH, OPTIONS", 
+        `Access-Control-Allow-Headers` = "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization", 
+        `Content-Length` = "140", `X-UniProt-Release-Date` = "14-December-2022"), class = "httr2_headers"), 
+    body = charToRaw("Entry\tEntry Name\tReviewed\tProtein names\tGene Names\tOrganism\tLength\nP99999\tCYC_HUMAN\treviewed\tCytochrome c\tCYCS CYC\tHomo sapiens (Human)\t105\n")), class = "httr2_response")

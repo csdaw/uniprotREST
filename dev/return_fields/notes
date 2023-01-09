@@ -1,0 +1,45 @@
+method to get examples:
+
+search the following query:
+proteome:UP000005640 AND reviewed:true
+
+databases:
+
+## uniprotkb
+- can scrape names of return fields from their website
+- 'alphafold' seems to be a possible return field, but gives an error when
+I try and download tsv.
+
+## alphafold
+- fields are the same as uniprotkb
+
+## uniref
+- search: (id:UniRef90_P61626)
+
+## uniparc
+- search: (upi:UPI00021CF2DE)
+...
+but want something less large for including with package
+
+CDD HAMAP PANTHER SFLD TIGRFAMS
+## proteomes
+- SEARCH: (upid:UP000005640)
+## taxonomy
+- search: (tax_id:587200)
+## keywords
+- search: (keyword_id:KW-0904)
+## citations
+- search: (id:100133)
+## diseases
+- search: (id:DI-00007)
+## database
+- search: (id:DB-0004)
+- This output only seems to do json
+## locations
+- search: (id:SL-0011)
+## unirule
+- search: (rule_id:UR00000121)
+- This output only seems to do json, list
+## arba
+- search: (rule_id:ARBA00000001)
+- This output only seems to do json, list

@@ -4,67 +4,91 @@ output: github_document
 ---
 
 <!-- badges: start -->
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-![License: MIT](https://img.shields.io/github/license/csdaw/uniprotREST)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
+This package provides an R wrapper for the 
+[UniProt website REST API](https://www.uniprot.org/help/api).
 
-An R interface for the new UniProt REST API.
+## Installation
 
-## Overview
+Install the latest development version from GitHub:
 
-Placeholder.
+```{r, eval=FALSE}
+remotes::install_github("csdaw/uniprotREST")
+```
+
+## Documentation
+
+Read the full docs here.
+
+## Quick start
 
 ```{r}
 library(uniprotREST)
-library(magrittr)
 ```
 
+### `uniprot_map()` - ID mapping
 
-### Retrieve individual entries
-
-[API description](https://www.uniprot.org/help/api_retrieve_entries)
+Map to/from UniProt IDs. This function wraps the 
+[ID mapping](https://www.uniprot.org/help/id_mapping) API endpoint.
 
 ```{r}
-lst <- uniprot_retrieve(
+# Proteins of interest (from 3 different taxa)
+ids <- c("P99999", "P12345", "P23456")
+
+# Get accessions, gene names and sequence lengths
+result <- uniprot_map(
+  ids = ids, 
+  from = "UniProtKB_AC-ID",
+  to = "UniProtKB",
+  format = "tsv",
+  fields = c("accession", "gene_primary", "length")
+)
+
+result
+```
+
+### `uniprot_search()` - Text search
+
+Perform text searches against UniProt databases.
+This function wraps the [Query](https://www.uniprot.org/help/api_queries) 
+API endpoint.
+
+```{r}
+# Get human glycoproteins less than 100 amino acids long
+
+result <- uniprot_search(
+  query = "(proteome:UP000005640) AND (keyword:KW-0325) AND (length<100)",
+  database = "uniprotkb",
+  format = "tsv",
+  fields = c("accession", "gene_primary")
+)
+
+head(result)
+```
+
+### `uniprot_single()` - Retrieve single entries
+
+Download the full entry for a single protein. This function wraps the 
+[Retrieve](https://www.uniprot.org/help/api_retrieve_entries) API endpoint.
+
+```{r}
+# Human cytochrome C
+result <- uniprot_single(
   id = "P99999",
   database = "uniprotkb",
   format = "json"
 )
 
-lst %>% str(max.level = 1)
+str(result, max.level = 1)
 ```
 
+## Metadata
 
-### Retrieve entries via queries
-
-[API description](https://www.uniprot.org/help/api_queries).
-
-```{r}
-seqs <- uniprot_search(
-  query = "Major capsid protein 723",
-  format = "fasta",
-  method = "paged"
-)
-
-seqs
-```
-
-### Map database identifiers
-
-[API description](https://www.uniprot.org/help/id_mapping)
-
-```{r}
-df <- uniprot_map(
-  ids = c("ENSG00000092199", "ENSG00000136997"),
-  from = "Ensembl",
-  to = "UniProtKB-Swiss-Prot",
-  format = "tsv",
-  fields = c("accession", "gene_names", "organism_name"),
-  method = "stream"
-)
-
-df
-```
-
+- Please [report any issues or bugs](https://github.com/csdaw/uniprotREST/issues)
+  ideally with a [reproducible example](https://reprex.tidyverse.org/)
+- This project is released with a Contributor Code of Conduct. By participating
+  in this project you agree to abide by its terms.
+- Author: Charlotte Dawson
+- License: MIT

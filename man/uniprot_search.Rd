@@ -2,119 +2,124 @@
 % Please edit documentation in R/uniprot_search.R
 \name{uniprot_search}
 \alias{uniprot_search}
-\title{Search UniProt via REST API}
+\title{Search UniProt}
 \usage{
 uniprot_search(
   query,
-  database = c("uniprotkb", "uniref", "uniparc", "proteomes", "taxonomy", "keywords",
-    "citations", "diseases", "database", "locations", "unirule", "arba"),
-  format = c("tsv", "fasta", "json"),
+  database = "uniprotkb",
+  format = "tsv",
   path = NULL,
   fields = NULL,
   isoform = NULL,
+  method = "paged",
+  page_size = 500,
   compressed = NULL,
-  method = c("paged", "stream"),
-  size = 500L,
   verbosity = NULL,
   dry_run = FALSE
 )
 }
 \arguments{
-\item{query}{\code{string}, the search query. See available
-\href{https://www.uniprot.org/help/query-fields}{query fields} and help for
-\href{https://www.uniprot.org/help/text-search}{constructing queries}.}
+\item{query}{\code{string}, the search query. See
+\href{https://www.uniprot.org/help/text-search}{this page} for helping
+constructing search queries.}
 
-\item{database}{\code{string}, the name of the database endpoint of interest.
-Choose from: \code{uniprotkb} (default), \code{uniref}, \code{uniparc}, \code{proteomes}, \code{taxonomy},
-\code{keywords}, \code{citations}, \code{diseases}, \code{database}, \code{locations}, \code{unirule}, \code{arba}.
-See details below.}
+\item{database}{\code{string}, database to look up. Default is \code{"uniprotkb"}.
+See the \strong{Databases} section below for all available databases.}
 
-\item{format}{\code{string}, output format for search results.
-Only \code{tsv} (default) implemented properly at the moment.}
+\item{format}{\code{string}, data format to fetch. Default is \code{"tsv"}.
+Can be one of \code{"tsv"} or \code{"fasta"}.}
 
-\item{path}{Optional \code{string}, file path to save API response. Useful for
-large queries to avoid storing in memory.}
+\item{path}{Optional \code{string}, file path to save the results, e.g.
+\code{"path/to/results.tsv"}.}
 
-\item{fields}{Optional \verb{character vector}. Columns to retrieve in the search
-results. Applies to the \code{json}, \code{tsv}, and \code{xlsx} formats only.
-See \href{https://www.uniprot.org/help/return_fields}{here} for available
-UniProtKB fields.}
+\item{fields}{Optional \code{character}, fields (i.e. columns) of data to get.
+The fields available depends on the database used, see \link{return_fields}
+for all available fields.}
 
-\item{isoform}{Optional \code{logical}. Whether or not to include isoforms in the
-search results. Only applicable if \code{database = "uniprotkb"}.}
+\item{isoform}{Optional \code{logical}, should protein isoforms be included in the
+results? Not necessarily relevant for all formats and databases.}
 
-\item{compressed}{\code{logical}, should results be returned gzipped? Default is
-\code{FALSE}.}
+\item{method}{\code{string}, download method to use. Either \code{"paged"} (default) or
+\code{"stream"}. Paged is more robust to connection issues and takes less
+memory. Stream may be faster, but uses more memory and is more sensitive
+to connection issues.}
 
-\item{method}{\code{string}, method for getting results. Either \code{stream} (default) or \code{paged}.
-Stream method should be used with small queries, and can fail at times. Paged
-method is a bit slower but more reliable and useful for large queries.}
+\item{page_size}{Optional \code{integer}, how many entries per page to request?
+Only relevant if \code{method = "paged"}. It's best to leave this at \code{500}.}
 
-\item{size}{\code{integer}, number of entries to output per 'page' of results.
-Probably don't change this from the default to avoid hammering UniProt's servers.}
+\item{compressed}{Optional \code{logical}, should gzipped data be requested?
+Only relevant if \code{method = "stream"} and \code{path} is specified.}
 
-\item{verbosity}{Optional \code{integer}, how much information to print? This is
-a wrapper around \code{\link[httr2]{req_verbose}} that uses an integer to
-control verbosity:
+\item{verbosity}{How much information to print? This is a wrapper
+around \code{req_verbose()} that uses an integer to control verbosity:
 \itemize{
-\item 0: no output.
-\item 1: show headers.
-\item 2: show headers and bodies.
+\item 0: no output
+\item 1: show headers
+\item 2: show headers and bodies
 \item 3: show headers, bodies, and curl status messages.
-}}
+}
 
-\item{dry_run}{\code{logical}, default is \code{FALSE}. If \code{TRUE} print the HTTP
-request using \code{\link[httr2]{req_dry_run}} without actually sending
-anything to the UniProt server. Useful for debugging if you get an HTTP 400
-Bad Request error i.e. your \code{query} was not written correctly.}
+Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
+you can't affect directly.}
+
+\item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
+Requires the \code{httpuv} package to be installed. Default is \code{FALSE}.}
 }
 \value{
-If the request was successful (i.e. the request was successfully
-performed and a response with HTTP status code <400 was received), a data.frame
-(\code{tsv}) or a list (\code{json}) is returned; otherwise an error is thrown.
-Use the \code{path} argument to save to a file instead.
+By default, returns an object whose type depends on \code{format}:
+\itemize{
+\item \strong{\code{tsv}}: \code{data.frame}
+\item \strong{\code{fasta}}: \link[Biostrings:XStringSet-class]{Biostrings::AAStringSet} (or \verb{named character} if
+Biostrings not installed)
+}
 
-If \code{dry_run = TRUE}, then prints the HTTP request and returns,
-invisibly, a list containing information about the request without actually
-sending anything to the UniProt server.
+If \code{path} is specified, saves the results to the file path indicated,
+and returns \code{NULL} invisibly. If \code{dry_run = TRUE}, returns a
+list containing information about the request, including the request
+\code{method}, \code{path}, and \code{headers}.
 }
 \description{
-Search UniProt programmatically with \code{\link[httr2:httr2-package]{httr2}}.
-Essentially a wrapper around a HTTP \code{\link[httr2]{request}} on the UniProt
-REST API sent using \code{\link[httr2]{req_perform}}.
-See the
-\href{https://www.uniprot.org/help/api_queries}{Retrieving entries via queries}
-page for more details on the API this function accesses.
+Search Uniprot via REST API. By default it searches the supplied
+query against UniProtKB and returns a \code{data.frame} of matching proteins.
+It is a wrapper for
+\href{https://www.uniprot.org/help/api_queries}{this} UniProt API
+endpoint.
 }
-\details{
-To do: add more details on a number of things!
+\section{Databases}{
+
+
+The following databases are available to query:
+\itemize{
+\item \strong{\code{uniprotkb}}: \href{https://www.uniprot.org/help/uniprotkb}{UniProt Knowledge Base}
+\item \strong{\code{uniref}}: \href{https://www.uniprot.org/help/uniref}{UniProt Reference Clusters}
+\item \strong{\code{uniparc}}: \href{https://www.uniprot.org/help/uniparc}{UniProt Archive}
+\item \strong{\code{proteomes}}: \href{https://www.uniprot.org/help/reference_proteome}{Reference proteomes}
+\item \strong{\code{taxonomy}}: \href{https://www.uniprot.org/help/taxonomy}{Taxonomy}
+\item \strong{\code{keywords}}: \href{https://www.uniprot.org/help/keywords}{Keywords}
+\item \strong{\code{citations}}: \href{https://www.uniprot.org/help/literature_references}{Literature references}
+\item \strong{\code{diseases}}: \href{https://www.uniprot.org/help/disease_query}{Disease queries}
+\item \strong{\code{database}}: \href{https://www.uniprot.org/help/cross_references_section}{Cross references}
+\item \strong{\code{locations}}: \href{https://www.uniprot.org/help/subcellular_location}{Subcellular location}
+\item \strong{\code{unirule}}: \href{https://www.uniprot.org/help/unirule}{UniRule}
+\item \strong{\code{arba}}: \href{https://www.uniprot.org/help/automatic_annotation}{ARBA}
+(Association-Rule-Based Annotator)
 }
+}
+
 \examples{
-# See https://www.uniprot.org/help/query-fields and
-# https://www.uniprot.org/help/text-search for help constructing queries.
-
 \dontrun{
+  # Search for all human glycoproteins from SwissProt
+  res <- uniprot_search(
+    query = "(proteome:UP000005640) AND (keyword:KW-0325) AND (reviewed:true)",
+    database = "uniprotkb",
+    format = "tsv",
+    fields = c("accession", "gene_primary", "feature_count")
+  )
 
-# Simple UniProtKB search
-resp <- search_uniprot(
-  query = "Major capsid protein 723"
-)
-
-# Extract the response body (JSON by default)
-results <- httr2::resp_body_json(resp)
-
-# Can use paste to construct query string
-resp <- search_uniprot(
-  query = paste(c("taxonomy_name:candida albicans", "length<50"), collapse = " AND "),
-  fields = c("accession", "protein_name", "length")
-  format = "tsv"
-)
-
-# Extract the response body (tsv this time)
-results <- httr2::resp_body_string(resp) \%>\%
-  read.delim(text = .)
-
-# To do: add more examples
+  # Look at the resulting dataframe
+  head(res)
 }
-
+}
+\seealso{
+Other API wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=uniprot_single]{uniprot_single()}}
 }

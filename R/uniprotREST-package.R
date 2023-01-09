@@ -2,4 +2,5 @@
 "_PACKAGE"
 
 #' @importFrom magrittr %>%
+#' @import checkmate
 NULL
