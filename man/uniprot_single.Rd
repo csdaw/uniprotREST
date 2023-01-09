@@ -25,7 +25,7 @@ UniProtKB, \code{"UPI0000128BBF"} for UniParc, etc.}
 See the \strong{Databases} section below for all available databases.}
 
 \item{format}{\code{string}, data format to fetch. Default is \code{"json"}.
-Can only be \code{"tsv"} or \code{"json"} at the moment.}
+Can be one of \code{"tsv"}, \code{"json"}, or \code{"fasta"}.}
 
 \item{path}{Optional \code{string}, file path to save the results, e.g.
 \code{"path/to/results.tsv"}.}

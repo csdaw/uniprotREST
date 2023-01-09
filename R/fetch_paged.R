@@ -21,8 +21,7 @@
 #' @param n_pages `integer`, the number of pages to be fetched. This can be
 #'   calculated by dividing the number of total results by the page size e.g.
 #'   `resp$headers$x-total-results / page_size`.
-#' @param format `string`, data format to fetch. Can only be `"tsv"` at the
-#'   moment.
+#' @param format `string`, data format to fetch. Can one of `"tsv"`, or `"fasta"`.
 #'
 #' @inherit fetch_stream return
 #' @export

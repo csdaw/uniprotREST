@@ -13,8 +13,7 @@ fetch_paged(req, n_pages, format = "tsv", path = NULL, verbosity = NULL)
 calculated by dividing the number of total results by the page size e.g.
 \code{resp$headers$x-total-results / page_size}.}
 
-\item{format}{\code{string}, data format to fetch. Can only be \code{"tsv"} at the
-moment.}
+\item{format}{\code{string}, data format to fetch. Can one of \code{"tsv"}, or \code{"fasta"}.}
 
 \item{path}{Optionally, path to save body of request. This is useful for
 large responses since it avoids storing the response in memory.}

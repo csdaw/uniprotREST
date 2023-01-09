@@ -12,7 +12,7 @@
 #' @param database `string`, database to look up. Default is `"uniprotkb"`.
 #'   See the **Databases** section below for all available databases.
 #' @param format `string`, data format to fetch. Default is `"json"`.
-#'   Can only be `"tsv"` or `"json"` at the moment.
+#'   Can be one of `"tsv"`, `"json"`, or `"fasta"`.
 #' @param path Optional `string`, file path to save the results, e.g.
 #'   `"path/to/results.tsv"`.
 #' @param fields Optional `character`, fields (i.e. columns) of data to get.

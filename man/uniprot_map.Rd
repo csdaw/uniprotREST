@@ -30,7 +30,7 @@ See \link{from_to_rules} for the possible databases you can map to, depending on
 the \code{from} database.}
 
 \item{format}{\code{string}, data format to fetch. Default is \code{"tsv"}.
-Can only be \code{"tsv"} at the moment.}
+Can be one of \code{"tsv"} or \code{"fasta"}.}
 
 \item{path}{Optional \code{string}, file path to save the results, e.g.
 \code{"path/to/results.tsv"}.}

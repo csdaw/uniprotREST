@@ -13,7 +13,7 @@
 #' @param max_tries `integer`, the number of maximum attempts to perform the
 #'   HTTP request. Default is `5`.
 #' @param rate `numeric`, the maximum number of requests per second. Default is
-#' `1 / 1` i.e. 1 request per 1 second.
+#'   `1 / 1` i.e. 1 request per 1 second.
 #'
 #' @return Returns an `httr2_request` object, (which is essentially a list).
 #' @export

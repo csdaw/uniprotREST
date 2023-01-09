@@ -10,7 +10,7 @@
 #'   [this page](https://www.uniprot.org/help/text-search) for helping
 #'   constructing search queries.
 #' @param format `string`, data format to fetch. Default is `"tsv"`.
-#'   Can only be `"tsv"` at the moment.
+#'   Can be one of `"tsv"` or `"fasta"`.
 #' @param method `string`, download method to use. Either `"paged"` (default) or
 #'   `"stream"`. Paged is more robust to connection issues and takes less
 #'   memory. Stream may be faster, but uses more memory and is more sensitive
