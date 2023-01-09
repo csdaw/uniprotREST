@@ -22,6 +22,7 @@ Imports:
     magrittr,
     utils
 Suggests: 
+    Biostrings,
     covr,
     httptest2,
     httpuv,

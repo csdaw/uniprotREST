@@ -61,7 +61,7 @@ formats <- bind_rows("single" = df_single, "search" = df_search, "map" = df_map,
                                       "database", "locations", "unirule", "arba", "other"))) %>%
   separate_rows(format, sep = " ") %>%
   arrange(func, database, format) %>%
-  filter(format %in% c("tsv", "json")) %>% # only tsv and json for now...
+  filter(format %in% c("tsv", "json", "fasta")) %>% # only tsv, json, and fasta for now...
   filter(!format == "json" | !func %in% c("search", "map")) %>%
   as.data.frame()
 

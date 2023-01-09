@@ -52,8 +52,12 @@ fetch_paged <- function(req,
   if (!is.null(verbosity))
     assert_integerish(verbosity, lower = 0, upper = 3, max.len = 1) # verbosity must be in 0:3
 
-  # Make an empty list to save outputs to
   out <- vector("list", n_pages)
+
+  # Make an empty list to save outputs to
+  if (format == "fasta" && requireNamespace("Biostrings", quietly = TRUE)) {
+    out <- Biostrings::AAStringSetList(out)
+  }
 
   # Initialise counter
   i <- 1L
@@ -73,7 +77,8 @@ fetch_paged <- function(req,
     # Parse response body
     out[[i]] <- switch(
       format,
-      tsv = resp_body_tsv(resp, page = i, con = con)
+      tsv = resp_body_tsv(resp, page = i, con = con),
+      fasta = resp_body_fasta(resp, con = con)
     )
 
     next_url <- get_next_link(resp)
@@ -93,7 +98,8 @@ fetch_paged <- function(req,
     # to memory = return parsed body
     switch(
       format,
-      tsv = do.call(rbind, out)
+      tsv = do.call(rbind, out),
+      fasta = unlist(out)
     )
   }
 }

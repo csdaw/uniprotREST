@@ -1,3 +1,32 @@
+# convert string to AAStringSet
+# return AAStringSet if Biostrings is installed
+# else return named vector
+parse_fasta_string <- function(x) {
+  xlines <- unlist(strsplit(x, "\n"))
+
+  hdr_idx <- grep(">", xlines)
+
+  seq_idx <- data.frame(
+    hdr = hdr_idx,
+    from = hdr_idx + 1,
+    to = c((hdr_idx - 1)[-1], length(xlines))
+  )
+
+  seqs <- vector(mode = "character", length = length(hdr_idx))
+
+  for (i in seq_along(hdr_idx)) {
+    seqs[i] <- paste(xlines[seq_idx$from[i]:seq_idx$to[i]], collapse = "")
+  }
+
+  names(seqs) <- substring(xlines[hdr_idx], 2)
+
+  if (!requireNamespace("Biostrings", quietly = TRUE)) {
+    return(seqs)
+  } else {
+    Biostrings::AAStringSet(seqs)
+  }
+}
+
 # fetch total results header
 # input: get request, output: integer
 fetch_n_results <- function(req, verbosity = NULL) {

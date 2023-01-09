@@ -74,14 +74,15 @@ fetch_stream <- function(req,
   )
 
   if (!is.null(path)) {
-    return(invisible)
+    return(invisible())
   } else if (!parse) {
     return(resp)
   } else if (parse) {
     switch(
       format,
       tsv = resp_body_tsv(resp),
-      json = httr2::resp_body_json(resp)
+      json = httr2::resp_body_json(resp),
+      fasta = resp_body_fasta(resp)
     )
   }
 }
