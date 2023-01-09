@@ -1,5 +1,5 @@
 Package: uniprotREST
-Title: R interface for the UniProt REST API
+Title: R wrapper for the UniProt website REST API
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Charlotte", 
@@ -7,9 +7,8 @@ Authors@R:
            email = "csdaw@outlook.com", 
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7151-5971"))
-Description: Simple functions to access the updated (2022) UniProt REST API. Wraps
-    httr2 functions to easily map IDs and query all available databases (UniProtKB, 
-    UniRef, UniParc, proteomes, etc.)
+Description: Simple functions to access the UniProt website REST API. Wraps
+    httr2 functions to easily map IDs and query all available databases.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
