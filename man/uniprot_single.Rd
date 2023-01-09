@@ -63,6 +63,8 @@ By default, returns an object whose type depends on \code{format}:
 \itemize{
 \item \strong{\code{tsv}}: \code{data.frame}
 \item \strong{\code{json}}: \code{list}
+\item \strong{\code{fasta}}: \link[Biostrings:XStringSet-class]{Biostrings::AAStringSet} (or \verb{named character} if
+Biostrings not installed)
 }
 
 If \code{path} is specified, saves the results to the file path indicated,

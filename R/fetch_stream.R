@@ -31,6 +31,8 @@
 #'
 #'   - **`tsv`**: `data.frame`
 #'   - **`json`**: `list`
+#'   - **`fasta`**: [Biostrings::AAStringSet] (or `named character` if
+#'     Biostrings not installed)
 #'
 #'   If `parse = FALSE`, returns an `httr2_response`. If `path` is specified,
 #'   saves the parsed results to the file path indicated, and returns `NULL`

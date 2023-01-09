@@ -29,6 +29,8 @@
 #'
 #'   - **`tsv`**: `data.frame`
 #'   - **`json`**: `list`
+#'   - **`fasta`**: [Biostrings::AAStringSet] (or `named character` if
+#'     Biostrings not installed)
 #'
 #'   If `path` is specified, saves the results to the file path indicated,
 #'   and returns `NULL` invisibly. If `dry_run = TRUE`, returns a
