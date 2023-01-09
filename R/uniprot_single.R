@@ -10,8 +10,7 @@
 #' @param id `string`, entry ID. Form depends on database e.g. `"P12345"` for
 #'   UniProtKB, `"UPI0000128BBF"` for UniParc, etc.
 #' @param database `string`, database to look up. Default is `"uniprotkb"`.
-#'   See the **Databases** section below or `?uniprot_dbs` for all
-#'   available databases.
+#'   See the **Databases** section below for all available databases.
 #' @param format `string`, data format to fetch. Default is `"json"`.
 #'   Can only be `"tsv"` or `"json"` at the moment.
 #' @param path Optional `string`, file path to save the results, e.g.

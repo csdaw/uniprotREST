@@ -23,8 +23,8 @@ uniprot_search(
 \href{https://www.uniprot.org/help/text-search}{this page} for helping
 constructing search queries.}
 
-\item{database}{See the \strong{Databases} section below or \code{?uniprot_dbs} for all
-available databases.}
+\item{database}{\code{string}, database to look up. Default is \code{"uniprotkb"}.
+See the \strong{Databases} section below for all available databases.}
 
 \item{format}{\code{string}, data format to fetch. Default is \code{"tsv"}.
 Can only be \code{"tsv"} at the moment.}

@@ -22,8 +22,7 @@ uniprot_single(
 UniProtKB, \code{"UPI0000128BBF"} for UniParc, etc.}
 
 \item{database}{\code{string}, database to look up. Default is \code{"uniprotkb"}.
-See the \strong{Databases} section below or \code{?uniprot_dbs} for all
-available databases.}
+See the \strong{Databases} section below for all available databases.}
 
 \item{format}{\code{string}, data format to fetch. Default is \code{"json"}.
 Can only be \code{"tsv"} or \code{"json"} at the moment.}

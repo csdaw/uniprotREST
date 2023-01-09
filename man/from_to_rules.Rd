@@ -17,7 +17,8 @@ from_to_rules
 }
 \description{
 This list contains the valid from/to pairings that can be used
-with \code{uniprot_map()}. See \strong{Examples} below for how to use this object.
+with \code{\link[=uniprot_map]{uniprot_map()}}. See \strong{Examples} below for how to use this object.
+Also see \link{from_to_dbs} for the more information on each database.
 }
 \examples{
 # Show valid `from` values
@@ -27,6 +28,6 @@ names(from_to_rules)
 from_to_rules[["SGD"]]
 }
 \seealso{
-\link{from_to_dbs} for details of each database available for ID mapping.
+\link{from_to_dbs}
 }
 \keyword{datasets}

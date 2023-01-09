@@ -19,7 +19,7 @@
 #'   using Web Developer Tools (F12) to inspect the GET request made when
 #'   searching the different database on the UniProt website.
 #'
-#' @seealso [from_to_dbs]
+#' @seealso [formats]
 #'
 #' @examples
 #' # What UniProt databases are available to query?

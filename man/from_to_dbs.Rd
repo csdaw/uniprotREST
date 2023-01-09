@@ -17,8 +17,8 @@ from_to_dbs
 }
 \description{
 This dataframe contains details of the databases that can be
-mapped from/to with \code{uniprot_map()}. See \link{from_to_rules} for the info on
-which database identifiers can be mapped to what other database.
+mapped from/to with \code{\link[=uniprot_map]{uniprot_map()}}. See \link{from_to_rules} for the rules on
+which database identifiers can be mapped to what other databases.
 }
 \details{
 Columns:

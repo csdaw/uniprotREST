@@ -1,14 +1,10 @@
 ## To do
 
-- To all `dry_run` docs, add httpuv requirement
-
-- Sort out documentation inheritParams links
-
 - In `formats` documentation, add full name of formats.
 
-- Change name of `from_to_dbs` to `uniprot_dbs`?
-
 - Add fasta as an allowed format
+
+- Make function args one per line
 
 ## Vignettes
 

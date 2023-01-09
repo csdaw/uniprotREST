@@ -1,8 +1,8 @@
 #' (Dataset) From/to databases for ID mapping
 #'
 #' @description This dataframe contains details of the databases that can be
-#'   mapped from/to with `uniprot_map()`. See [from_to_rules] for the info on
-#'   which database identifiers can be mapped to what other database.
+#'   mapped from/to with [uniprot_map()]. See [from_to_rules] for the rules on
+#'   which database identifiers can be mapped to what other databases.
 #'
 #' @details Columns:
 #'   \tabular{ll}{

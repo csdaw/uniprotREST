@@ -49,7 +49,11 @@
 #'
 #'   fetch_stream(req)
 #' }
-fetch_stream <- function(req, format = "tsv", parse = TRUE, path = NULL, verbosity = NULL) {
+fetch_stream <- function(req,
+                         format = "tsv",
+                         parse = TRUE,
+                         path = NULL,
+                         verbosity = NULL) {
   ## Argument checking
   assert_request(req)
   assert_format(format)

@@ -18,7 +18,7 @@ formats
 \description{
 This dataframe contains the available download file types i.e.
 values for \code{format} for each UniProt database.
-See \strong{Examples} below for how to use this object.
+See \strong{Examples} below for how to use this object
 }
 \details{
 Columns:
@@ -36,5 +36,8 @@ levels(formats$database)[1:12]
 # What formats are available for querying the `proteomes` database,
 # using `uniprot_search()`
 formats[formats$database == "proteomes" & formats$func == "search", "format"]
+}
+\seealso{
+\link{return_fields}
 }
 \keyword{datasets}

@@ -40,6 +40,6 @@ levels(return_fields$database)
 return_fields[return_fields$database == "proteomes", "field"]
 }
 \seealso{
-\link{from_to_dbs}
+\link{formats}
 }
 \keyword{datasets}

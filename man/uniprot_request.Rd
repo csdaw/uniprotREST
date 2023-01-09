@@ -23,7 +23,7 @@ HTTP request. Default is \code{5}.}
 \code{1 / 1} i.e. 1 request per 1 second.}
 }
 \value{
-Returns an \code{httr2_request} object.
+Returns an \code{httr2_request} object, (which is essentially a list).
 }
 \description{
 This function creates a request object for the UniProt REST API.

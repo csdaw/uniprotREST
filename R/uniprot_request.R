@@ -15,7 +15,7 @@
 #' @param rate `numeric`, the maximum number of requests per second. Default is
 #' `1 / 1` i.e. 1 request per 1 second.
 #'
-#' @return Returns an `httr2_request` object.
+#' @return Returns an `httr2_request` object, (which is essentially a list).
 #' @export
 #'
 #' @examples
