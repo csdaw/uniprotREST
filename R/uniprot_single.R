@@ -74,8 +74,6 @@ uniprot_single <- function(id,
                            fields = NULL,
                            isoform = NULL,
                            verbosity = NULL,
-                           max_tries = 5,
-                           rate = 1 / 1,
                            dry_run = FALSE) {
   ## Argument checking
   assert_string(id)
@@ -93,9 +91,7 @@ uniprot_single <- function(id,
   req <- uniprot_request(
     url = "https://rest.uniprot.org",
     fields = fields,
-    includeIsoform = isoform,
-    max_tries = max_tries,
-    rate = rate
+    includeIsoform = isoform
   ) %>%
     httr2::req_url_path_append(database, paste(id, format, sep = "."))
 

@@ -12,8 +12,6 @@ uniprot_single(
   fields = NULL,
   isoform = NULL,
   verbosity = NULL,
-  max_tries = 5,
-  rate = 1/1,
   dry_run = FALSE
 )
 }
@@ -48,12 +46,6 @@ around \code{req_verbose()} that uses an integer to control verbosity:
 
 Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
 you can't affect directly.}
-
-\item{max_tries}{\code{integer}, the number of maximum attempts to perform the
-HTTP request. Default is \code{5}.}
-
-\item{rate}{\code{numeric}, the maximum number of requests per second. Default is
-\code{1 / 1} i.e. 1 request per 1 second.}
 
 \item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
 Requires the \code{httpuv} package to be installed. Default is \code{FALSE}.}
