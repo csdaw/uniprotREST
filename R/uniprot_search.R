@@ -116,6 +116,9 @@ uniprot_search <- function(query,
     # n pages = n results / page size
     n_results <- fetch_n_results(req, verbosity = verbosity)
 
+    if (n_results == 0)
+      return(vcat("Sorry, no results were found!", verbosity = verbosity, null_prints = TRUE))
+
     n_pages <- ceiling(n_results / page_size)
 
     fetch_paged(

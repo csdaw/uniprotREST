@@ -163,6 +163,9 @@ uniprot_map <- function(ids,
     # n pages = n results / page size
     n_results <- as.integer(status_resp$headers$`x-total-results`)
 
+    if (n_results == 0)
+      return(vcat("Sorry, no results were found!", verbosity = verbosity, null_prints = TRUE))
+
     n_pages <- ceiling(n_results / page_size)
 
     fetch_paged(
