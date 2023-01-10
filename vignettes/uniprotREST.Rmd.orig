@@ -1,0 +1,358 @@
+---
+title: "Getting started with uniprotREST"
+author: "Charlotte Dawson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with uniprotREST}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE
+)
+options(width = 80)
+```
+
+This document will show you the basics of **uniprotREST**. This package uses
+[httr2](https://httr2.r-lib.org) to wrap the latest UniProt REST API, which
+was updated in June 2022. I wrote this package as an easy-to-use interface to
+the API for R users who need to regularly and reproducibly download information
+from UniProt.
+
+**uniprotREST** has 3 main functions to use:
+
+1. `uniprot_map()` to map _to_ or _from_ UniProt accessions.
+1. `uniprot_search()` to perform text search queries.
+1. `uniprot_single()` to get detailed information for a single entry.
+
+```{r}
+library(uniprotREST)
+```
+
+## 1. ID mapping with `uniprot_map`
+
+This is by far the most frequently used tool. Say hypothetically, you have been
+given a list of [UniProt accessions](https://www.uniprot.org/help/accession_numbers).
+You have no clue what proteins they are, or what metadata they have. You can
+use `uniprot_map()` to find this out.
+
+```{r}
+# Accessions of interest
+aoi <- c("A0A8I6AN81", "A0A0N4SVP8", "Q9H6R0")
+```
+
+### Default settings
+
+Here we just use the default settings, which will map the IDs from
+`UniProtKB_AC-ID` to `UniProtKB`, and output a dataframe.
+
+```{r}
+result1 <- uniprot_map(ids = aoi)
+```
+
+The job ID is automatically printed (stop printing by setting the `verbosity`
+argument to 0). Job IDs and the job data are kept by UniProt for approximately
+7 days, and are then deleted.
+
+```{r}
+# All 3 proteins are RNA helicases
+head(result1)
+```
+
+By default, the output will be a dataframe with 8 columns and n rows depending
+on:
+
+- How many ids were successfully mapped
+- If the mapping was 1:1 or not
+
+The output columns can be customised with the `fields` argument.
+
+### Return fields
+
+UniProt has a lot of metadata available for each protein. You can access
+this in the results by requesting different columns or 'return fields' using
+the `fields` argument.
+
+Here we will request some different return fields. See the X page
+for the list of all available `fields`.
+
+- Primary gene name
+- Organism name
+- Protein length
+- Protein mass
+
+```{r}
+# Jobs are stored for 7 days so this time
+# it will be quicker!
+result2 <- uniprot_map(
+  ids = aoi,
+  fields = c(
+    "gene_primary",
+    "organism_name",
+    "length",
+    "mass"
+  )
+)
+```
+
+```{r}
+head(result2)
+```
+
+### From/To database
+
+`uniprot_map()` can be used to map IDs from other databases to UniProt IDs,
+and vice-versa. See the X page for a list of databases available for mapping,
+and X page for the rules of which databases can be mapped to what.
+
+Here we'll map some Ensembl gene IDs to _reviewed_ UniProtKB accessions.
+
+```{r}
+# Genes of interest
+goi <- c("ENSG00000088247", "ENSG00000162613")
+```
+
+The `fields` argument only works when mapping _to_ a database from UniProt,
+UniRef, or UniParc.
+
+```{r}
+result3 <- uniprot_map(
+  ids = goi,
+  from = "Ensembl",
+  to = "UniProtKB-Swiss-Prot",
+  fields = c("accession", "gene_primary")
+)
+```
+
+```{r}
+head(result3)
+```
+
+### Format
+
+The UniProt REST API can deliver results in different data formats. The
+formats available depends on the database being accessed and the **uniprotREST**
+function being used. See the X page for a full list of available formats.
+
+The **uniprotREST** wrapper functions do not support all formats yet. Each tool
+currently supports the following formats:
+
+- `uniprot_map()` and `uniprot_search()` = `tsv, fasta`
+- `uniprot_single()` = `tsv, fasta, json`
+
+Here we'll re-use the `result3` job above, but request the FASTA protein
+sequences instead. If the `Biostrings` package is installed (highly recommended)
+the output will be a `Biostrings::AAStringSet`, or otherwise a `named character`.
+
+```{r}
+result4 <- uniprot_map(
+  ids = goi,
+  from = "Ensembl",
+  to = "UniProtKB-Swiss-Prot",
+  format = "fasta"
+)
+```
+
+```{r}
+result4
+```
+
+### Path
+
+The previous examples all save the data from UniProt into an object in memory.
+However, you can also save the data to disk. To do this, just specify a file
+path with the correct extension. The file must not already exist otherwise an
+error is thrown.
+
+```{r}
+# Get temp path for this example (and delete when done)
+tmp <- tempfile(fileext = ".tsv")
+on.exit(unlink(tmp))
+
+# Save results to a tsv file
+uniprot_map(
+  ids = goi,
+  from = "Ensembl",
+  to = "UniProtKB-Swiss-Prot",
+  fields = c("accession", "gene_primary"),
+  format = "tsv",
+  path = tmp
+)
+
+# Check file contents
+read.delim(tmp)
+```
+
+### Other arguments
+
+The other arguments in `uniprot_map()` are as follows:
+
+#### isoform
+
+By default, the UniProt APIs will only provide results with a proteins'
+[canonical sequence](https://www.uniprot.org/help/canonical_and_isoforms).
+If you set `isoform = TRUE`, then isoform sequences will be included as well.
+This is typically only relevant when `format = "fasta"` although I have run
+into some exceptions.
+
+Here we get the canonical and isoform sequence for human GAPDH.
+
+```{r}
+result5 <- uniprot_map(
+  ids = "P04406",
+  format = "fasta",
+  isoform = TRUE
+)
+```
+
+```{r}
+result5
+```
+
+#### method and page_size
+
+The UniProt API provides results via 2 endpoints: stream, and pagination, which
+you can choose via the `method` argument.
+
+By default, `uniprot_map()` and `uniprot_search()` use `method = "paged"` which is
+more robust but slightly slower, with the default recommended `page_size` of
+500. Whereas `uniprot_single()` only uses the stream endpoint.
+
+Paged endpoint:
+
+- Slightly slower.
+- Processes results in chunks, so much more reliable to connection issues.
+- Can theoretically handle more than 10,000,000 results.
+
+Stream endpoint:
+
+- Slightly faster.
+- Expensive for the API, uses a lot of memory.
+- Can return a `429` status error if it currently has too many requests.
+- Up to 10,000,000 results can be fetched.
+
+#### compressed
+
+Should gzipped data be requested? This is `FALSE` by default, and it is only
+used if `method = "stream"` and `path` is specified.
+
+For example:
+
+```{r}
+# Get temp path for this example (and delete when done)
+tmp <- tempfile(fileext = ".fasta.gz")
+on.exit(unlink(tmp))
+
+# Save results to a tsv file
+uniprot_map(
+  ids = "P04406",
+  format = "fasta",
+  isoform = TRUE,
+  method = "stream",
+  path = tmp,
+  compressed = TRUE
+)
+
+# Check file contents
+Biostrings::readAAStringSet(tmp)
+```
+
+#### verbosity
+
+Controls the amount of information to print:
+
+- Use `verbosity = 0` to not print anything.
+- Use `verbosity = 1`, `2`, or `3` to print increasing amounts of
+information about the HTTP requests made to the UniProt API (typically for
+debugging purposes).
+
+#### dry_run
+
+If `TRUE`, performs the request locally with `httr2::req_dry_run()` instead of
+the actually sending it to the UniProt REST API. This is useful for debugging
+purposes if you are getting `400 - Bad request` status error.
+
+## 2. Querying UniProt with `uniprot_search`
+
+This function is used to perform text searches against UniProt, akin to using
+the search bar on their website. The different databases available from the
+search bar are also available via `uniprot_search()` (see page x).
+
+It's very important that the search string is constructed correctly, see
+[this page](https://www.uniprot.org/help/text-search) for help building queries.
+If you get a `400 - Bad request` error, its likely your search string is not
+formatted correctly.
+
+Here we'll do a search for human proteins annotated with the glycoprotein
+keyword, which are in SwissProt i.e. have been manually reviewed.
+
+```{r}
+result6 <- uniprot_search(
+  query = "(proteome:UP000005640) AND (keyword:KW-0325) AND (length<100)",
+  database = "uniprotkb",
+  format = "tsv",
+  fields = c("accession", "gene_primary")
+)
+```
+
+```{r}
+head(result6)
+```
+
+The other UniProt databases other than UniProtKB are available to query as well.
+In this example we'll look for all reference proteomes with the word 'dog' in
+their title.
+
+```{r}
+result7 <- uniprot_search(
+  "dog",
+  database = "proteomes",
+  format = "tsv",
+  fields = c("upid", "organism")
+)
+```
+
+```{r}
+head(result7)
+```
+
+## 3. Retrieving an entry with `uniprot_single`
+
+`uniprot_single()` is used to quickly retrieve information about a single entry in
+UniProt. By default the `json` format is requested and is parsed into a list
+which contains _all_ information available for that particular entry. All other
+arguments work the same as `uniprot_search()`.
+
+For example:
+
+```{r}
+result8 <- uniprot_single(
+  id = "P99999",
+  verbosity = 0
+)
+```
+
+```{r}
+str(result8, max.level = 1)
+```
+
+
+Again, there are other UniProt databases available apart from UniProtKB
+(see X page for a full list of databases).
+
+For example UniParc:
+
+```{r}
+result9 <- uniprot_single(
+  id = "UPI0001C61C61",
+  database = "uniparc",
+  verbosity = 0
+)
+```
+
+```{r}
+str(result9, max.level = 1)
+```
