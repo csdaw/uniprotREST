@@ -4,9 +4,9 @@
 \name{uniprotREST-package}
 \alias{uniprotREST}
 \alias{uniprotREST-package}
-\title{uniprotREST: R interface for the UniProt REST API}
+\title{uniprotREST: R wrapper for the UniProt website REST API}
 \description{
-Simple functions to access the updated (2022) UniProt REST API. Wraps httr2 functions to easily map IDs and query all available databases (UniProtKB, UniRef, UniParc, proteomes, etc.)
+Simple functions to access the UniProt website REST API. Wraps httr2 functions to easily map IDs and query all available databases.
 }
 \author{
 \strong{Maintainer}: Charlotte Dawson \email{csdaw@outlook.com} (\href{https://orcid.org/0000-0002-7151-5971}{ORCID})

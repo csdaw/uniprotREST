@@ -8,7 +8,17 @@
 #'   protein lengths, domains, etc. You can also map IDs from/to other databases
 #'   e.g. `from = "Ensembl", to = "UniProtKB"`.
 #'
-#' @param ids `character`, vector of identifiers to map from.
+#'   ### Things to note
+#'
+#'   This service has limits on the number of IDs allowed. Very large mapping
+#'   requests are likely to fail. Try to split your queries into smaller chunks
+#'   in case of problems.
+#'
+#'   - 100,000: maximum number of input `ids` allowed
+#'   - 500,000: maximum number of entries that will be output
+#'
+#' @param ids `character`, vector of identifiers to map from. Should not contain
+#'   duplicates. Maximum length = 100,000 ids.
 #' @param from `string`, database to map from. Default is `"UniProtKB_AC-ID"`.
 #'   See [from_to_dbs] possible databases whose identifiers you can map from.
 #' @param to `string`, database to map to. Default is `"UniProtKB"`.
@@ -56,7 +66,7 @@ uniprot_map <- function(ids,
                         dry_run = FALSE) {
   ## Argument checking
   if (!is.null(ids)) {
-    assert_character(ids)
+    assert_character(ids, max.len = 100000)
     if (length(ids) > 1) ids <- paste(ids, collapse = ",")
   }
   assert_from_to(from, to)

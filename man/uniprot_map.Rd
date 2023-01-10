@@ -20,7 +20,8 @@ uniprot_map(
 )
 }
 \arguments{
-\item{ids}{\code{character}, vector of identifiers to map from.}
+\item{ids}{\code{character}, vector of identifiers to map from. Should not contain
+duplicates. Maximum length = 100,000 ids.}
 
 \item{from}{\code{string}, database to map from. Default is \code{"UniProtKB_AC-ID"}.
 See \link{from_to_dbs} possible databases whose identifiers you can map from.}
@@ -89,6 +90,16 @@ another. By default it maps UniProtKB accessions to UniProt and returns a
 \code{data.frame}, so you can get information about a set of IDs e.g. gene names,
 protein lengths, domains, etc. You can also map IDs from/to other databases
 e.g. \verb{from = "Ensembl", to = "UniProtKB"}.
+\subsection{Things to note}{
+
+This service has limits on the number of IDs allowed. Very large mapping
+requests are likely to fail. Try to split your queries into smaller chunks
+in case of problems.
+\itemize{
+\item 100,000: maximum number of input \code{ids} allowed
+\item 500,000: maximum number of entries that will be output
+}
+}
 }
 \examples{
 \dontrun{
