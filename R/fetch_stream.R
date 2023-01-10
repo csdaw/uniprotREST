@@ -24,7 +24,8 @@
 #'   or should the `httr2_response` object be returned instead? Default is `TRUE`.
 #'   Does nothing if `path` is provided.
 #' @param path Optional `string`, file path to save the results, e.g.
-#'   `"path/to/results.tsv"`.
+#'   `"path/to/results.tsv"`. The file must not already exist, otherwise an
+#'   error is thrown.
 #' @inheritParams httr2::req_perform
 #'
 #' @return By default, returns an object whose type depends on `format`:

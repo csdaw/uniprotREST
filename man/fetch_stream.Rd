@@ -18,7 +18,8 @@ or should the \code{httr2_response} object be returned instead? Default is \code
 Does nothing if \code{path} is provided.}
 
 \item{path}{Optional \code{string}, file path to save the results, e.g.
-\code{"path/to/results.tsv"}.}
+\code{"path/to/results.tsv"}. The file must not already exist, otherwise an
+error is thrown.}
 
 \item{verbosity}{How much information to print? This is a wrapper
 around \code{req_verbose()} that uses an integer to control verbosity:

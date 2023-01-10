@@ -96,8 +96,8 @@ This service has limits on the number of IDs allowed. Very large mapping
 requests are likely to fail. Try to split your queries into smaller chunks
 in case of problems.
 \itemize{
-\item 100,000: maximum number of input \code{ids} allowed
-\item 500,000: maximum number of entries that will be output
+\item 100,000 = maximum number of input \code{ids} allowed
+\item 500,000 = maximum number of entries that will be output
 }
 }
 }

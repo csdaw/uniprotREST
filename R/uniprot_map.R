@@ -14,8 +14,8 @@
 #'   requests are likely to fail. Try to split your queries into smaller chunks
 #'   in case of problems.
 #'
-#'   - 100,000: maximum number of input `ids` allowed
-#'   - 500,000: maximum number of entries that will be output
+#'   - 100,000 = maximum number of input `ids` allowed
+#'   - 500,000 = maximum number of entries that will be output
 #'
 #' @param ids `character`, vector of identifiers to map from. Should not contain
 #'   duplicates. Maximum length = 100,000 ids.
