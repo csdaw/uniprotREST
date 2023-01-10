@@ -16,7 +16,7 @@ API](https://www.uniprot.org/help/api).
 Install the latest development version from GitHub:
 
 ``` r
-remotes::install_github("csdaw/uniprotREST")
+remotes::install_github("csdaw/uniprotREST", build_vignettes = TRUE)
 ```
 
 ## Documentation
@@ -29,7 +29,7 @@ Read the full docs here.
 library(uniprotREST)
 ```
 
-### `uniprot_map()` - ID mapping
+### ID mapping with `uniprot_map`
 
 Map to/from UniProt IDs. This function wraps the [ID
 mapping](https://www.uniprot.org/help/id_mapping) API endpoint.
@@ -60,7 +60,7 @@ result
     ## 2 P12345 P12345                 GOT2    430
     ## 3 P23456 P23456                    L   2151
 
-### `uniprot_search()` - Text search
+### Querying UniProt with `uniprot_search`
 
 Perform text searches against UniProt databases. This function wraps the
 [Query](https://www.uniprot.org/help/api_queries) API endpoint.
@@ -90,7 +90,7 @@ head(result)
     ## 5 P25063                 CD24
     ## 6 P31358                 CD52
 
-### `uniprot_single()` - Retrieve single entries
+### Retrieving an entry with `uniprot_single`
 
 Download the full entry for a single protein. This function wraps the
 [Retrieve](https://www.uniprot.org/help/api_retrieve_entries) API
@@ -101,13 +101,10 @@ endpoint.
 result <- uniprot_single(
   id = "P99999",
   database = "uniprotkb",
-  format = "json"
+  format = "json",
+  verbosity = 0
 )
-```
 
-    ## Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 3.9 kB     Downloading: 3.9 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 4.2 kB     Downloading: 14 kB     Downloading: 14 kB     Downloading: 14 kB     Downloading: 14 kB
-
-``` r
 str(result, max.level = 1)
 ```
 
