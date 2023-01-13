@@ -89,7 +89,7 @@ jobs:
           gha_repos <- if(
               .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
           ) c(
-              "AnVIL" = "https://bioconductordocker.blob.core.windows.net/packages/3.15/bioc",
+              "AnVIL" = "https://bioconductordocker.blob.core.windows.net/packages/3.16/bioc",
               BiocManager::repositories()
               ) else BiocManager::repositories()
 
@@ -106,6 +106,18 @@ jobs:
           message(paste('****', Sys.time(), 'pass number 1 at installing dependencies: local dependencies ****'))
           remotes::install_local(dependencies = TRUE, repos = gha_repos, build_vignettes = FALSE, upgrade = TRUE)
         continue-on-error: true
+        shell: Rscript {0}
+
+      - name: Install covr
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        run: |
+          remotes::install_cran("covr")
+        shell: Rscript {0}
+
+      - name: Install pkgdown
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        run: |
+          remotes::install_cran("pkgdown")
         shell: Rscript {0}
 
       - name: Session info
@@ -130,8 +142,39 @@ jobs:
         shell: Rscript {0}
 
       - name: Reveal testthat details
-        if:  env.has_testthat == 'true'
         run: find . -name testthat.Rout -exec cat '{}' ';'
+
+      - name: Test coverage
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        run: |
+          covr::codecov()
+        shell: Rscript {0}
+
+      - name: Install package for pkgdown
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        run: R CMD INSTALL .
+
+      - name: Build pkgdown site
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
+        shell: Rscript {0}
+        ## Note that you need to run pkgdown::deploy_to_branch(new_process = FALSE)
+        ## at least one locally before this will work. This creates the gh-pages
+        ## branch (erasing anything you haven't version controlled!) and
+        ## makes the git history recognizable by pkgdown.
+
+      - name: Install deploy dependencies
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        run: |
+          apt-get update && apt-get -y install rsync
+
+      - name: Deploy pkgdown site to GitHub pages 🚀
+        if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs
 
       - name: Upload check results
         if: failure()
