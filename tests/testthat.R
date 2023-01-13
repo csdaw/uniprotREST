@@ -9,4 +9,4 @@
 library(testthat)
 library(uniprotREST)
 
-test_check("uniprotREST")
+test_check("uniprotREST", stop_on_warning = TRUE)
