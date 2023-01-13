@@ -1,0 +1,141 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+name: check-bioc
+
+jobs:
+  build-check:
+    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.config.os}} (R ${{ matrix.config.r }}, Bioc ${{ matrix.config.bioc }})
+    container:
+      image: ${{ matrix.config.cont }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, r: '4.2', bioc: '3.16', cont: "bioconductor/bioconductor_docker:RELEASE_3_16" }
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+
+      ## Set the R library to the directory matching the
+      ## R packages cache step further below when running on Docker (Linux).
+      ## (lcolladotor/biocthis)
+      - name: Set R Library home on Linux
+        if: runner.os == 'Linux'
+        run: |
+          mkdir /__w/_temp/Library
+          echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
+
+      ## (r-lib/check-standard)
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      ## R and pandoc already installed in Bioconductor docker containers
+
+      ## (lcolladotor/biocthis)
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+        shell: Rscript {0}
+
+      ## (lcolladotor/biocthis)
+      - name: Cache R packages on Linux
+        if: "!contains(github.event.head_commit.message, '/nocache') && runner.os == 'Linux' "
+        uses: actions/cache@v3
+        with:
+          path: /home/runner/work/_temp/Library
+          key: ${{ env.cache-version }}-${{ runner.os }}-Bioc-RELEASE_3_16-R-${{ matrix.config.r }}-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ env.cache-version }}-${{ runner.os }}-Bioc-RELEASE_3_16-R-${{ matrix.config.r }}-
+
+      ## Prevent an error due to 'libcurl4-openssl-dev is not available'
+      ## (lcolladotor/biocthis)
+      - name: Install Linux system dependencies
+        run: |
+          sysreqs=$(Rscript -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04")), collapse = " "))')
+          echo $sysreqs
+          sudo -s eval "$sysreqs"
+
+      - name: Install BiocManager
+        run: |
+          message(paste('****', Sys.time(), 'installing BiocManager ****'))
+          remotes::install_cran("BiocManager")
+        shell: Rscript {0}
+
+      - name: Set BiocVersion
+        run: |
+          BiocManager::install(version = "${{ matrix.config.bioc }}", ask = FALSE, force = TRUE)
+        shell: Rscript {0}
+
+      - name: Install dependencies pass 1
+        run: |
+          ## Try installing the package dependencies in steps. First the local
+          ## dependencies, then any remaining dependencies to avoid the
+          ## issues described at
+          ## https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016675.html
+          ## https://github.com/r-lib/remotes/issues/296
+          ## Ideally, all dependencies should get installed in the first pass.
+          ## Set the repos source depending on the OS
+          ## Alternatively use https://storage.googleapis.com/bioconductor_docker/packages/
+          ## though based on https://bit.ly/bioc2021-package-binaries
+          ## the Azure link will be the main one going forward.
+          gha_repos <- if(
+              .Platform$OS.type == "unix" && Sys.info()["sysname"] != "Darwin"
+          ) c(
+              "AnVIL" = "https://bioconductordocker.blob.core.windows.net/packages/3.15/bioc",
+              BiocManager::repositories()
+              ) else BiocManager::repositories()
+
+
+          ## For running the checks
+          message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))
+          install.packages(c("rcmdcheck", "BiocCheck"), repos = gha_repos)
+
+
+          ## Pass #1 at installing dependencies
+          ## This pass uses AnVIL-powered fast binaries
+          ## details at https://github.com/nturaga/bioc2021-bioconductor-binaries
+          ## The speed gains only apply to the docker builds.
+          message(paste('****', Sys.time(), 'pass number 1 at installing dependencies: local dependencies ****'))
+          remotes::install_local(dependencies = TRUE, repos = gha_repos, build_vignettes = FALSE, upgrade = TRUE)
+        continue-on-error: true
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - name: Run CMD check
+        env:
+          _R_CHECK_CRAN_INCOMING_: false
+          DISPLAY: 99.0
+        run: |
+          options(crayon.enabled = TRUE)
+          rcmdcheck::rcmdcheck(
+              args = c("--no-manual", "--no-vignettes", "--timings"),
+              build_args = c("--no-manual", "--keep-empty-dirs", "--no-resave-data"),
+              error_on = "warning",
+              check_dir = "check"
+          )
+        shell: Rscript {0}
+
+      - name: Reveal testthat details
+        if:  env.has_testthat == 'true'
+        run: find . -name testthat.Rout -exec cat '{}' ';'
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ runner.os }}-Bioc-RELEASE_3_16-R-${{ matrix.config.bioc }}-results
+          path: check
