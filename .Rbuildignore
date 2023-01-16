@@ -1,6 +1,7 @@
 ^uniprotREST\.Rproj$
 ^\.Rproj\.user$
 ^README.Rmd$
+^code_of_conduct.md$
 ^dev
 ^data-raw
 ^codecov\.yml$
