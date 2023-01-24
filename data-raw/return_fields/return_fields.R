@@ -10,10 +10,10 @@ other <- read_tsv(here("data-raw/return_fields/fields_other.tsv"),
                   show_col_types = FALSE)
 
 return_fields <- rbind(uniprot_kb, other) %>%
+  filter(!database %in% c("database", "unirule", "arba")) %>%
   mutate(database = factor(database, levels = c("uniprotkb", "uniref", "uniparc",
                                                 "proteomes", "taxonomy", "keywords",
-                                                "citations", "diseases", "database",
-                                                "locations", "unirule", "arba"))) %>%
+                                                "citations", "diseases", "locations"))) %>%
   as.data.frame()
 
 ## Optionally add some examples
