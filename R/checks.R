@@ -119,8 +119,11 @@ assert_format <- checkmate::makeAssertionFunction(check_format)
 
 ## check_database_format -------------------------------------------------------
 check_database_format <- function(func, d, f) {
+  res_func <- check_string(func)
   res_d <- check_database(d)
   res_f <- check_format(f)
+  if (!isTRUE(res_func))
+    return(res_func)
   if (!isTRUE(res_d))
     return(res_d)
   if (!isTRUE(res_f))

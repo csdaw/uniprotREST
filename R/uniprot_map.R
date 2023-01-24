@@ -70,7 +70,9 @@ uniprot_map <- function(ids,
     if (length(ids) > 1) ids <- paste(ids, collapse = ",")
   }
   assert_from_to(from, to)
-  database <- uniprotREST::from_to_dbs[uniprotREST::from_to_dbs$name == to, "uniprot_db"]
+  assert_format(format)
+  database <- as.character(uniprotREST::from_to_dbs[uniprotREST::from_to_dbs$name == to, "formats_db"])
+  assert_database(database)
   assert_database_format(func = "map", d = database, f = format)
   if (!is.null(path)) assert_path_for_output(path)
   if (!is.null(fields)) {

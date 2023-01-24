@@ -27,8 +27,8 @@ Columns:
 \strong{from} \tab \code{character}. Is the database allowed to be mapped \code{from}? \cr
 \strong{to} \tab \code{character}. Is the database allowed to be mapped \code{to}? \cr
 \strong{url} \tab \code{character}. Database URL. \cr
-\strong{return_fields_db} \tab \code{character}. Relevant return fields database,
-see \link{return_fields} for which fields i.e. columns can be requested. \cr
+\strong{formats_db} \tab \code{factor}. Relevant \code{formats} database, see \link{formats}
+for which download formats are available \cr
 }
 }
 \seealso{
