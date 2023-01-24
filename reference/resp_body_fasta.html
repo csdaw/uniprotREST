@@ -28,6 +28,9 @@ Biostrings::AAStringSet or named character vector."><!-- mathjax --><script src=
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -62,15 +65,15 @@ and either saves it to a file or parses it in memory into a
 
 
 <dt>con</dt>
-<dd><p>Optional <code>string</code> or <a href="https://rdrr.io/r/base/connections.html" class="external-link">base::connection</a> object, the file in which
+<dd><p><code>string</code> or <a href="https://rdrr.io/r/base/connections.html" class="external-link">base::connection</a> object (optional), the file in which
 to save the data.</p></dd>
 
 
 <dt>encoding</dt>
-<dd><p>Character encoding of the body text. If not specified,
-will use the encoding specified by the content-type, falling back to
-UTF-8 with a warning if it cannot be found. The resulting string is
-always re-encoded to UTF-8.</p></dd>
+<dd><p><code>string</code> (optional), character encoding of the body text. If
+not specified, will use the encoding specified by the content-type, falling
+back to <code>"UTF8"</code> with a warning if it cannot be found. The resulting string
+is always re-encoded to UTF-8.</p></dd>
 
 </dl></div>
     <div class="section level2">

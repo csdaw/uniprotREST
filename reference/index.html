@@ -24,6 +24,9 @@
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -38,7 +41,7 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a></h2>
       
       
 
@@ -50,54 +53,9 @@
 
       <dl><dt>
           
-          <code><a href="fetch_paged.html">fetch_paged()</a></code> 
-        </dt>
-        <dd>Fetch results via pagination</dd>
-      </dl><dl><dt>
-          
-          <code><a href="fetch_stream.html">fetch_stream()</a></code> 
-        </dt>
-        <dd>Fetch results via stream</dd>
-      </dl><dl><dt>
-          
-          <code><a href="formats.html">formats</a></code> 
-        </dt>
-        <dd>(Dataset) UniProt download formats</dd>
-      </dl><dl><dt>
-          
-          <code><a href="from_to_dbs.html">from_to_dbs</a></code> 
-        </dt>
-        <dd>(Dataset) From/to databases for ID mapping</dd>
-      </dl><dl><dt>
-          
-          <code><a href="from_to_rules.html">from_to_rules</a></code> 
-        </dt>
-        <dd>(Dataset) From/to rules for ID mapping</dd>
-      </dl><dl><dt>
-          
-          <code><a href="resp_body_fasta.html">resp_body_fasta()</a></code> 
-        </dt>
-        <dd>Extract FASTA data from response body</dd>
-      </dl><dl><dt>
-          
-          <code><a href="resp_body_tsv.html">resp_body_tsv()</a></code> 
-        </dt>
-        <dd>Extract tab-delimited data from response body</dd>
-      </dl><dl><dt>
-          
-          <code><a href="return_fields.html">return_fields</a></code> 
-        </dt>
-        <dd>(Dataset) UniProt return fields</dd>
-      </dl><dl><dt>
-          
           <code><a href="uniprot_map.html">uniprot_map()</a></code> 
         </dt>
         <dd>Map from/to UniProt IDs</dd>
-      </dl><dl><dt>
-          
-          <code><a href="uniprot_request.html">uniprot_request()</a></code> 
-        </dt>
-        <dd>Create UniProt HTTP request</dd>
       </dl><dl><dt>
           
           <code><a href="uniprot_search.html">uniprot_search()</a></code> 
@@ -108,8 +66,87 @@
           <code><a href="uniprot_single.html">uniprot_single()</a></code> 
         </dt>
         <dd>Download a single UniProt entry</dd>
+      </dl></div><div class="section level2">
+      <h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a></h2>
+      
+      <p class="section-desc"></p><p>Contains info about databases and data available to request.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="formats.html">formats</a></code> 
+        </dt>
+        <dd>(Dataset) UniProt download formats</dd>
+      </dl><dl><dt>
+          
+          <code><a href="return_fields.html">return_fields</a></code> 
+        </dt>
+        <dd>(Dataset) UniProt return fields</dd>
+      </dl><dl><dt>
+          
+          <code><a href="from_to_dbs.html">from_to_dbs</a></code> 
+        </dt>
+        <dd>(Dataset) From/to databases for ID mapping</dd>
+      </dl><dl><dt>
+          
+          <code><a href="from_to_rules.html">from_to_rules</a></code> 
+        </dt>
+        <dd>(Dataset) From/to rules for ID mapping</dd>
+      </dl></div><div class="section level2">
+      <h2 id="construct-and-perform-httr-requests">Construct and perform httr2 requests<a class="anchor" aria-label="anchor" href="#construct-and-perform-httr-requests"></a></h2>
+      
+      <p class="section-desc"></p><p>These functions you likely won’t use directly.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="uniprot_request.html">uniprot_request()</a></code> 
+        </dt>
+        <dd>Create a UniProt HTTP request</dd>
+      </dl><dl><dt>
+          
+          <code><a href="fetch_paged.html">fetch_paged()</a></code> 
+        </dt>
+        <dd>Fetch results via pagination</dd>
+      </dl><dl><dt>
+          
+          <code><a href="fetch_stream.html">fetch_stream()</a></code> 
+        </dt>
+        <dd>Fetch results via stream</dd>
+      </dl></div><div class="section level2">
+      <h2 id="parse-httr-responses">Parse httr2 responses<a class="anchor" aria-label="anchor" href="#parse-httr-responses"></a></h2>
+      
+      <p class="section-desc"></p><p>These functions you likely won’t use directly.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="resp_body_tsv.html">resp_body_tsv()</a></code> 
+        </dt>
+        <dd>Extract tab-delimited data from response body</dd>
+      </dl><dl><dt>
+          
+          <code><a href="resp_body_fasta.html">resp_body_fasta()</a></code> 
+        </dt>
+        <dd>Extract FASTA data from response body</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

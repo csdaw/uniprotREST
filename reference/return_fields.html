@@ -30,6 +30,9 @@ See Examples below for how to use this object."><!-- mathjax --><script src="htt
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -59,7 +62,7 @@ See <strong>Examples</strong> below for how to use this object.</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>An object of class <code>data.frame</code> with 411 rows and 4 columns.</p>
+    <p>An object of class <code>data.frame</code> with 391 rows and 4 columns.</p>
     </div>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
@@ -71,7 +74,7 @@ searching the different database on the UniProt website.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Columns:</p><table class="table table"><tr><td><strong>database</strong></td><td><code>character</code>. UniProt database to be queried.</td></tr><tr><td><strong>section</strong></td><td><code>character</code>. Similar return fields are grouped together in sections.</td></tr><tr><td><strong>field</strong></td><td><code>character</code>. The return field i.e. the string used to request the desired column of information.</td></tr><tr><td><strong>label</strong></td><td><code>character</code>. Human readable column name that will be returned by the API.</td></tr></table></div>
+    <p>Columns:</p><table class="table table"><tr><td><strong>database</strong></td><td><code>character</code>, UniProt database to be queried.</td></tr><tr><td><strong>section</strong></td><td><code>character</code>, similar return fields are grouped together in sections.</td></tr><tr><td><strong>field</strong></td><td><code>character</code>, the return field i.e. the string used to request the desired column of information.</td></tr><tr><td><strong>label</strong></td><td><code>character</code>, human readable column name that will be returned by the API.</td></tr></table></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><a href="formats.html">formats</a></p></div>
@@ -81,8 +84,8 @@ searching the different database on the UniProt website.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># What UniProt databases are available to query?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">return_fields</span><span class="op">$</span><span class="va">database</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "uniprotkb" "uniref"    "uniparc"   "proteomes" "taxonomy"  "keywords" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "citations" "diseases"  "database"  "locations" "unirule"   "arba"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "uniprotkb" "uniref"    "uniparc"   "proteomes" "taxonomy"  "keywords" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "citations" "diseases"  "locations"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># What fields are available for the `proteomes` database?</span></span></span>
 <span class="r-in"><span><span class="va">return_fields</span><span class="op">[</span><span class="va">return_fields</span><span class="op">$</span><span class="va">database</span> <span class="op">==</span> <span class="st">"proteomes"</span>, <span class="st">"field"</span><span class="op">]</span></span></span>

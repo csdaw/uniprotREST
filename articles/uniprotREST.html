@@ -41,6 +41,9 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -59,10 +62,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Getting started with uniprotREST</h1>
-                        <h4 data-toc-skip class="author">Charlotte
-Dawson</h4>
             
-            <h4 data-toc-skip class="date">2023-01-10</h4>
       
       
       <div class="d-none name"><code>uniprotREST.Rmd</code></div>
@@ -93,9 +93,9 @@ single entry.</li>
 </h2>
 <p>This is by far the most frequently used tool. Say hypothetically, you
 have been given a list of <a href="https://www.uniprot.org/help/accession_numbers" class="external-link">UniProt
-accessions</a>. You have no clue what proteins they are, or what
-metadata they have. You can use <code><a href="../reference/uniprot_map.html">uniprot_map()</a></code> to find this
-out.</p>
+accessions</a>. You have no clue what proteins they refer to, or what
+properties these proteins have. You can use <code><a href="../reference/uniprot_map.html">uniprot_map()</a></code>
+to find this out.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Accessions of interest</span></span>
 <span><span class="va">aoi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A0A8I6AN81"</span>, <span class="st">"A0A0N4SVP8"</span>, <span class="st">"Q9H6R0"</span><span class="op">)</span></span></code></pre></div>
@@ -127,8 +127,27 @@ by UniProt for approximately 7 days, and are then deleted.</p>
 <span><span class="co">## 1  Rig1 Ddx58 Rattus norvegicus (Rat)    881</span></span>
 <span><span class="co">## 2    Eif4a3l2    Mus musculus (Mouse)    411</span></span>
 <span><span class="co">## 3 DHX33 DDX33    Homo sapiens (Human)    707</span></span></code></pre></div>
-<p>By default, the output will be a dataframe with 8 columns and n rows
-depending on:</p>
+<p>By default, the output will be a dataframe with 8 columns:</p>
+<ul>
+<li>
+<code>From</code> = accessions used to map from</li>
+<li>
+<code>To</code> = accessions they were mapped to</li>
+<li>
+<code>Entry.Name</code> = UniProtKB entry name</li>
+<li>
+<code>Reviewed</code> = is the protein in Swiss-Prot?</li>
+<li>
+<code>Protein.names</code> = name of protein in UniProtKB</li>
+<li>
+<code>Gene.Names</code> = gene names associated with this protein
+(can be multiple)</li>
+<li>
+<code>Organism</code> = name of organism the protein is from</li>
+<li>
+<code>Length</code> = amino acid length</li>
+</ul>
+<p>And n rows which depends on:</p>
 <ul>
 <li>How many ids were successfully mapped</li>
 <li>If the mapping was 1:1 or not</li>
@@ -144,12 +163,6 @@ access this in the results by requesting different columns or ‘return
 fields’ using the <code>fields</code> argument.</p>
 <p>Here we will request some different return fields. See the X page for
 the list of all available <code>fields</code>.</p>
-<ul>
-<li>Primary gene name</li>
-<li>Organism name</li>
-<li>Protein length</li>
-<li>Protein mass</li>
-</ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Jobs are stored for 7 days so this time</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it will be quicker!</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">uniprot_map</span>(</span>
@@ -172,7 +185,7 @@ the list of all available <code>fields</code>.</p>
 <span><span class="co">## 3     Q9H6R0                DHX33    Homo sapiens (Human)    707  78874</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="fromto-database">From/To database<a class="anchor" aria-label="anchor" href="#fromto-database"></a>
+<h3 id="fromto-database">From/to database<a class="anchor" aria-label="anchor" href="#fromto-database"></a>
 </h3>
 <p><code><a href="../reference/uniprot_map.html">uniprot_map()</a></code> can be used to map IDs from other
 databases to UniProt IDs, and vice-versa. See the X page for a list of
@@ -184,7 +197,7 @@ accessions.</p>
 <code class="sourceCode R"><span><span class="co"># Genes of interest</span></span>
 <span><span class="va">goi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ENSG00000088247"</span>, <span class="st">"ENSG00000162613"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>fields</code> argument only works when mapping <em>to</em>
-a database from UniProt, UniRef, or UniParc.</p>
+a UniProtKB, UniRef, or UniParc database.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>result3 <span class="ot">&lt;-</span> <span class="fu">uniprot_map</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">ids =</span> goi,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="st">"Ensembl"</span>,</span>
@@ -243,9 +256,9 @@ is installed (highly recommended) the output will be a
 <h3 id="path">Path<a class="anchor" aria-label="anchor" href="#path"></a>
 </h3>
 <p>The previous examples all save the data from UniProt into an object
-in memory. However, you can also save the data to disk. To do this, just
-specify a file path with the correct extension. The file must not
-already exist otherwise an error is thrown.</p>
+in memory. However, you can also save the data to a file on disk. To do
+this, just specify a file path with the correct extension. The file must
+not already exist otherwise an error is thrown.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get temp path for this example (and delete when done)</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="at">fileext =</span> <span class="st">".tsv"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on.exit</span>(<span class="fu">unlink</span>(tmp))</span>
@@ -274,7 +287,7 @@ already exist otherwise an error is thrown.</p>
 </h3>
 <p>The other arguments in <code><a href="../reference/uniprot_map.html">uniprot_map()</a></code> are as follows:</p>
 <div class="section level4">
-<h4 id="isoform">isoform<a class="anchor" aria-label="anchor" href="#isoform"></a>
+<h4 id="isoform">Isoform<a class="anchor" aria-label="anchor" href="#isoform"></a>
 </h4>
 <p>By default, the UniProt APIs will only provide results with a
 proteins’ <a href="https://www.uniprot.org/help/canonical_and_isoforms" class="external-link">canonical
@@ -299,7 +312,7 @@ exceptions.</p>
 <span><span class="co">## [2]   293 MVYMFQYDSTHGKFHGTVKAENG...WYDNEFGYSNRVVDLMAHMASKE sp|P04406-2|G3P_H...</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="method-and-page_size">method and page_size<a class="anchor" aria-label="anchor" href="#method-and-page_size"></a>
+<h4 id="method-and-page_size">Method and page_size<a class="anchor" aria-label="anchor" href="#method-and-page_size"></a>
 </h4>
 <p>The UniProt API provides results via 2 endpoints: stream, and
 pagination, which you can choose via the <code>method</code>
@@ -326,7 +339,7 @@ many requests.</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="compressed">compressed<a class="anchor" aria-label="anchor" href="#compressed"></a>
+<h4 id="compressed">Compressed<a class="anchor" aria-label="anchor" href="#compressed"></a>
 </h4>
 <p>Should gzipped data be requested? This is <code>FALSE</code> by
 default, and it is only used if <code>method = "stream"</code> and
@@ -368,7 +381,7 @@ default, and it is only used if <code>method = "stream"</code> and
 <span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [2]   293 MVYMFQYDSTHGKFHGTVKAENG...WYDNEFGYSNRVVDLMAHMASKE sp|P04406-2|G3P_H...</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="verbosity">verbosity<a class="anchor" aria-label="anchor" href="#verbosity"></a>
+<h4 id="verbosity">Verbosity<a class="anchor" aria-label="anchor" href="#verbosity"></a>
 </h4>
 <p>Controls the amount of information to print:</p>
 <ul>
@@ -379,12 +392,12 @@ the UniProt API (typically for debugging purposes).</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="dry_run">dry_run<a class="anchor" aria-label="anchor" href="#dry_run"></a>
+<h4 id="dry_run">Dry_run<a class="anchor" aria-label="anchor" href="#dry_run"></a>
 </h4>
 <p>If <code>TRUE</code>, performs the request locally with
 <code><a href="https://httr2.r-lib.org/reference/req_dry_run.html" class="external-link">httr2::req_dry_run()</a></code> instead of the actually sending it to
 the UniProt REST API. This is useful for debugging purposes if you are
-getting <code>400 - Bad request</code> status error.</p>
+getting <code>400 - Bad request</code> status errors.</p>
 </div>
 </div>
 </div>
