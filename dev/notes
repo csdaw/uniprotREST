@@ -1,15 +1,27 @@
-## To do
+# To do
 
-- In `formats` documentation, add full name of formats.
+## General
 
-- Add fasta as an allowed format
+- Look up ROpenScis instructions for citation.
 
-- Make function args one per line
+## README
 
-## Vignettes
+- Add installation instructions to Runiverse
+- Add the relevant link in "Read the full docs here."
+- Add taxa id column to map example
+- Add link to code of conduct
+- Potentially add link to citation or copiable text.
+- Add missing badges:
+  - covr
+  - ...
 
-- README
-- Get started
-- map
-- search
-- single
+## Get Started
+
+- Fix see the X page links
+
+## Function docs
+
+- Fix all 'optional' to go after the object type
+- Use commas after object type, not full stops
+
+
