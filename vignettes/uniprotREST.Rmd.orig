@@ -1,7 +1,5 @@
 ---
 title: "Getting started with uniprotREST"
-author: "Charlotte Dawson"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Getting started with uniprotREST}
@@ -36,7 +34,7 @@ library(uniprotREST)
 
 This is by far the most frequently used tool. Say hypothetically, you have been
 given a list of [UniProt accessions](https://www.uniprot.org/help/accession_numbers).
-You have no clue what proteins they are, or what metadata they have. You can
+You have no clue what proteins they refer to, or what properties these proteins have. You can
 use `uniprot_map()` to find this out.
 
 ```{r}
@@ -62,8 +60,18 @@ argument to 0). Job IDs and the job data are kept by UniProt for approximately
 head(result1)
 ```
 
-By default, the output will be a dataframe with 8 columns and n rows depending
-on:
+By default, the output will be a dataframe with 8 columns:
+
+- `From` = accessions used to map from
+- `To` = accessions they were mapped to
+- `Entry.Name` = UniProtKB entry name
+- `Reviewed` = is the protein in Swiss-Prot?
+- `Protein.names` = name of protein in UniProtKB
+- `Gene.Names` = gene names associated with this protein (can be multiple)
+- `Organism` = name of organism the protein is from
+- `Length` = amino acid length
+
+And n rows which depends on:
 
 - How many ids were successfully mapped
 - If the mapping was 1:1 or not
@@ -78,11 +86,6 @@ the `fields` argument.
 
 Here we will request some different return fields. See the X page
 for the list of all available `fields`.
-
-- Primary gene name
-- Organism name
-- Protein length
-- Protein mass
 
 ```{r}
 # Jobs are stored for 7 days so this time
@@ -102,7 +105,7 @@ result2 <- uniprot_map(
 head(result2)
 ```
 
-### From/To database
+### From/to database
 
 `uniprot_map()` can be used to map IDs from other databases to UniProt IDs,
 and vice-versa. See the X page for a list of databases available for mapping,
@@ -115,8 +118,7 @@ Here we'll map some Ensembl gene IDs to _reviewed_ UniProtKB accessions.
 goi <- c("ENSG00000088247", "ENSG00000162613")
 ```
 
-The `fields` argument only works when mapping _to_ a database from UniProt,
-UniRef, or UniParc.
+The `fields` argument only works when mapping _to_ a UniProtKB, UniRef, or UniParc database.
 
 ```{r}
 result3 <- uniprot_map(
@@ -163,7 +165,7 @@ result4
 ### Path
 
 The previous examples all save the data from UniProt into an object in memory.
-However, you can also save the data to disk. To do this, just specify a file
+However, you can also save the data to a file on disk. To do this, just specify a file
 path with the correct extension. The file must not already exist otherwise an
 error is thrown.
 
@@ -190,7 +192,7 @@ read.delim(tmp)
 
 The other arguments in `uniprot_map()` are as follows:
 
-#### isoform
+#### Isoform
 
 By default, the UniProt APIs will only provide results with a proteins'
 [canonical sequence](https://www.uniprot.org/help/canonical_and_isoforms).
@@ -212,7 +214,7 @@ result5 <- uniprot_map(
 result5
 ```
 
-#### method and page_size
+#### Method and page_size
 
 The UniProt API provides results via 2 endpoints: stream, and pagination, which
 you can choose via the `method` argument.
@@ -234,7 +236,7 @@ Stream endpoint:
 - Can return a `429` status error if it currently has too many requests.
 - Up to 10,000,000 results can be fetched.
 
-#### compressed
+#### Compressed
 
 Should gzipped data be requested? This is `FALSE` by default, and it is only
 used if `method = "stream"` and `path` is specified.
@@ -260,7 +262,7 @@ uniprot_map(
 Biostrings::readAAStringSet(tmp)
 ```
 
-#### verbosity
+#### Verbosity
 
 Controls the amount of information to print:
 
@@ -269,11 +271,11 @@ Controls the amount of information to print:
 information about the HTTP requests made to the UniProt API (typically for
 debugging purposes).
 
-#### dry_run
+#### Dry_run
 
 If `TRUE`, performs the request locally with `httr2::req_dry_run()` instead of
 the actually sending it to the UniProt REST API. This is useful for debugging
-purposes if you are getting `400 - Bad request` status error.
+purposes if you are getting `400 - Bad request` status errors.
 
 ## 2. Querying UniProt with `uniprot_search`
 
