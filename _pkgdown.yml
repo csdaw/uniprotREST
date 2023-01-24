@@ -1,4 +1,36 @@
 url: ~
+
 template:
   bootstrap: 5
+  bslib:
+    primary: "#0054AD"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
 
+reference:
+- title: "Main functions"
+  contents:
+  - uniprot_map
+  - uniprot_search
+  - uniprot_single
+- title: "Datasets"
+  desc: >
+    Contains info about databases and data available to request.
+  contents:
+    - formats
+    - return_fields
+    - from_to_dbs
+    - from_to_rules
+- title: "Construct and perform httr2 requests"
+  desc: >
+    These functions you likely won't use directly.
+  contents:
+  - uniprot_request
+  - fetch_paged
+  - fetch_stream
+- title: "Parse httr2 responses"
+  desc: >
+    These functions you likely won't use directly.
+  contents:
+  - resp_body_tsv
+  - resp_body_fasta
