@@ -17,7 +17,7 @@ df_single <- data.frame(
     "tsv xlsx json rdf list obo", #diseases
     "json rdf", #database
     "tsv xlsx json rdf list obo", #locations
-    "tsv xlsx json list", #unirule
+    "json list", #unirule, tsv and xlsx supposedly ok, but they don't return anything
     "json list" # arba
   )
 )
@@ -37,7 +37,7 @@ df_search <- data.frame(
     "tsv xlsx json list obo", #diseases
     "json", #database
     "tsv xlsx json list obo", #locations
-    "tsv xlsx json list", #unirule
+    "json list", #unirule, tsv and xlsx supposedly ok, but they don't return anything
     "json list" #arba
   )
 )

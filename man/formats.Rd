@@ -5,7 +5,7 @@
 \alias{formats}
 \title{(Dataset) UniProt download formats}
 \format{
-An object of class \code{data.frame} with 45 rows and 3 columns.
+An object of class \code{data.frame} with 43 rows and 3 columns.
 }
 \source{
 UniProtKB download formats have been determined by hand by querying
