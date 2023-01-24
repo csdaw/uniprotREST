@@ -1,6 +1,6 @@
-#' Create UniProt HTTP request
+#' Create a UniProt HTTP request
 #'
-#' @description This function creates a request object for the UniProt REST API.
+#' @description This function creates an `httr2::request` object.
 #'   You likely won't use this function directly, but rather one of the
 #'   wrapper functions: [uniprot_map()], [uniprot_search()], or [uniprot_single()].
 #'

@@ -13,12 +13,12 @@
 #'   See the **Databases** section below for all available databases.
 #' @param format `string`, data format to fetch. Default is `"json"`.
 #'   Can be one of `"tsv"`, `"json"`, or `"fasta"`.
-#' @param path Optional `string`, file path to save the results, e.g.
+#' @param path `string` (optional), file path to save the results, e.g.
 #'   `"path/to/results.tsv"`.
-#' @param fields Optional `character`, fields (i.e. columns) of data to get.
+#' @param fields `character` (optional), fields (i.e. columns) of data to get.
 #'   The fields available depends on the database used, see [return_fields]
 #'   for all available fields.
-#' @param isoform Optional `logical`, should protein isoforms be included in the
+#' @param isoform `logical` (optional), should protein isoforms be included in the
 #'   results? Not necessarily relevant for all formats and databases.
 #' @param dry_run `logical`, perform request with [httr2::req_dry_run()]?
 #'   Requires the `httpuv` package to be installed. Default is `FALSE`.

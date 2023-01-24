@@ -16,7 +16,6 @@
 #'      only the request for the current page needs to be reattempted. With the
 #'      stream endpoint, the entire request needs to be completely restarted.
 #'
-#' @inheritParams httr2::req_perform
 #' @inheritParams fetch_stream
 #' @param n_pages `integer`, the number of pages to be fetched. This can be
 #'   calculated by dividing the number of total results by the page size e.g.

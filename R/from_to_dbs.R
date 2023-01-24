@@ -6,11 +6,11 @@
 #'
 #' @details Columns:
 #'   \tabular{ll}{
-#'     **name** \tab `character`. Database name. \cr
-#'     **from** \tab `character`. Is the database allowed to be mapped `from`? \cr
-#'     **to** \tab `character`. Is the database allowed to be mapped `to`? \cr
-#'     **url** \tab `character`. Database URL. \cr
-#'     **formats_db** \tab `factor`. Relevant `formats` database, see [formats]
+#'     **name** \tab `character`, database name. \cr
+#'     **from** \tab `character`, is the database allowed to be mapped `from`? \cr
+#'     **to** \tab `character`, is the database allowed to be mapped `to`? \cr
+#'     **url** \tab `character`, database URL. \cr
+#'     **formats_db** \tab `factor`, relevant `formats` database, see [formats]
 #'     for which download formats are available \cr
 #'   }
 #'

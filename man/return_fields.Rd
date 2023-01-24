@@ -26,10 +26,10 @@ See \strong{Examples} below for how to use this object.
 \details{
 Columns:
 \tabular{ll}{
-\strong{database} \tab \code{character}. UniProt database to be queried. \cr
-\strong{section} \tab \code{character}. Similar return fields are grouped together in sections. \cr
-\strong{field} \tab \code{character}. The return field i.e. the string used to request the desired column of information. \cr
-\strong{label} \tab \code{character}. Human readable column name that will be returned by the API.\cr
+\strong{database} \tab \code{character}, UniProt database to be queried. \cr
+\strong{section} \tab \code{character}, similar return fields are grouped together in sections. \cr
+\strong{field} \tab \code{character}, the return field i.e. the string used to request the desired column of information. \cr
+\strong{label} \tab \code{character}, human readable column name that will be returned by the API.\cr
 }
 }
 \examples{

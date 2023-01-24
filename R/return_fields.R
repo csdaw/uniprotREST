@@ -7,10 +7,10 @@
 #'
 #' @details Columns:
 #' \tabular{ll}{
-#'   **database** \tab `character`. UniProt database to be queried. \cr
-#'   **section** \tab `character`. Similar return fields are grouped together in sections. \cr
-#'   **field** \tab `character`. The return field i.e. the string used to request the desired column of information. \cr
-#'   **label** \tab `character`. Human readable column name that will be returned by the API.\cr
+#'   **database** \tab `character`, UniProt database to be queried. \cr
+#'   **section** \tab `character`, similar return fields are grouped together in sections. \cr
+#'   **field** \tab `character`, the return field i.e. the string used to request the desired column of information. \cr
+#'   **label** \tab `character`, human readable column name that will be returned by the API.\cr
 #' }
 #'
 #' @source UniProtKB return fields have been scraped from the

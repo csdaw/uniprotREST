@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniprot_request.R
 \name{uniprot_request}
 \alias{uniprot_request}
-\title{Create UniProt HTTP request}
+\title{Create a UniProt HTTP request}
 \usage{
 uniprot_request(url, method = "GET", ..., max_tries = 5, rate = 1/1)
 }
@@ -26,7 +26,7 @@ HTTP request. Default is \code{5}.}
 Returns an \code{httr2_request} object, (which is essentially a list).
 }
 \description{
-This function creates a request object for the UniProt REST API.
+This function creates an \code{httr2::request} object.
 You likely won't use this function directly, but rather one of the
 wrapper functions: \code{\link[=uniprot_map]{uniprot_map()}}, \code{\link[=uniprot_search]{uniprot_search()}}, or \code{\link[=uniprot_single]{uniprot_single()}}.
 }

@@ -17,21 +17,18 @@ or \code{"fasta"}.}
 or should the \code{httr2_response} object be returned instead? Default is \code{TRUE}.
 Does nothing if \code{path} is provided.}
 
-\item{path}{Optional \code{string}, file path to save the results, e.g.
+\item{path}{\code{string} (optional), file path to save the results, e.g.
 \code{"path/to/results.tsv"}. The file must not already exist, otherwise an
 error is thrown.}
 
-\item{verbosity}{How much information to print? This is a wrapper
-around \code{req_verbose()} that uses an integer to control verbosity:
+\item{verbosity}{\code{integer} (optional), how much information to print?
 \itemize{
 \item 0: no output
-\item 1: show headers
-\item 2: show headers and bodies
-\item 3: show headers, bodies, and curl status messages.
-}
-
-Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
-you can't affect directly.}
+\item NULL (default): minimal output
+\item 1: show request headers
+\item 2: show request headers and bodies
+\item 3: show request headers, bodies, and curl status messages
+}}
 }
 \value{
 By default, returns an object whose type depends on \code{format}:

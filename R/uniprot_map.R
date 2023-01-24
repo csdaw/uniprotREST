@@ -3,10 +3,9 @@
 #' @description This function wraps the
 #'   [UniProt ID Mapping](https://www.uniprot.org/help/id_mapping) service which
 #'   maps between the identifiers used in one database, to the identifiers of
-#'   another. By default it maps UniProtKB accessions to UniProt and returns a
-#'   `data.frame`, so you can get information about a set of IDs e.g. gene names,
-#'   protein lengths, domains, etc. You can also map IDs from/to other databases
-#'   e.g. `from = "Ensembl", to = "UniProtKB"`.
+#'   another. By default it maps UniProtKB accessions to UniProt, and returns
+#'   a `data.frame` with metadata about the mapped protein accessions. You can
+#'   also map IDs from/to other databases e.g. `from = "Ensembl", to = "UniProtKB"`.
 #'
 #'   ### Things to note
 #'
@@ -24,7 +23,7 @@
 #' @param to `string`, database to map to. Default is `"UniProtKB"`.
 #'   See [from_to_rules] for the possible databases you can map to, depending on
 #'   the `from` database.
-#' @param fields Optional `character`, fields (i.e. columns) of data to get.
+#' @param fields `character` (optional), fields (i.e. columns) of data to get.
 #'   Only used if `to` is a UniProtKB, UniRef, or UniParc database. See
 #'   [return_fields] for all available fields.
 #' @inheritParams uniprot_search

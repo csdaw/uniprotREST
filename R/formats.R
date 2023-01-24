@@ -6,9 +6,9 @@
 #'
 #' @details Columns:
 #' \tabular{ll}{
-#'   **func** \tab `character`. `uniprotREST` function to be used. \cr
-#'   **database** \tab `character`. UniProt database to be queried. \cr
-#'   **format** \tab `character`. The different formats available to download
+#'   **func** \tab `character`, `uniprotREST` function to be used. \cr
+#'   **database** \tab `character`, UniProt database to be queried. \cr
+#'   **format** \tab `character`, the different formats available to download
 #'   i.e. the string you'll use with the `uniprotREST` function. \cr
 #' }
 #'

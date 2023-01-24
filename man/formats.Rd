@@ -23,9 +23,9 @@ See \strong{Examples} below for how to use this object
 \details{
 Columns:
 \tabular{ll}{
-\strong{func} \tab \code{character}. \code{uniprotREST} function to be used. \cr
-\strong{database} \tab \code{character}. UniProt database to be queried. \cr
-\strong{format} \tab \code{character}. The different formats available to download
+\strong{func} \tab \code{character}, \code{uniprotREST} function to be used. \cr
+\strong{database} \tab \code{character}, UniProt database to be queried. \cr
+\strong{format} \tab \code{character}, the different formats available to download
 i.e. the string you'll use with the \code{uniprotREST} function. \cr
 }
 }

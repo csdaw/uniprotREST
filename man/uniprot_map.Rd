@@ -33,14 +33,14 @@ the \code{from} database.}
 \item{format}{\code{string}, data format to fetch. Default is \code{"tsv"}.
 Can be one of \code{"tsv"} or \code{"fasta"}.}
 
-\item{path}{Optional \code{string}, file path to save the results, e.g.
+\item{path}{\code{string} (optional), file path to save the results, e.g.
 \code{"path/to/results.tsv"}.}
 
-\item{fields}{Optional \code{character}, fields (i.e. columns) of data to get.
+\item{fields}{\code{character} (optional), fields (i.e. columns) of data to get.
 Only used if \code{to} is a UniProtKB, UniRef, or UniParc database. See
 \link{return_fields} for all available fields.}
 
-\item{isoform}{Optional \code{logical}, should protein isoforms be included in the
+\item{isoform}{\code{logical} (optional), should protein isoforms be included in the
 results? Not necessarily relevant for all formats and databases.}
 
 \item{method}{\code{string}, download method to use. Either \code{"paged"} (default) or
@@ -48,23 +48,20 @@ results? Not necessarily relevant for all formats and databases.}
 memory. Stream may be faster, but uses more memory and is more sensitive
 to connection issues.}
 
-\item{page_size}{Optional \code{integer}, how many entries per page to request?
+\item{page_size}{\code{integer} (optional), how many entries per page to request?
 Only relevant if \code{method = "paged"}. It's best to leave this at \code{500}.}
 
-\item{compressed}{Optional \code{logical}, should gzipped data be requested?
+\item{compressed}{\code{logical} (optional), should gzipped data be requested?
 Only relevant if \code{method = "stream"} and \code{path} is specified.}
 
-\item{verbosity}{How much information to print? This is a wrapper
-around \code{req_verbose()} that uses an integer to control verbosity:
+\item{verbosity}{\code{integer} (optional), how much information to print?
 \itemize{
 \item 0: no output
-\item 1: show headers
-\item 2: show headers and bodies
-\item 3: show headers, bodies, and curl status messages.
-}
-
-Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
-you can't affect directly.}
+\item NULL (default): minimal output
+\item 1: show request headers
+\item 2: show request headers and bodies
+\item 3: show request headers, bodies, and curl status messages
+}}
 
 \item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
 Requires the \code{httpuv} package to be installed. Default is \code{FALSE}.}
@@ -86,10 +83,9 @@ list containing information about the request, including the request
 This function wraps the
 \href{https://www.uniprot.org/help/id_mapping}{UniProt ID Mapping} service which
 maps between the identifiers used in one database, to the identifiers of
-another. By default it maps UniProtKB accessions to UniProt and returns a
-\code{data.frame}, so you can get information about a set of IDs e.g. gene names,
-protein lengths, domains, etc. You can also map IDs from/to other databases
-e.g. \verb{from = "Ensembl", to = "UniProtKB"}.
+another. By default it maps UniProtKB accessions to UniProt, and returns
+a \code{data.frame} with metadata about the mapped protein accessions. You can
+also map IDs from/to other databases e.g. \verb{from = "Ensembl", to = "UniProtKB"}.
 \subsection{Things to note}{
 
 This service has limits on the number of IDs allowed. Very large mapping

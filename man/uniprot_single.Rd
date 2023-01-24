@@ -25,27 +25,24 @@ See the \strong{Databases} section below for all available databases.}
 \item{format}{\code{string}, data format to fetch. Default is \code{"json"}.
 Can be one of \code{"tsv"}, \code{"json"}, or \code{"fasta"}.}
 
-\item{path}{Optional \code{string}, file path to save the results, e.g.
+\item{path}{\code{string} (optional), file path to save the results, e.g.
 \code{"path/to/results.tsv"}.}
 
-\item{fields}{Optional \code{character}, fields (i.e. columns) of data to get.
+\item{fields}{\code{character} (optional), fields (i.e. columns) of data to get.
 The fields available depends on the database used, see \link{return_fields}
 for all available fields.}
 
-\item{isoform}{Optional \code{logical}, should protein isoforms be included in the
+\item{isoform}{\code{logical} (optional), should protein isoforms be included in the
 results? Not necessarily relevant for all formats and databases.}
 
-\item{verbosity}{How much information to print? This is a wrapper
-around \code{req_verbose()} that uses an integer to control verbosity:
+\item{verbosity}{\code{integer} (optional), how much information to print?
 \itemize{
 \item 0: no output
-\item 1: show headers
-\item 2: show headers and bodies
-\item 3: show headers, bodies, and curl status messages.
-}
-
-Use \code{\link[httr2:with_verbosity]{with_verbosity()}} to control the verbosity of requests that
-you can't affect directly.}
+\item NULL (default): minimal output
+\item 1: show request headers
+\item 2: show request headers and bodies
+\item 3: show request headers, bodies, and curl status messages
+}}
 
 \item{dry_run}{\code{logical}, perform request with \code{\link[httr2:req_dry_run]{httr2::req_dry_run()}}?
 Requires the \code{httpuv} package to be installed. Default is \code{FALSE}.}

@@ -23,11 +23,11 @@ which database identifiers can be mapped to what other databases.
 \details{
 Columns:
 \tabular{ll}{
-\strong{name} \tab \code{character}. Database name. \cr
-\strong{from} \tab \code{character}. Is the database allowed to be mapped \code{from}? \cr
-\strong{to} \tab \code{character}. Is the database allowed to be mapped \code{to}? \cr
-\strong{url} \tab \code{character}. Database URL. \cr
-\strong{formats_db} \tab \code{factor}. Relevant \code{formats} database, see \link{formats}
+\strong{name} \tab \code{character}, database name. \cr
+\strong{from} \tab \code{character}, is the database allowed to be mapped \code{from}? \cr
+\strong{to} \tab \code{character}, is the database allowed to be mapped \code{to}? \cr
+\strong{url} \tab \code{character}, database URL. \cr
+\strong{formats_db} \tab \code{factor}, relevant \code{formats} database, see \link{formats}
 for which download formats are available \cr
 }
 }

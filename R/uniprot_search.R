@@ -15,9 +15,9 @@
 #'   `"stream"`. Paged is more robust to connection issues and takes less
 #'   memory. Stream may be faster, but uses more memory and is more sensitive
 #'   to connection issues.
-#' @param page_size Optional `integer`, how many entries per page to request?
+#' @param page_size `integer` (optional), how many entries per page to request?
 #'   Only relevant if `method = "paged"`. It's best to leave this at `500`.
-#' @param compressed Optional `logical`, should gzipped data be requested?
+#' @param compressed `logical` (optional), should gzipped data be requested?
 #'   Only relevant if `method = "stream"` and `path` is specified.
 #' @inheritParams uniprot_single
 #' @inheritParams httr2::req_perform

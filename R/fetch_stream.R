@@ -23,10 +23,15 @@
 #' @param parse `logical`, should the response body be parsed e.g. into a `data.frame`
 #'   or should the `httr2_response` object be returned instead? Default is `TRUE`.
 #'   Does nothing if `path` is provided.
-#' @param path Optional `string`, file path to save the results, e.g.
+#' @param path `string` (optional), file path to save the results, e.g.
 #'   `"path/to/results.tsv"`. The file must not already exist, otherwise an
 #'   error is thrown.
-#' @inheritParams httr2::req_perform
+#' @param verbosity `integer` (optional), how much information to print?
+#'   - 0: no output
+#'   - NULL (default): minimal output
+#'   - 1: show request headers
+#'   - 2: show request headers and bodies
+#'   - 3: show request headers, bodies, and curl status messages
 #'
 #' @return By default, returns an object whose type depends on `format`:
 #'
