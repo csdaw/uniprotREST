@@ -1,0 +1,36 @@
+---
+title: "Map Databases"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(uniprotREST)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyr))
+```
+
+This vignette describes the databases available to `uniprot_map()`, and which
+databases are allowed to map _from_ or _to_.
+
+```{r}
+df1 <- from_to_dbs %>%
+  filter(from) %>%
+  select(-c(from, to)) %>%
+  arrange(formats_db)
+
+df2 <- from_to_rules %>%
+  lapply(paste, collapse = "<br>") %>%
+  do.call(rbind, .) %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column("name")
+
+df <- left_join(df1, df2, by = "name") %>%
+  replace_na(list(url = "")) %>%
+  mutate(name = paste(name, url, sep = "<br>")) %>%
+  select(-c(formats_db, url)) %>%
+  `colnames<-`(c("from", "to"))
+```
+
+```{r}
+knitr::kable(df)
+```

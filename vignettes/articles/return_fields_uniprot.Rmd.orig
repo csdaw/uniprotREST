@@ -1,0 +1,34 @@
+---
+title: "Return Fields - UniProtKB"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(uniprotREST)
+suppressPackageStartupMessages(library(dplyr))
+```
+
+This vignette describes all the columns of data (aka return fields) you can request
+from UniProt's UniProtKB database. This is relevant for `uniprot_map()` when
+mapping _to_ UniProtKB and for `uniprot_search()` when `database = "uniprotkb"`.
+These tables have been scraped from
+[this page](https://www.uniprot.org/help/return_fields) on the UniProt website.
+
+- **field** = string to use in the `fields` argument
+- **label** = name of column that will be returned
+
+```{r}
+up <- uniprotREST::return_fields %>%
+  filter(database == "uniprotkb") %>%
+  mutate(section = factor(section, levels = unique(section)))
+
+dfs <- split(up, f = up$section) %>%
+  lapply(function(x) select(x, -c(section, database)))
+```
+
+```{r, results='asis'}
+for (i in seq_along(dfs)) {
+  cat(paste("##", names(dfs)[i], "\n"))
+  print(knitr::kable(dfs[[i]], row.names = FALSE))
+}
+```

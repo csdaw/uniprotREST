@@ -1,0 +1,40 @@
+---
+title: "Available Formats"
+---
+
+```{=html}
+<style>
+table {
+table-layout: fixed;
+}
+</style>
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(uniprotREST)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(tidyr))
+```
+
+This vignette describes all the currently available file formats to download 
+using the main **uniprotREST** functions. There are 
+[more file formats](https://www.uniprot.org/help/api_queries) available via their
+website which have not yet been implemented.
+
+```{r}
+dfs <- split(formats, f = formats$func) %>% 
+  lapply(function(x) {
+    x %>% 
+      select(-func) %>% 
+      group_by(database) %>% 
+      summarise(format = paste(format, collapse = ", "))
+  })
+```
+
+```{r, results='asis'}
+for (i in seq_along(dfs)) {
+  cat(paste("##", names(dfs)[i], "\n"))
+  print(knitr::kable(dfs[[i]], row.names = FALSE))
+}
+```

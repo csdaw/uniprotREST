@@ -1,0 +1,41 @@
+---
+title: "Return Fields - Other Databases"
+---
+
+```{=html}
+<style>
+  table {
+    table-layout: fixed;
+  }
+</style>
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(uniprotREST)
+suppressPackageStartupMessages(library(dplyr))
+```
+
+This vignette describes all the columns of data (aka return fields) you can request
+from each UniProt database. This is relevant for `uniprot_map()`
+when mapping _to_ UniParc/UniRef and for `uniprot_search()`.
+
+- **field** = string to use in the `fields` argument
+- **label** = name of column that will be returned
+
+```{r}
+other <- uniprotREST::return_fields %>%
+  filter(database != "uniprotkb") %>%
+  mutate(database = droplevels(database, "uniprotkb"),
+         section = factor(section, levels = unique(section)))
+
+dfs <- split(other, f = other$database) %>%
+  purrr::map(function(x) select(x, -c(database)))
+```
+
+```{r, results='asis'}
+for (i in seq_along(dfs)) {
+  cat(paste("##", names(dfs)[i], "\n"))
+  print(knitr::kable(dfs[[i]], row.names = FALSE))
+}
+```
