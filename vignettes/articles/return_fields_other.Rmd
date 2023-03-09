@@ -1,0 +1,170 @@
+---
+title: "Return Fields - Other Databases"
+---
+
+```{=html}
+<style>
+  table {
+    table-layout: fixed;
+  }
+</style>
+```
+
+
+
+This vignette describes all the columns of data (aka return fields) you can request
+from each UniProt database. This is relevant for `uniprot_map()`
+when mapping _to_ UniParc/UniRef and for `uniprot_search()`.
+
+- **field** = string to use in the `fields` argument
+- **label** = name of column that will be returned
+
+
+
+## uniref 
+
+
+|section          |field          |label              |
+|:----------------|:--------------|:------------------|
+|Names & Taxonomy |id             |Cluster ID         |
+|Names & Taxonomy |name           |Cluster Name       |
+|Names & Taxonomy |common_taxon   |Common taxon       |
+|Names & Taxonomy |common_taxonid |Common taxon ID    |
+|Names & Taxonomy |organism_id    |Organism IDs       |
+|Names & Taxonomy |organism       |Organisms          |
+|Sequences        |identity       |Identity           |
+|Sequences        |length         |Length             |
+|Sequences        |sequence       |Reference sequence |
+|Miscellaneous    |types          |Types              |
+|Miscellaneous    |members        |Cluster members    |
+|Miscellaneous    |count          |Size               |
+|Date of          |created        |Date of creation   |
+## uniparc 
+
+
+|section          |field       |label         |
+|:----------------|:-----------|:-------------|
+|Names & Taxonomy |upi         |Entry         |
+|Names & Taxonomy |gene        |Gene names    |
+|Names & Taxonomy |organism_id |Organism ID   |
+|Names & Taxonomy |organism    |Organisms     |
+|Names & Taxonomy |protein     |Protein names |
+|Names & Taxonomy |proteome    |Proteomes     |
+|Sequences        |checksum    |Checksum      |
+|Sequences        |length      |Length        |
+|Sequences        |sequence    |Sequence      |
+|Miscellaneous    |accession   |UniProtKB     |
+|Date of          |first_seen  |First seen    |
+|Date of          |last_seen   |Last seen     |
+|Family & Domains |CDD         |CDD           |
+|Family & Domains |Gene3D      |Gene3D        |
+|Family & Domains |HAMAP       |HAMAP         |
+|Family & Domains |PANTHER     |PANTHER       |
+|Family & Domains |Pfam        |Pfam          |
+|Family & Domains |PIRSF       |PIRSF         |
+|Family & Domains |PRINTS      |PRINTS        |
+|Family & Domains |PROSITE     |PROSITE       |
+|Family & Domains |SFLD        |SFLD          |
+|Family & Domains |SMART       |SMART         |
+|Family & Domains |SUPFAM      |SUPFAM        |
+|Family & Domains |TIGRFAMs    |TIGRFAMs      |
+## proteomes 
+
+
+|section          |field                 |label                 |
+|:----------------|:---------------------|:---------------------|
+|Names & Taxonomy |upid                  |Proteome Id           |
+|Names & Taxonomy |organism              |Organism              |
+|Names & Taxonomy |organism_id           |Organism Id           |
+|Names & Taxonomy |components            |Components            |
+|Names & Taxonomy |mnemonic              |Taxon mnemonic        |
+|Names & Taxonomy |lineage               |Taxonomic lineage     |
+|Names & Taxonomy |busco                 |BUSCO                 |
+|Miscellaneous    |cpd                   |CPD                   |
+|Miscellaneous    |genome_assembly       |Genome assembly ID    |
+|Miscellaneous    |genome_representation |Genome representation |
+|Miscellaneous    |protein_count         |Protein count         |
+## taxonomy 
+
+
+|section  |field           |label           |
+|:--------|:---------------|:---------------|
+|Taxonomy |id              |Taxon Id        |
+|Taxonomy |mnemonic        |Mnemonic        |
+|Taxonomy |scientific_name |Scientific name |
+|Taxonomy |common_name     |Common name     |
+|Taxonomy |synonyms        |Synonyms        |
+|Taxonomy |other_names     |Other Names     |
+|Taxonomy |rank            |Rank            |
+|Taxonomy |reviewed        |Reviewed        |
+|Taxonomy |lineage         |Lineage         |
+|Taxonomy |strains         |Strains         |
+|Taxonomy |parent          |Parent          |
+|Taxonomy |hosts           |Virus hosts     |
+|Taxonomy |links           |Links           |
+|Taxonomy |statistics      |Statistics      |
+## keywords 
+
+
+|section  |field           |label           |
+|:--------|:---------------|:---------------|
+|Keywords |id              |Keyword ID      |
+|Keywords |name            |Name            |
+|Keywords |definition      |Definition      |
+|Keywords |category        |Category        |
+|Keywords |synonyms        |Synonyms        |
+|Keywords |gene_ontologies |Gene Ontologies |
+|Keywords |links           |Links           |
+|Keywords |children        |Children        |
+|Keywords |parents         |Parents         |
+|Keywords |statistics      |Statistics      |
+## citations 
+
+
+|section    |field            |label            |
+|:----------|:----------------|:----------------|
+|Literature |id               |Citation Id      |
+|Literature |doi              |Doi              |
+|Literature |title            |Title            |
+|Literature |authors          |Authors          |
+|Literature |authoring_group  |Authoring Group  |
+|Literature |journal          |Journal          |
+|Literature |publication_date |Publication date |
+|Literature |first_page       |First page       |
+|Literature |last_page        |Last page        |
+|Literature |volume           |Volume           |
+|Literature |reference        |Reference        |
+|Literature |lit_abstract     |Abstract/Summary |
+|Literature |statistics       |Statistics       |
+## diseases 
+
+
+|section |field             |label             |
+|:-------|:-----------------|:-----------------|
+|Disease |id                |DiseaseEntry ID   |
+|Disease |name              |Name              |
+|Disease |acronym           |Mnemonic          |
+|Disease |definition        |Description       |
+|Disease |alternative_names |Alternative Names |
+|Disease |cross_references  |Cross Reference   |
+|Disease |keywords          |Keywords          |
+|Disease |statistics        |Statistics        |
+## locations 
+
+
+|section              |field           |label                   |
+|:--------------------|:---------------|:-----------------------|
+|Subcellular location |id              |Subcellular location ID |
+|Subcellular location |name            |Name                    |
+|Subcellular location |definition      |Description             |
+|Subcellular location |category        |Category                |
+|Subcellular location |keyword         |Keyword                 |
+|Subcellular location |synonyms        |Synonyms                |
+|Subcellular location |content         |Content                 |
+|Subcellular location |gene_ontologies |Gene Ontologies         |
+|Subcellular location |note            |Note                    |
+|Subcellular location |references      |References              |
+|Subcellular location |links           |Links                   |
+|Subcellular location |is_a            |Is a                    |
+|Subcellular location |part_of         |Is part of              |
+|Subcellular location |statistics      |Statistics              |

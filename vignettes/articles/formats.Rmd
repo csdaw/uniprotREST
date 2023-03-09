@@ -1,0 +1,61 @@
+---
+title: "Available Formats"
+---
+
+```{=html}
+<style>
+table {
+table-layout: fixed;
+}
+</style>
+```
+
+
+
+This vignette describes all the currently available file formats to download 
+using the main **uniprotREST** functions. There are 
+[more file formats](https://www.uniprot.org/help/api_queries) available via their
+website which have not yet been implemented.
+
+
+
+## map 
+
+
+|database  |format     |
+|:---------|:----------|
+|uniprotkb |fasta, tsv |
+|uniref    |fasta, tsv |
+|uniparc   |fasta, tsv |
+|other     |tsv        |
+## search 
+
+
+|database  |format     |
+|:---------|:----------|
+|uniprotkb |fasta, tsv |
+|uniref    |fasta, tsv |
+|uniparc   |fasta, tsv |
+|proteomes |tsv        |
+|taxonomy  |tsv        |
+|keywords  |tsv        |
+|citations |tsv        |
+|diseases  |tsv        |
+|locations |tsv        |
+## single 
+
+
+|database  |format           |
+|:---------|:----------------|
+|uniprotkb |fasta, json, tsv |
+|uniref    |fasta, json, tsv |
+|uniparc   |fasta, json, tsv |
+|proteomes |json, tsv        |
+|taxonomy  |json, tsv        |
+|keywords  |json, tsv        |
+|citations |json, tsv        |
+|diseases  |json, tsv        |
+|database  |json             |
+|locations |json, tsv        |
+|unirule   |json             |
+|arba      |json             |

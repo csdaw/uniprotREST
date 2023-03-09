@@ -1,0 +1,456 @@
+---
+title: "Return Fields - UniProtKB"
+---
+
+
+
+This vignette describes all the columns of data (aka return fields) you can request
+from UniProt's UniProtKB database. This is relevant for `uniprot_map()` when
+mapping _to_ UniProtKB and for `uniprot_search()` when `database = "uniprotkb"`.
+These tables have been scraped from
+[this page](https://www.uniprot.org/help/return_fields) on the UniProt website.
+
+- **field** = string to use in the `fields` argument
+- **label** = name of column that will be returned
+
+
+
+## Names & Taxonomy 
+
+
+|field          |label                      |
+|:--------------|:--------------------------|
+|accession      |Entry                      |
+|id             |Entry name                 |
+|gene_names     |Gene names                 |
+|gene_primary   |Gene names (primary)       |
+|gene_synonym   |Gene names (synonym)       |
+|gene_oln       |Gene names (ordered locus) |
+|gene_orf       |Gene names (ORF)           |
+|organism_name  |Organism                   |
+|organism_id    |Organism ID                |
+|protein_name   |Protein names              |
+|xref_proteomes |Proteomes                  |
+|lineage        |Taxonomic lineage          |
+|lineage_ids    |Taxonomic lineage (IDs)    |
+|virus_hosts    |Virus hosts                |
+## Sequences 
+
+
+|field                   |label                           |
+|:-----------------------|:-------------------------------|
+|cc_alternative_products |Alternative products            |
+|ft_var_seq              |Alternative sequence            |
+|error_gmodel_pred       |Erroneous gene model prediction |
+|fragment                |Fragment                        |
+|organelle               |Gene encoded by                 |
+|length                  |Length                          |
+|mass                    |Mass                            |
+|cc_mass_spectrometry    |Mass spectrometry               |
+|ft_variant              |Natural variant                 |
+|ft_non_cons             |Non-adjacent residues           |
+|ft_non_std              |Non-standard residue            |
+|ft_non_ter              |Non-terminal residue            |
+|cc_polymorphism         |Polymorphism                    |
+|cc_rna_editing          |RNA editing                     |
+|sequence                |Sequence                        |
+|cc_sequence_caution     |Sequence caution                |
+|ft_conflict             |Sequence conflict               |
+|ft_unsure               |Sequence uncertainty            |
+|sequence_version        |Sequence version                |
+## Function 
+
+
+|field                  |label                  |
+|:----------------------|:----------------------|
+|absorption             |Absorption             |
+|ft_act_site            |Active site            |
+|cc_activity_regulation |Activity regulation    |
+|ft_binding             |Binding site           |
+|ft_ca_bind             |Calcium binding        |
+|cc_catalytic_activity  |Catalytic activity     |
+|cc_cofactor            |Cofactor               |
+|ft_dna_bind            |DNA binding            |
+|ec                     |EC number              |
+|cc_function            |Function [CC]          |
+|kinetics               |Kinetics               |
+|ft_metal               |Metal binding          |
+|ft_np_bind             |Nucleotide binding     |
+|cc_pathway             |Pathway                |
+|ph_dependence          |pH dependence          |
+|redox_potential        |Redox potential        |
+|rhea                   |Rhea ID                |
+|ft_site                |Site                   |
+|temp_dependence        |Temperature dependence |
+## Miscellaneous 
+
+
+|field             |label              |
+|:-----------------|:------------------|
+|annotation_score  |Annotation         |
+|cc_caution        |Caution            |
+|comment_count     |Comment Count      |
+|feature_count     |Features           |
+|keywordid         |Keyword ID         |
+|keyword           |Keywords           |
+|cc_miscellaneous  |Miscellaneous [CC] |
+|protein_existence |Protein existence  |
+|reviewed          |Reviewed           |
+|tools             |Tools              |
+|uniparc_id        |UniParc            |
+## Interaction 
+
+
+|field          |label                 |
+|:--------------|:---------------------|
+|cc_interaction |Interacts with        |
+|cc_subunit     |Subunit structure[CC] |
+## Expression 
+
+
+|field                  |label               |
+|:----------------------|:-------------------|
+|cc_developmental_stage |Developmental stage |
+|cc_induction           |Induction           |
+|cc_tissue_specificity  |Tissue specificity  |
+## Gene Ontology (GO) 
+
+
+|field |label                              |
+|:-----|:----------------------------------|
+|go_p  |Gene ontology (biological process) |
+|go_c  |Gene ontology (cellular component) |
+|go    |Gene ontology (GO)                 |
+|go_f  |Gene ontology (molecular function) |
+|go_id |Gene ontology IDs                  |
+## Pathology & Biotech 
+
+
+|field                   |label                  |
+|:-----------------------|:----------------------|
+|cc_allergen             |Allergenic properties  |
+|cc_biotechnology        |Biotechnological use   |
+|cc_disruption_phenotype |Disruption phenotype   |
+|cc_disease              |Involvement in disease |
+|ft_mutagen              |Mutagenesis            |
+|cc_pharmaceutical       |Pharmaceutical use     |
+|cc_toxic_dose           |Toxic dose             |
+## Subcellular location 
+
+
+|field                   |label                    |
+|:-----------------------|:------------------------|
+|ft_intramem             |Intramembrane            |
+|cc_subcellular_location |Subcellular location[CC] |
+|ft_topo_dom             |Topological domain       |
+|ft_transmem             |Transmembrane            |
+## PTM / Processsing 
+
+
+|field       |label                           |
+|:-----------|:-------------------------------|
+|ft_chain    |Chain                           |
+|ft_crosslnk |Cross-link                      |
+|ft_disulfid |Disulfide bond                  |
+|ft_carbohyd |Glycosylation                   |
+|ft_init_met |Initiator methionine            |
+|ft_lipid    |Lipidation                      |
+|ft_mod_res  |Modified residue                |
+|ft_peptide  |Peptide                         |
+|cc_ptm      |Post-translational modification |
+|ft_propep   |Propeptide                      |
+|ft_signal   |Signal peptide                  |
+|ft_transit  |Transit peptide                 |
+## Structure 
+
+
+|field        |label       |
+|:------------|:-----------|
+|structure_3d |3D          |
+|ft_strand    |Beta strand |
+|ft_helix     |Helix       |
+|ft_turn      |Turn        |
+## Publications 
+
+
+|field         |label     |
+|:-------------|:---------|
+|lit_pubmed_id |PubMed ID |
+## Date of 
+
+
+|field                  |label                              |
+|:----------------------|:----------------------------------|
+|date_created           |Date of creation                   |
+|date_modified          |Date of last modification          |
+|date_sequence_modified |Date of last sequence modification |
+|version                |Entry version                      |
+## Family & Domains 
+
+
+|field            |label              |
+|:----------------|:------------------|
+|ft_coiled        |Coiled coil        |
+|ft_compbias      |Compositional bias |
+|cc_domain        |Domain[CC]         |
+|ft_domain        |Domain[FT]         |
+|ft_motif         |Motif              |
+|protein_families |Protein families   |
+|ft_region        |Region             |
+|ft_repeat        |Repeat             |
+|ft_zn_fing       |Zinc finger        |
+## Sequence Databases 
+
+
+|field       |label  |
+|:-----------|:------|
+|xref_ccds   |CCDS   |
+|xref_embl   |EMBL   |
+|xref_pir    |PIR    |
+|xref_refseq |RefSeq |
+## 3D Structure Databases 
+
+
+|field            |label       |
+|:----------------|:-----------|
+|xref_alphafolddb |AlphaFoldDB |
+|xref_bmrb        |BMRB        |
+|xref_pcddb       |PCDDB       |
+|xref_pdb         |PDB         |
+|xref_pdbsum      |PDBsum      |
+|xref_sasbdb      |SASBDB      |
+|xref_smr         |SMR         |
+## Protein-Protein Interaction Databases 
+
+
+|field              |label         |
+|:------------------|:-------------|
+|xref_biogrid       |BioGRID       |
+|xref_corum         |CORUM         |
+|xref_complexportal |ComplexPortal |
+|xref_dip           |DIP           |
+|xref_elm           |ELM           |
+|xref_intact        |IntAct        |
+|xref_mint          |MINT          |
+|xref_string        |STRING        |
+## Chemistry Databases 
+
+
+|field                    |label               |
+|:------------------------|:-------------------|
+|xref_bindingdb           |BindingDB           |
+|xref_chembl              |ChEMBL              |
+|xref_drugbank            |DrugBank            |
+|xref_drugcentral         |DrugCentral         |
+|xref_guidetopharmacology |GuidetoPHARMACOLOGY |
+|xref_swisslipids         |SwissLipids         |
+## Protein Family/Group Databases 
+
+
+|field             |label        |
+|:-----------------|:------------|
+|xref_allergome    |Allergome    |
+|xref_cazy         |CAZy         |
+|xref_clae         |CLAE         |
+|xref_esther       |ESTHER       |
+|xref_imgt_gene-db |IMGT_GENE-DB |
+|xref_merops       |MEROPS       |
+|xref_moondb       |MoonDB       |
+|xref_moonprot     |MoonProt     |
+|xref_peroxibase   |PeroxiBase   |
+|xref_rebase       |REBASE       |
+|xref_tcdb         |TCDB         |
+|xref_unilectin    |UniLectin    |
+## Ptm Databases 
+
+
+|field                |label           |
+|:--------------------|:---------------|
+|xref_carbonyldb      |CarbonylDB      |
+|xref_depod           |DEPOD           |
+|xref_glyconnect      |GlyConnect      |
+|xref_glygen          |GlyGen          |
+|xref_metosite        |MetOSite        |
+|xref_phosphositeplus |PhosphoSitePlus |
+|xref_swisspalm       |SwissPalm       |
+|xref_unicarbkb       |UniCarbKB       |
+|xref_iptmnet         |iPTMnet         |
+## Genetic Variation Databases 
+
+
+|field        |label   |
+|:------------|:-------|
+|xref_biomuta |BioMuta |
+|xref_dmdm    |DMDM    |
+|xref_dbsnp   |dbSNP   |
+## 2D Gel Databases 
+
+
+|field                    |label               |
+|:------------------------|:-------------------|
+|xref_compluyeast-2dpage  |COMPLUYEAST-2DPAGE  |
+|xref_dosac-cobs-2dpage   |DOSAC-COBS-2DPAGE   |
+|xref_ogp                 |OGP                 |
+|xref_reproduction-2dpage |REPRODUCTION-2DPAGE |
+|xref_swiss-2dpage        |SWISS-2DPAGE        |
+|xref_ucd-2dpage          |UCD-2DPAGE          |
+|xref_world-2dpage        |World-2DPAGE        |
+## Proteomic Databases 
+
+
+|field                  |label             |
+|:----------------------|:-----------------|
+|xref_cptac             |CPTAC             |
+|xref_epd               |EPD               |
+|xref_massive           |MassIVE           |
+|xref_maxqb             |MaxQB             |
+|xref_pride             |PRIDE             |
+|xref_paxdb             |PaxDb             |
+|xref_peptideatlas      |PeptideAtlas      |
+|xref_promex            |ProMEX            |
+|xref_proteomicsdb      |ProteomicsDB      |
+|xref_topdownproteomics |TopDownProteomics |
+|xref_jpost             |jPOST             |
+## Protocols And Materials Databases 
+
+
+|field              |label         |
+|:------------------|:-------------|
+|xref_abcd          |ABCD          |
+|xref_antibodypedia |Antibodypedia |
+|xref_cptc          |CPTC          |
+|xref_dnasu         |DNASU         |
+## Genome Annotation Databases 
+
+
+|field                            |label                       |
+|:--------------------------------|:---------------------------|
+|xref_ensembl                     |Ensembl                     |
+|xref_ensemblbacteria             |EnsemblBacteria             |
+|xref_ensemblfungi                |EnsemblFungi                |
+|xref_ensemblmetazoa              |EnsemblMetazoa              |
+|xref_ensemblplants               |EnsemblPlants               |
+|xref_ensemblprotists             |EnsemblProtists             |
+|xref_geneid                      |GeneID                      |
+|xref_gramene                     |Gramene                     |
+|xref_kegg                        |KEGG                        |
+|xref_mane-select                 |MANE-Select                 |
+|xref_patric                      |PATRIC                      |
+|xref_ucsc                        |UCSC                        |
+|xref_vectorbase                  |VectorBase                  |
+|xref_wbparasite                  |WBParaSite                  |
+|xref_wbparasitetranscriptprotein |WBParaSiteTranscriptProtein |
+## Organism-Specific Databases 
+
+
+|field              |label         |
+|:------------------|:-------------|
+|xref_arachnoserver |ArachnoServer |
+|xref_araport       |Araport       |
+|xref_cgd           |CGD           |
+|xref_ctd           |CTD           |
+|xref_conoserver    |ConoServer    |
+|xref_disgenet      |DisGeNET      |
+|xref_echobase      |EchoBASE      |
+|xref_flybase       |FlyBase       |
+|xref_genecards     |GeneCards     |
+|xref_genereviews   |GeneReviews   |
+|xref_hgnc          |HGNC          |
+|xref_hpa           |HPA           |
+|xref_legiolist     |LegioList     |
+|xref_leproma       |Leproma       |
+|xref_mgi           |MGI           |
+|xref_mim           |MIM           |
+|xref_maizegdb      |MaizeGDB      |
+|xref_malacards     |MalaCards     |
+|xref_niagads       |NIAGADS       |
+|xref_opentargets   |OpenTargets   |
+|xref_orphanet      |Orphanet      |
+|xref_pharmgkb      |PharmGKB      |
+|xref_pombase       |PomBase       |
+|xref_pseudocap     |PseudoCAP     |
+|xref_rgd           |RGD           |
+|xref_sgd           |SGD           |
+|xref_tair          |TAIR          |
+|xref_tuberculist   |TubercuList   |
+|xref_veupathdb     |VEuPathDB     |
+|xref_vgnc          |VGNC          |
+|xref_wormbase      |WormBase      |
+|xref_xenbase       |Xenbase       |
+|xref_zfin          |ZFIN          |
+|xref_dictybase     |dictyBase     |
+|xref_euhcvdb       |euHCVdb       |
+|xref_nextprot      |neXtProt      |
+## Phylogenomic Databases 
+
+
+|field           |label      |
+|:---------------|:----------|
+|xref_genetree   |GeneTree   |
+|xref_hogenom    |HOGENOM    |
+|xref_inparanoid |InParanoid |
+|xref_ko         |KO         |
+|xref_oma        |OMA        |
+|xref_orthodb    |OrthoDB    |
+|xref_phylomedb  |PhylomeDB  |
+|xref_treefam    |TreeFam    |
+|xref_eggnog     |eggNOG     |
+## Enzyme And Pathway Databases 
+
+
+|field               |label          |
+|:-------------------|:--------------|
+|xref_brenda         |BRENDA         |
+|xref_biocyc         |BioCyc         |
+|xref_pathwaycommons |PathwayCommons |
+|xref_plantreactome  |PlantReactome  |
+|xref_reactome       |Reactome       |
+|xref_sabio-rk       |SABIO-RK       |
+|xref_signor         |SIGNOR         |
+|xref_signalink      |SignaLink      |
+|xref_unipathway     |UniPathway     |
+## Miscellaneous Databases 
+
+
+|field                  |label             |
+|:----------------------|:-----------------|
+|xref_biogrid-orcs      |BioGRID-ORCS      |
+|xref_chitars           |ChiTaRS           |
+|xref_evolutionarytrace |EvolutionaryTrace |
+|xref_genewiki          |GeneWiki          |
+|xref_genomernai        |GenomeRNAi        |
+|xref_phi-base          |PHI-base          |
+|xref_pro               |PRO               |
+|xref_pharos            |Pharos            |
+|xref_rnact             |RNAct             |
+## Gene Expression Databases 
+
+
+|field                |label           |
+|:--------------------|:---------------|
+|xref_bgee            |Bgee            |
+|xref_cleanex         |CleanEx         |
+|xref_collectf        |CollecTF        |
+|xref_expressionatlas |ExpressionAtlas |
+|xref_genevisible     |Genevisible     |
+## Family And Domain Databases 
+
+
+|field         |label    |
+|:-------------|:--------|
+|xref_cdd      |CDD      |
+|xref_disprot  |DisProt  |
+|xref_gene3d   |Gene3D   |
+|xref_hamap    |HAMAP    |
+|xref_ideal    |IDEAL    |
+|xref_interpro |InterPro |
+|xref_panther  |PANTHER  |
+|xref_pirsf    |PIRSF    |
+|xref_prints   |PRINTS   |
+|xref_prosite  |PROSITE  |
+|xref_pfam     |Pfam     |
+|xref_prodom   |ProDom   |
+|xref_sfld     |SFLD     |
+|xref_smart    |SMART    |
+|xref_supfam   |SUPFAM   |
+|xref_tigrfams |TIGRFAMs |
