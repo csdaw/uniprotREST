@@ -21,7 +21,8 @@ remotes::install_github("csdaw/uniprotREST", build_vignettes = TRUE)
 
 ## Documentation
 
-Read the full docs here.
+Read the full documentation
+[here](https://csdaw.github.io/uniprotREST/articles/uniprotREST.html).
 
 ## Quick start
 
@@ -29,7 +30,7 @@ Read the full docs here.
 library(uniprotREST)
 ```
 
-### ID mapping with `uniprot_map`
+### ID mapping with `uniprot_map()`
 
 Map to/from UniProt IDs. This function wraps the [ID
 mapping](https://www.uniprot.org/help/id_mapping) API endpoint.
@@ -60,7 +61,7 @@ result
     ## 2 P12345 P12345                 GOT2    430
     ## 3 P23456 P23456                    L   2151
 
-### Querying UniProt with `uniprot_search`
+### Querying UniProt with `uniprot_search()`
 
 Perform text searches against UniProt databases. This function wraps the
 [Query](https://www.uniprot.org/help/api_queries) API endpoint.
@@ -90,7 +91,7 @@ head(result)
     ## 5 P25063                 CD24
     ## 6 P31358                 CD52
 
-### Retrieving an entry with `uniprot_single`
+### Retrieving an entry with `uniprot_single()`
 
 Download the full entry for a single protein. This function wraps the
 [Retrieve](https://www.uniprot.org/help/api_retrieve_entries) API
@@ -123,7 +124,7 @@ str(result, max.level = 1)
     ##  $ features                :List of 36
     ##  $ keywords                :List of 14
     ##  $ references              :List of 19
-    ##  $ uniProtKBCrossReferences:List of 178
+    ##  $ uniProtKBCrossReferences:List of 179
     ##  $ sequence                :List of 5
     ##  $ extraAttributes         :List of 3
 
@@ -132,7 +133,8 @@ str(result, max.level = 1)
 - Please [report any issues or
   bugs](https://github.com/csdaw/uniprotREST/issues) ideally with a
   [reproducible example](https://reprex.tidyverse.org/)
-- This project is released with a Contributor Code of Conduct. By
+- This project is released with a [Contributor Code of
+  Conduct](https://pkgdown.r-lib.org/CODE_OF_CONDUCT.html). By
   participating in this project you agree to abide by its terms.
 - Author: Charlotte Dawson
 - License: MIT

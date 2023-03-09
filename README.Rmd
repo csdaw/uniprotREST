@@ -20,7 +20,7 @@ remotes::install_github("csdaw/uniprotREST", build_vignettes = TRUE)
 
 ## Documentation
 
-Read the full docs here.
+Read the full documentation [here](https://csdaw.github.io/uniprotREST/articles/uniprotREST.html).
 
 ## Quick start
 
@@ -28,7 +28,7 @@ Read the full docs here.
 library(uniprotREST)
 ```
 
-### ID mapping with `uniprot_map`
+### ID mapping with `uniprot_map()`
 
 Map to/from UniProt IDs. This function wraps the 
 [ID mapping](https://www.uniprot.org/help/id_mapping) API endpoint.
@@ -49,7 +49,7 @@ result <- uniprot_map(
 result
 ```
 
-### Querying UniProt with `uniprot_search`
+### Querying UniProt with `uniprot_search()`
 
 Perform text searches against UniProt databases.
 This function wraps the [Query](https://www.uniprot.org/help/api_queries) 
@@ -68,7 +68,7 @@ result <- uniprot_search(
 head(result)
 ```
 
-### Retrieving an entry with `uniprot_single`
+### Retrieving an entry with `uniprot_single()`
 
 Download the full entry for a single protein. This function wraps the 
 [Retrieve](https://www.uniprot.org/help/api_retrieve_entries) API endpoint.
@@ -89,7 +89,7 @@ str(result, max.level = 1)
 
 - Please [report any issues or bugs](https://github.com/csdaw/uniprotREST/issues)
   ideally with a [reproducible example](https://reprex.tidyverse.org/)
-- This project is released with a Contributor Code of Conduct. By participating
-  in this project you agree to abide by its terms.
+- This project is released with a [Contributor Code of Conduct](https://pkgdown.r-lib.org/CODE_OF_CONDUCT.html). 
+  By participating in this project you agree to abide by its terms.
 - Author: Charlotte Dawson
 - License: MIT
