@@ -43,6 +43,15 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/formats.html">Available Formats</a>
+    <a class="dropdown-item" href="articles/map_dbs.html">Map Databases</a>
+    <a class="dropdown-item" href="articles/return_fields_other.html">Return Fields - Other Databases</a>
+    <a class="dropdown-item" href="articles/return_fields_uniprot.html">Return Fields - UniProtKB</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
@@ -74,7 +83,7 @@
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<p>Read the full docs here.</p>
+<p>Read the full documentation <a href="https://csdaw.github.io/uniprotREST/articles/uniprotREST.html" class="external-link">here</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
@@ -82,7 +91,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">uniprotREST</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
-<h3 id="id-mapping-with-uniprot_map">ID mapping with <code>uniprot_map</code>
+<h3 id="id-mapping-with-uniprot_map">ID mapping with <code>uniprot_map()</code>
 <a class="anchor" aria-label="anchor" href="#id-mapping-with-uniprot_map"></a>
 </h3>
 <p>Map to/from UniProt IDs. This function wraps the <a href="https://www.uniprot.org/help/id_mapping" class="external-link">ID mapping</a> API endpoint.</p>
@@ -108,7 +117,7 @@
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 P23456 P23456                    L   2151</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="querying-uniprot-with-uniprot_search">Querying UniProt with <code>uniprot_search</code>
+<h3 id="querying-uniprot-with-uniprot_search">Querying UniProt with <code>uniprot_search()</code>
 <a class="anchor" aria-label="anchor" href="#querying-uniprot-with-uniprot_search"></a>
 </h3>
 <p>Perform text searches against UniProt databases. This function wraps the <a href="https://www.uniprot.org/help/api_queries" class="external-link">Query</a> API endpoint.</p>
@@ -133,7 +142,7 @@
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 P31358                 CD52</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="retrieving-an-entry-with-uniprot_single">Retrieving an entry with <code>uniprot_single</code>
+<h3 id="retrieving-an-entry-with-uniprot_single">Retrieving an entry with <code>uniprot_single()</code>
 <a class="anchor" aria-label="anchor" href="#retrieving-an-entry-with-uniprot_single"></a>
 </h3>
 <p>Download the full entry for a single protein. This function wraps the <a href="https://www.uniprot.org/help/api_retrieve_entries" class="external-link">Retrieve</a> API endpoint.</p>
@@ -162,7 +171,7 @@
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ features                :List of 36</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ keywords                :List of 14</span></span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ references              :List of 19</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ uniProtKBCrossReferences:List of 178</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ uniProtKBCrossReferences:List of 179</span></span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ sequence                :List of 5</span></span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ extraAttributes         :List of 3</span></span></code></pre></div>
 </div>
@@ -173,7 +182,7 @@
 <ul>
 <li>Please <a href="https://github.com/csdaw/uniprotREST/issues" class="external-link">report any issues or bugs</a> ideally with a <a href="https://reprex.tidyverse.org/" class="external-link">reproducible example</a>
 </li>
-<li>This project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms.</li>
+<li>This project is released with a <a href="https://pkgdown.r-lib.org/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</li>
 <li>Author: Charlotte Dawson</li>
 <li>License: MIT</li>
 </ul>

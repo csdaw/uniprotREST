@@ -2,6 +2,10 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  formats: formats.html
+  map_dbs: map_dbs.html
+  return_fields_other: return_fields_other.html
+  return_fields_uniprot: return_fields_uniprot.html
   uniprotREST: uniprotREST.html
-last_built: 2023-01-24T16:36Z
+last_built: 2023-03-09T17:06Z
 

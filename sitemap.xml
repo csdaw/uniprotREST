@@ -7,7 +7,19 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/articles/formats.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/map_dbs.html</loc>
+  </url>
+  <url>
+    <loc>/articles/return_fields_other.html</loc>
+  </url>
+  <url>
+    <loc>/articles/return_fields_uniprot.html</loc>
   </url>
   <url>
     <loc>/articles/uniprotREST.html</loc>
