@@ -118,7 +118,7 @@ uniprot_map <- function(ids,
   ## Construct a status (HEAD) request
   status_req <- uniprot_request(
     url = paste0("https://rest.uniprot.org/idmapping/status/", job_id),
-    method = "HEAD",
+    method = "HEAD"
   ) %>%
     # UniProt returns status 200 while job is still running and
     # status 303 when job is complete.

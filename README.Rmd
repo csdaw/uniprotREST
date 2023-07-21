@@ -89,7 +89,7 @@ str(result, max.level = 1)
 
 - Please [report any issues or bugs](https://github.com/csdaw/uniprotREST/issues)
   ideally with a [reproducible example](https://reprex.tidyverse.org/)
-- This project is released with a [Contributor Code of Conduct](https://pkgdown.r-lib.org/CODE_OF_CONDUCT.html). 
+- This project is released with a [Contributor Code of Conduct](https://csdaw.github.io/uniprotREST/code_of_conduct.html). 
   By participating in this project you agree to abide by its terms.
 - Author: Charlotte Dawson
 - License: MIT

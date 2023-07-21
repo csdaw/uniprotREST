@@ -49,7 +49,7 @@ result <- uniprot_map(
 )
 ```
 
-    ## Running job: fb7778b417ab8f889e11f4ffb4a602bf8fecef13 
+    ## Running job: 90889074746482f892eea3ec45ebac4779dbc1c6 
     ##  Downloading: page 1 of 1
 
 ``` r
@@ -134,7 +134,7 @@ str(result, max.level = 1)
   bugs](https://github.com/csdaw/uniprotREST/issues) ideally with a
   [reproducible example](https://reprex.tidyverse.org/)
 - This project is released with a [Contributor Code of
-  Conduct](https://pkgdown.r-lib.org/CODE_OF_CONDUCT.html). By
+  Conduct](https://csdaw.github.io/uniprotREST/code_of_conduct.html). By
   participating in this project you agree to abide by its terms.
 - Author: Charlotte Dawson
 - License: MIT
