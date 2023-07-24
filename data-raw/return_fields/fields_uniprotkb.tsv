@@ -156,6 +156,7 @@
 "uniprotkb"	"PTM Databases"	"xref_phosphositeplus"	"PhosphoSitePlus"
 "uniprotkb"	"PTM Databases"	"xref_swisspalm"	"SwissPalm"
 "uniprotkb"	"PTM Databases"	"xref_iptmnet"	"iPTMnet"
+"uniprotkb"	"PTM Databases"	"xref_unicarbkb"	"UniCarbKB"
 "uniprotkb"	"Genetic Variation Databases"	"xref_biomuta"	"BioMuta"
 "uniprotkb"	"Genetic Variation Databases"	"xref_dmdm"	"DMDM"
 "uniprotkb"	"Genetic Variation Databases"	"xref_dbsnp"	"dbSNP"

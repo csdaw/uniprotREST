@@ -57,13 +57,16 @@ tables3 <- lapply(tables2, function(i) {
 })
 head(tables3)
 
+# add unicarbkb manually for now (need it for thesis)
+unicarbkb <- tibble_row(database = "uniprotkb", section = "PTM Databases", field = "xref_unicarbkb", label = "UniCarbKB")
+
 out <- purrr::map_df(tables3, c, .id = "section") %>%
   `colnames<-`(c("section", "label", "old_field", "field")) %>%
   filter(field != "\\<does not exist\\>") %>%
   mutate(field = gsub(" \\\\", "", field),
          database = "uniprotkb") %>%
-  select(database, section, field, label)
-
+  select(database, section, field, label) %>%
+  add_row(unicarbkb, .after = 157)
 
 # Save to tsv
 write.table(

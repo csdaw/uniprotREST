@@ -5,7 +5,7 @@
 \alias{return_fields}
 \title{(Dataset) UniProt return fields}
 \format{
-An object of class \code{data.frame} with 389 rows and 4 columns.
+An object of class \code{data.frame} with 390 rows and 4 columns.
 }
 \source{
 UniProtKB return fields have been scraped from the
