@@ -47,7 +47,9 @@ Here we just use the default settings, which will map the IDs from
 
 ```r
 result1 <- uniprot_map(ids = aoi)
-## Running job: aa29fe3eb9b54ec1e3bff6890465804ef3085fc6 
+## Running job: 30b29a9ff6a8afbb177c3cd24d2860825a383978 
+## Checking job status...
+## Job complete!
 ##  Downloading: page 1 of 1
 ```
 
@@ -68,7 +70,7 @@ head(result1)
 ## 2                                           RNA helicase (EC 3.6.4.13)
 ## 3 ATP-dependent RNA helicase DHX33 (EC 3.6.4.13) (DEAH box protein 33)
 ##    Gene.Names                Organism Length
-## 1  Rig1 Ddx58 Rattus norvegicus (Rat)    881
+## 1        Rig1 Rattus norvegicus (Rat)    881
 ## 2    Eif4a3l2    Mus musculus (Mouse)    411
 ## 3 DHX33 DDX33    Homo sapiens (Human)    707
 ```
@@ -97,13 +99,15 @@ UniProt has a lot of metadata available for each protein. You can access
 this in the results by requesting different columns or 'return fields' using
 the `fields` argument.
 
-Here we will request some different return fields. See the X page
-for the list of all available `fields`.
+Here we will request some different return fields. See
+[Return Fields - UniProt](https://csdaw.github.io/uniprotREST/articles/01_return_fields_uniprot.html)
+and [Return Fields - Other](https://csdaw.github.io/uniprotREST/articles/02_return_fields_other.html)
+for lists of all available `fields`.
 
 
 ```r
-# Jobs are stored for 7 days so this time
-# it will be quicker!
+# Jobs are stored for 7 days
+# so subsequent queries will be faster
 result2 <- uniprot_map(
   ids = aoi,
   fields = c(
@@ -113,7 +117,9 @@ result2 <- uniprot_map(
     "mass"
   )
 )
-## Running job: aa29fe3eb9b54ec1e3bff6890465804ef3085fc6 
+## Running job: 30b29a9ff6a8afbb177c3cd24d2860825a383978 
+## Checking job status...
+## Job complete!
 ##  Downloading: page 1 of 1
 ```
 
@@ -129,8 +135,8 @@ head(result2)
 ### From/to database
 
 `uniprot_map()` can be used to map IDs from other databases to UniProt IDs,
-and vice-versa. See the X page for a list of databases available for mapping,
-and X page for the rules of which databases can be mapped to what.
+and vice-versa. See [Databases](https://csdaw.github.io/uniprotREST/articles/03_databases.html) for a list of databases available for mapping,
+and [From/to Rules](https://csdaw.github.io/uniprotREST/reference/from_to_rules.html) for the rules of which databases can be mapped to what.
 
 Here we'll map some Ensembl gene IDs to _reviewed_ UniProtKB accessions.
 
@@ -150,7 +156,9 @@ result3 <- uniprot_map(
   to = "UniProtKB-Swiss-Prot",
   fields = c("accession", "gene_primary")
 )
-## Running job: 03772c110ee17372f3dc29049d1ff9fa50105fad 
+## Running job: fcc9728d59b6c0e3f618d5cf59445fc83d359a9a 
+## Checking job status...
+## Job complete!
 ##  Downloading: page 1 of 1
 ```
 
@@ -166,12 +174,13 @@ head(result3)
 
 The UniProt REST API can deliver results in different data formats. The
 formats available depends on the database being accessed and the **uniprotREST**
-function being used. See the X page for a full list of available formats.
+function being used. See [Formats](https://csdaw.github.io/uniprotREST/articles/04_formats.html) for a full list of available formats.
 
 The **uniprotREST** wrapper functions do not support all formats yet. Each tool
 currently supports the following formats:
 
-- `uniprot_map()` and `uniprot_search()` = `tsv, fasta`
+- `uniprot_map()` = `tsv, fasta`
+- `uniprot_search()` = `tsv, fasta`
 - `uniprot_single()` = `tsv, fasta, json`
 
 Here we'll re-use the `result3` job above, but request the FASTA protein
@@ -186,7 +195,9 @@ result4 <- uniprot_map(
   to = "UniProtKB-Swiss-Prot",
   format = "fasta"
 )
-## Running job: 03772c110ee17372f3dc29049d1ff9fa50105fad 
+## Running job: fcc9728d59b6c0e3f618d5cf59445fc83d359a9a 
+## Checking job status...
+## Job complete!
 ##  Downloading: page 1 of 1
 ```
 
@@ -221,7 +232,9 @@ uniprot_map(
   format = "tsv",
   path = tmp
 )
-## Running job: 03772c110ee17372f3dc29049d1ff9fa50105fad 
+## Running job: fcc9728d59b6c0e3f618d5cf59445fc83d359a9a 
+## Checking job status...
+## Job complete!
 ##  Downloading: page 1 of 1
 
 # Check file contents
@@ -252,7 +265,9 @@ result5 <- uniprot_map(
   format = "fasta",
   isoform = TRUE
 )
-## Running job: 8589ca2e878ae84053759d9161aabd9006a79c6d 
+## Running job: 5feb5aff87ab072e97ab3ab620e270f19b36e103 
+## Checking job status...
+## Job complete!
 ##  Downloading: page 1 of 1
 ```
 
@@ -309,8 +324,10 @@ uniprot_map(
   path = tmp,
   compressed = TRUE
 )
-## Running job: 8589ca2e878ae84053759d9161aabd9006a79c6d 
-## Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 420 B     Downloading: 420 B     Downloading: 420 B     Downloading: 420 B
+## Running job: 5feb5aff87ab072e97ab3ab620e270f19b36e103 
+## Checking job status...
+## Job complete!
+## Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 0 B     Downloading: 420 B     Downloading: 420 B     Downloading: 420 B     Downloading: 420 B
 
 # Check file contents
 Biostrings::readAAStringSet(tmp)
@@ -339,7 +356,7 @@ purposes if you are getting `400 - Bad request` status errors.
 
 This function is used to perform text searches against UniProt, akin to using
 the search bar on their website. The different databases available from the
-search bar are also available via `uniprot_search()` (see page x).
+search bar are also available via `uniprot_search()` (see [Databases](https://csdaw.github.io/uniprotREST/articles/03_databases.html)).
 
 It's very important that the search string is constructed correctly, see
 [this page](https://www.uniprot.org/help/text-search) for help building queries.
@@ -393,17 +410,17 @@ head(result7)
 ##   Proteome.Id
 ## 1 UP000252519
 ## 2 UP000645828
-## 3 UP000002254
+## 3 UP000805418
 ## 4 UP000029752
 ## 5 UP000201396
-## 6 UP000792793
+## 6 UP000277561
 ##                                                                                            Organism
 ## 1                                                                Ancylostoma caninum (Dog hookworm)
 ## 2                                       Nyctereutes procyonoides (Raccoon dog) (Canis procyonoides)
 ## 3                                                   Canis lupus familiaris (Dog) (Canis familiaris)
 ## 4 Cadicivirus A (isolate Dog/Hong Kong/209/2008) (CaPdV-1) (Canine picodicistrovirus (isolate 209))
 ## 5                                                                             Raccoon dog amdovirus
-## 6                                               Lycaon pictus (African wild dog) (Cape hunting dog)
+## 6                                                                  Human associated gemykibivirus 2
 ```
 
 ## 3. Retrieving an entry with `uniprot_single`
@@ -441,14 +458,14 @@ str(result8, max.level = 1)
 ##  $ features                :List of 36
 ##  $ keywords                :List of 14
 ##  $ references              :List of 19
-##  $ uniProtKBCrossReferences:List of 178
+##  $ uniProtKBCrossReferences:List of 179
 ##  $ sequence                :List of 5
 ##  $ extraAttributes         :List of 3
 ```
 
 
 Again, there are other UniProt databases available apart from UniProtKB
-(see X page for a full list of databases).
+(see [Databases](https://csdaw.github.io/uniprotREST/articles/03_databases.html)).
 
 For example UniParc:
 
@@ -470,5 +487,5 @@ str(result9, max.level = 1)
 ##  $ sequence                 :List of 5
 ##  $ sequenceFeatures         :List of 7
 ##  $ oldestCrossRefCreated    : chr "2010-03-03"
-##  $ mostRecentCrossRefUpdated: chr "2022-12-14"
+##  $ mostRecentCrossRefUpdated: chr "2023-06-28"
 ```
