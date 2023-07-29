@@ -10,7 +10,7 @@ Authors@R:
 Description: Simple functions to access the UniProt website REST API. Wraps
     httr2 functions to easily map IDs and query all available databases.
 License: MIT + file LICENSE
-URL: https://csdaw.github.io/uniprotREST, https://github.com/csdaw/uniprotREST
+URL: https://csdaw.github.io/uniprotREST/, https://github.com/csdaw/uniprotREST
 BugReports: https://github.com/csdaw/uniprotREST/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
