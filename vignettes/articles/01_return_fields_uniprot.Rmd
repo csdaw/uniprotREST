@@ -21,12 +21,12 @@ These tables have been scraped from
 |field          |label                      |
 |:--------------|:--------------------------|
 |accession      |Entry                      |
-|id             |Entry name                 |
-|gene_names     |Gene names                 |
-|gene_primary   |Gene names (primary)       |
-|gene_synonym   |Gene names (synonym)       |
-|gene_oln       |Gene names (ordered locus) |
-|gene_orf       |Gene names (ORF)           |
+|id             |Entry Name                 |
+|gene_names     |Gene Names                 |
+|gene_primary   |Gene Names (primary)       |
+|gene_synonym   |Gene Names (synonym)       |
+|gene_oln       |Gene Names (ordered locus) |
+|gene_orf       |Gene Names (ORF)           |
 |organism_name  |Organism                   |
 |organism_id    |Organism ID                |
 |protein_name   |Protein names              |
@@ -67,15 +67,12 @@ These tables have been scraped from
 |ft_act_site            |Active site            |
 |cc_activity_regulation |Activity regulation    |
 |ft_binding             |Binding site           |
-|ft_ca_bind             |Calcium binding        |
 |cc_catalytic_activity  |Catalytic activity     |
 |cc_cofactor            |Cofactor               |
 |ft_dna_bind            |DNA binding            |
 |ec                     |EC number              |
 |cc_function            |Function [CC]          |
 |kinetics               |Kinetics               |
-|ft_metal               |Metal binding          |
-|ft_np_bind             |Nucleotide binding     |
 |cc_pathway             |Pathway                |
 |ph_dependence          |pH dependence          |
 |redox_potential        |Redox potential        |
@@ -261,19 +258,19 @@ These tables have been scraped from
 |xref_rebase       |REBASE       |
 |xref_tcdb         |TCDB         |
 |xref_unilectin    |UniLectin    |
-## Ptm Databases 
+## PTM Databases 
 
 
 |field                |label           |
 |:--------------------|:---------------|
 |xref_carbonyldb      |CarbonylDB      |
 |xref_depod           |DEPOD           |
+|xref_glycosmos       |GlyCosmos       |
 |xref_glyconnect      |GlyConnect      |
 |xref_glygen          |GlyGen          |
 |xref_metosite        |MetOSite        |
 |xref_phosphositeplus |PhosphoSitePlus |
 |xref_swisspalm       |SwissPalm       |
-|xref_unicarbkb       |UniCarbKB       |
 |xref_iptmnet         |iPTMnet         |
 ## Genetic Variation Databases 
 
@@ -345,6 +342,7 @@ These tables have been scraped from
 
 |field              |label         |
 |:------------------|:-------------|
+|xref_agr           |AGR           |
 |xref_arachnoserver |ArachnoServer |
 |xref_araport       |Araport       |
 |xref_cgd           |CGD           |

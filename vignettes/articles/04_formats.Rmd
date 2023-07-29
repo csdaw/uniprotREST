@@ -12,8 +12,8 @@ table-layout: fixed;
 
 
 
-This vignette describes all the currently available file formats to download 
-using the main **uniprotREST** functions. There are 
+This vignette describes all the currently available file formats to download
+using the main **uniprotREST** functions. There are
 [more file formats](https://www.uniprot.org/help/api_queries) available via their
 website which have not yet been implemented.
 
