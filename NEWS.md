@@ -1,3 +1,4 @@
-# Version 0.0.0.9000
+# uniprotREST 1.0.0
 
-- Added a `NEWS.md` file to track changes to the package.
+- Initial release. 3 main functions: `uniprot_map()`, `uniprot_search()`, and
+`uniprot_single()`. Only `tsv`, `json` or `fasta` formats available.
