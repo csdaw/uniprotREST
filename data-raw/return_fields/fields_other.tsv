@@ -42,7 +42,7 @@ proteomes	Names & Taxonomy	organism_id	Organism Id
 proteomes	Names & Taxonomy	components	Components
 proteomes	Names & Taxonomy	mnemonic	Taxon mnemonic
 proteomes	Names & Taxonomy	lineage	Taxonomic lineage
-proteomes	Names & Taxonomy	busco	BUSCO
+proteomes	Miscellaneous	busco	BUSCO
 proteomes	Miscellaneous	cpd	CPD
 proteomes	Miscellaneous	genome_assembly	Genome assembly ID
 proteomes	Miscellaneous	genome_representation	Genome representation
