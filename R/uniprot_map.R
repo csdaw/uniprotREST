@@ -131,7 +131,9 @@ uniprot_map <- function(ids,
     )
 
   ## Make status (HEAD) request
+  vcat("Checking job status...\n", verbosity = verbosity, null_prints = TRUE)
   status_resp <- httr2::req_perform(status_req, verbosity = verbosity)
+  vcat("Job complete!\n", verbosity = verbosity, null_prints = TRUE)
 
   ## Construct URL for GET request (depends on method)
   result_url <- switch(
