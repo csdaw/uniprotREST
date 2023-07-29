@@ -16,7 +16,7 @@ API](https://www.uniprot.org/help/api).
 Install the latest development version from GitHub:
 
 ``` r
-remotes::install_github("csdaw/uniprotREST", build_vignettes = TRUE)
+remotes::install_github("csdaw/uniprotREST")
 ```
 
 ## Documentation
@@ -50,6 +50,8 @@ result <- uniprot_map(
 ```
 
     ## Running job: 90889074746482f892eea3ec45ebac4779dbc1c6 
+    ## Checking job status...
+    ## Job complete!
     ##  Downloading: page 1 of 1
 
 ``` r

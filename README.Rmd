@@ -15,7 +15,7 @@ This package provides an R wrapper for the
 Install the latest development version from GitHub:
 
 ```{r, eval=FALSE}
-remotes::install_github("csdaw/uniprotREST", build_vignettes = TRUE)
+remotes::install_github("csdaw/uniprotREST")
 ```
 
 ## Documentation
