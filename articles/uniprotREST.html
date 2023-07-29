@@ -44,10 +44,10 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/formats.html">Available Formats</a>
-    <a class="dropdown-item" href="../articles/map_dbs.html">Map Databases</a>
-    <a class="dropdown-item" href="../articles/return_fields_other.html">Return Fields - Other Databases</a>
-    <a class="dropdown-item" href="../articles/return_fields_uniprot.html">Return Fields - UniProtKB</a>
+    <a class="dropdown-item" href="../articles/01_return_fields_uniprot.html">Return Fields - UniProtKB</a>
+    <a class="dropdown-item" href="../articles/02_return_fields_other.html">Return Fields - Other Databases</a>
+    <a class="dropdown-item" href="../articles/03_databases.html">Databases</a>
+    <a class="dropdown-item" href="../articles/04_formats.html">Formats</a>
   </div>
 </li>
 <li class="nav-item">
@@ -115,9 +115,11 @@ to find this out.</p>
 <code>UniProtKB_AC-ID</code> to <code>UniProtKB</code>, and output a
 dataframe.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>result1 <span class="ot">&lt;-</span> <span class="fu">uniprot_map</span>(<span class="at">ids =</span> aoi)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: aa29fe3eb9b54ec1e3bff6890465804ef3085fc6 </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 30b29a9ff6a8afbb177c3cd24d2860825a383978 </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
 <p>The job ID is automatically printed (stop printing by setting the
 <code>verbosity</code> argument to 0). Job IDs and the job data are kept
 by UniProt for approximately 7 days, and are then deleted.</p>
@@ -133,7 +135,7 @@ by UniProt for approximately 7 days, and are then deleted.</p>
 <span><span class="co">## 2                                           RNA helicase (EC 3.6.4.13)</span></span>
 <span><span class="co">## 3 ATP-dependent RNA helicase DHX33 (EC 3.6.4.13) (DEAH box protein 33)</span></span>
 <span><span class="co">##    Gene.Names                Organism Length</span></span>
-<span><span class="co">## 1  Rig1 Ddx58 Rattus norvegicus (Rat)    881</span></span>
+<span><span class="co">## 1        Rig1 Rattus norvegicus (Rat)    881</span></span>
 <span><span class="co">## 2    Eif4a3l2    Mus musculus (Mouse)    411</span></span>
 <span><span class="co">## 3 DHX33 DDX33    Homo sapiens (Human)    707</span></span></code></pre></div>
 <p>By default, the output will be a dataframe with 8 columns:</p>
@@ -170,10 +172,11 @@ argument.</p>
 <p>UniProt has a lot of metadata available for each protein. You can
 access this in the results by requesting different columns or ‘return
 fields’ using the <code>fields</code> argument.</p>
-<p>Here we will request some different return fields. See the X page for
-the list of all available <code>fields</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Jobs are stored for 7 days so this time</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it will be quicker!</span></span>
+<p>Here we will request some different return fields. See <a href="https://csdaw.github.io/uniprotREST/articles/01_return_fields_uniprot.html" class="external-link">Return
+Fields - UniProt</a> and <a href="https://csdaw.github.io/uniprotREST/articles/02_return_fields_other.html" class="external-link">Return
+Fields - Other</a> for lists of all available <code>fields</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Jobs are stored for 7 days</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># so subsequent queries will be faster</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>result2 <span class="ot">&lt;-</span> <span class="fu">uniprot_map</span>(</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ids =</span> aoi,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fields =</span> <span class="fu">c</span>(</span>
@@ -183,9 +186,11 @@ the list of all available <code>fields</code>.</p>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mass"</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: aa29fe3eb9b54ec1e3bff6890465804ef3085fc6 </span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 30b29a9ff6a8afbb177c3cd24d2860825a383978 </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">result2</span><span class="op">)</span></span>
 <span><span class="co">##         From Gene.Names..primary.                Organism Length   Mass</span></span>
@@ -197,9 +202,9 @@ the list of all available <code>fields</code>.</p>
 <h3 id="fromto-database">From/to database<a class="anchor" aria-label="anchor" href="#fromto-database"></a>
 </h3>
 <p><code><a href="../reference/uniprot_map.html">uniprot_map()</a></code> can be used to map IDs from other
-databases to UniProt IDs, and vice-versa. See the X page for a list of
-databases available for mapping, and X page for the rules of which
-databases can be mapped to what.</p>
+databases to UniProt IDs, and vice-versa. See <a href="https://csdaw.github.io/uniprotREST/articles/03_databases.html" class="external-link">Databases</a>
+for a list of databases available for mapping, and <a href="https://csdaw.github.io/uniprotREST/reference/from_to_rules.html" class="external-link">From/to
+Rules</a> for the rules of which databases can be mapped to what.</p>
 <p>Here we’ll map some Ensembl gene IDs to <em>reviewed</em> UniProtKB
 accessions.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -213,9 +218,11 @@ a UniProtKB, UniRef, or UniParc database.</p>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">"UniProtKB-Swiss-Prot"</span>,</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fields =</span> <span class="fu">c</span>(<span class="st">"accession"</span>, <span class="st">"gene_primary"</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 03772c110ee17372f3dc29049d1ff9fa50105fad </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: fcc9728d59b6c0e3f618d5cf59445fc83d359a9a </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">result3</span><span class="op">)</span></span>
 <span><span class="co">##              From  Entry Gene.Names..primary.</span></span>
@@ -227,14 +234,16 @@ a UniProtKB, UniRef, or UniParc database.</p>
 </h3>
 <p>The UniProt REST API can deliver results in different data formats.
 The formats available depends on the database being accessed and the
-<strong>uniprotREST</strong> function being used. See the X page for a
-full list of available formats.</p>
+<strong>uniprotREST</strong> function being used. See <a href="https://csdaw.github.io/uniprotREST/articles/04_formats.html" class="external-link">Formats</a>
+for a full list of available formats.</p>
 <p>The <strong>uniprotREST</strong> wrapper functions do not support all
 formats yet. Each tool currently supports the following formats:</p>
 <ul>
 <li>
-<code><a href="../reference/uniprot_map.html">uniprot_map()</a></code> and <code><a href="../reference/uniprot_search.html">uniprot_search()</a></code> =
-<code>tsv, fasta</code>
+<code><a href="../reference/uniprot_map.html">uniprot_map()</a></code> = <code>tsv, fasta</code>
+</li>
+<li>
+<code><a href="../reference/uniprot_search.html">uniprot_search()</a></code> = <code>tsv, fasta</code>
 </li>
 <li>
 <code><a href="../reference/uniprot_single.html">uniprot_single()</a></code> = <code>tsv, fasta, json</code>
@@ -251,9 +260,11 @@ is installed (highly recommended) the output will be a
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">"UniProtKB-Swiss-Prot"</span>,</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"fasta"</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 03772c110ee17372f3dc29049d1ff9fa50105fad </span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: fcc9728d59b6c0e3f618d5cf59445fc83d359a9a </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result4</span></span>
 <span><span class="co">## AAStringSet object of length 2:</span></span>
@@ -281,15 +292,17 @@ not already exist otherwise an error is thrown.</p>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"tsv"</span>,</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> tmp</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 03772c110ee17372f3dc29049d1ff9fa50105fad </span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Check file contents</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="fu">read.delim</span>(tmp)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">##              From  Entry Gene.Names..primary.</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 ENSG00000088247 Q92945                KHSRP</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 ENSG00000162613 Q96AE4                FUBP1</span></span></code></pre></div>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: fcc9728d59b6c0e3f618d5cf59445fc83d359a9a </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Check file contents</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">read.delim</span>(tmp)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">##              From  Entry Gene.Names..primary.</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 ENSG00000088247 Q92945                KHSRP</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 ENSG00000162613 Q96AE4                FUBP1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-arguments">Other arguments<a class="anchor" aria-label="anchor" href="#other-arguments"></a>
@@ -310,9 +323,11 @@ exceptions.</p>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"fasta"</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">isoform =</span> <span class="cn">TRUE</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 8589ca2e878ae84053759d9161aabd9006a79c6d </span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 5feb5aff87ab072e97ab3ab620e270f19b36e103 </span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a> Downloading<span class="sc">:</span> page <span class="dv">1</span> of <span class="dv">1</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result5</span></span>
 <span><span class="co">## AAStringSet object of length 2:</span></span>
@@ -367,27 +382,26 @@ default, and it is only used if <code>method = "stream"</code> and
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">path =</span> tmp,</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">compressed =</span> <span class="cn">TRUE</span></span>
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 8589ca2e878ae84053759d9161aabd9006a79c6d </span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Running job: 5feb5aff87ab072e97ab3ab620e270f19b36e103 </span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking job status...</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Job complete!</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">0</span> B     </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">420</span> B     </span>
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">420</span> B     </span>
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">420</span> B     </span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">420</span> B     </span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">420</span> B</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Check file contents</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>Biostrings<span class="sc">::</span><span class="fu">readAAStringSet</span>(tmp)</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="do">## AAStringSet object of length 2:</span></span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="do">##     width seq                                               names               </span></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]   335 MGKVKVGVNGFGRIGRLVTRAAF...WYDNEFGYSNRVVDLMAHMASKE sp|P04406|G3P_HUM...</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="do">## [2]   293 MVYMFQYDSTHGKFHGTVKAENG...WYDNEFGYSNRVVDLMAHMASKE sp|P04406-2|G3P_H...</span></span></code></pre></div>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span> <span class="dv">420</span> B</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Check file contents</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>Biostrings<span class="sc">::</span><span class="fu">readAAStringSet</span>(tmp)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="do">## AAStringSet object of length 2:</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="do">##     width seq                                               names               </span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="do">## [1]   335 MGKVKVGVNGFGRIGRLVTRAAF...WYDNEFGYSNRVVDLMAHMASKE sp|P04406|G3P_HUM...</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="do">## [2]   293 MVYMFQYDSTHGKFHGTVKAENG...WYDNEFGYSNRVVDLMAHMASKE sp|P04406-2|G3P_H...</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="verbosity">Verbosity<a class="anchor" aria-label="anchor" href="#verbosity"></a>
@@ -416,7 +430,7 @@ getting <code>400 - Bad request</code> status errors.</p>
 <p>This function is used to perform text searches against UniProt, akin
 to using the search bar on their website. The different databases
 available from the search bar are also available via
-<code><a href="../reference/uniprot_search.html">uniprot_search()</a></code> (see page x).</p>
+<code><a href="../reference/uniprot_search.html">uniprot_search()</a></code> (see <a href="https://csdaw.github.io/uniprotREST/articles/03_databases.html" class="external-link">Databases</a>).</p>
 <p>It’s very important that the search string is constructed correctly,
 see <a href="https://www.uniprot.org/help/text-search" class="external-link">this page</a> for
 help building queries. If you get a <code>400 - Bad request</code>
@@ -457,17 +471,17 @@ with the word ‘dog’ in their title.</p>
 <span><span class="co">##   Proteome.Id</span></span>
 <span><span class="co">## 1 UP000252519</span></span>
 <span><span class="co">## 2 UP000645828</span></span>
-<span><span class="co">## 3 UP000002254</span></span>
+<span><span class="co">## 3 UP000805418</span></span>
 <span><span class="co">## 4 UP000029752</span></span>
 <span><span class="co">## 5 UP000201396</span></span>
-<span><span class="co">## 6 UP000792793</span></span>
+<span><span class="co">## 6 UP000277561</span></span>
 <span><span class="co">##                                                                                            Organism</span></span>
 <span><span class="co">## 1                                                                Ancylostoma caninum (Dog hookworm)</span></span>
 <span><span class="co">## 2                                       Nyctereutes procyonoides (Raccoon dog) (Canis procyonoides)</span></span>
 <span><span class="co">## 3                                                   Canis lupus familiaris (Dog) (Canis familiaris)</span></span>
 <span><span class="co">## 4 Cadicivirus A (isolate Dog/Hong Kong/209/2008) (CaPdV-1) (Canine picodicistrovirus (isolate 209))</span></span>
 <span><span class="co">## 5                                                                             Raccoon dog amdovirus</span></span>
-<span><span class="co">## 6                                               Lycaon pictus (African wild dog) (Cape hunting dog)</span></span></code></pre></div>
+<span><span class="co">## 6                                                                  Human associated gemykibivirus 2</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="retrieving-an-entry-with-uniprot_single">3. Retrieving an entry with <code>uniprot_single</code><a class="anchor" aria-label="anchor" href="#retrieving-an-entry-with-uniprot_single"></a>
@@ -500,11 +514,11 @@ work the same as <code><a href="../reference/uniprot_search.html">uniprot_search
 <span><span class="co">##  $ features                :List of 36</span></span>
 <span><span class="co">##  $ keywords                :List of 14</span></span>
 <span><span class="co">##  $ references              :List of 19</span></span>
-<span><span class="co">##  $ uniProtKBCrossReferences:List of 178</span></span>
+<span><span class="co">##  $ uniProtKBCrossReferences:List of 179</span></span>
 <span><span class="co">##  $ sequence                :List of 5</span></span>
 <span><span class="co">##  $ extraAttributes         :List of 3</span></span></code></pre></div>
 <p>Again, there are other UniProt databases available apart from
-UniProtKB (see X page for a full list of databases).</p>
+UniProtKB (see <a href="https://csdaw.github.io/uniprotREST/articles/03_databases.html" class="external-link">Databases</a>).</p>
 <p>For example UniParc:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result9</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/uniprot_single.html">uniprot_single</a></span><span class="op">(</span></span>
@@ -520,7 +534,7 @@ UniProtKB (see X page for a full list of databases).</p>
 <span><span class="co">##  $ sequence                 :List of 5</span></span>
 <span><span class="co">##  $ sequenceFeatures         :List of 7</span></span>
 <span><span class="co">##  $ oldestCrossRefCreated    : chr "2010-03-03"</span></span>
-<span><span class="co">##  $ mostRecentCrossRefUpdated: chr "2022-12-14"</span></span></code></pre></div>
+<span><span class="co">##  $ mostRecentCrossRefUpdated: chr "2023-06-28"</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
