@@ -1,5 +1,5 @@
 ---
-title: "Available Formats"
+title: "Formats"
 ---
 
 ```{=html}
@@ -17,17 +17,17 @@ suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(tidyr))
 ```
 
-This vignette describes all the currently available file formats to download 
-using the main **uniprotREST** functions. There are 
+This vignette describes all the currently available file formats to download
+using the main **uniprotREST** functions. There are
 [more file formats](https://www.uniprot.org/help/api_queries) available via their
 website which have not yet been implemented.
 
 ```{r}
-dfs <- split(formats, f = formats$func) %>% 
+dfs <- split(formats, f = formats$func) %>%
   lapply(function(x) {
-    x %>% 
-      select(-func) %>% 
-      group_by(database) %>% 
+    x %>%
+      select(-func) %>%
+      group_by(database) %>%
       summarise(format = paste(format, collapse = ", "))
   })
 ```
