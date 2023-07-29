@@ -8,6 +8,15 @@
 \description{
 Simple functions to access the UniProt website REST API. Wraps httr2 functions to easily map IDs and query all available databases.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://csdaw.github.io/uniprotREST/}
+  \item \url{https://github.com/csdaw/uniprotREST}
+  \item Report bugs at \url{https://github.com/csdaw/uniprotREST/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Charlotte Dawson \email{csdaw@outlook.com} (\href{https://orcid.org/0000-0002-7151-5971}{ORCID})
 
