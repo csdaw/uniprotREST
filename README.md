@@ -13,7 +13,13 @@ API](https://www.uniprot.org/help/api).
 
 ## Installation
 
-Install the latest development version from GitHub:
+Install the latest version from R-universe:
+
+``` r
+install.packages("uniprotREST", repos = "https://csdaw.r-universe.dev")
+```
+
+Or install the latest development version from GitHub:
 
 ``` r
 remotes::install_github("csdaw/uniprotREST")
